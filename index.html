@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Huanguelén Dona Vida: información sobre donación de sangre y células progenitoras hematopoyéticas.">
+  <title>Huanguelén Dona Vida</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="logo-flotante">
+    <img src="logo.png" alt="Huanguelén Dona Vida">
+</div>
+
+<header>
+  <div class="logo">HUANGUELÉN <span>DONA VIDA</span> ❤️</div>
+  <button class="menu-btn" onclick="menu()">☰</button>
+  <nav id="nav">
+    <a href="#inicio" onclick="cerrarMenu()">Inicio</a>
+    <a href="#sangre" onclick="cerrarMenu()">Donación de sangre</a>
+    <a href="#cph" onclick="cerrarMenu()">Donación de CPH</a>
+    <a href="#recorrido" onclick="cerrarMenu()">Tablero interactivo</a>
+    <a href="#juego" onclick="cerrarMenu()">Preguntas</a>
+    <a href="#enlaces" onclick="cerrarMenu()">Enlaces</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="etiqueta">INFORMACIÓN Y CONCIENTIZACIÓN</div>
+    <h1>Donar es dar una oportunidad de <span>vida</span></h1>
+    <p>Conocé la importancia de la donación de sangre y de células progenitoras hematopoyéticas (CPH).</p>
+    <a href="#recorrido" class="btn">Jugar ahora</a>
+    <a href="#sangre" class="btn btn-secundario">Conocer más</a>
+  </div>
+</div>
+
+<section class="sangre" id="sangre">
+  <div class="section-title">
+    <small>DONACIÓN DE SANGRE</small>
+    <h2>Un acto solidario que salva vidas</h2>
+    <p>La sangre no se puede fabricar: la donación voluntaria permite ayudar a quienes la necesitan.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🩸</div>
+      <h3>¿Por qué donar?</h3>
+      <p>La sangre donada se utiliza en operaciones, tratamientos, accidentes y distintas situaciones médicas.</p>
+    </article>
+    <article class="card">
+      <div class="icon">❤️</div>
+      <h3>Donación voluntaria</h3>
+      <p>Donar sangre es una decisión solidaria y voluntaria que ayuda a mantener las reservas disponibles.</p>
+    </article>
+    <article class="card">
+      <div class="icon">🏥</div>
+      <h3>¿Dónde donar?</h3>
+      <p>La donación debe realizarse en centros habilitados y con personal de salud capacitado.</p>
+    </article>
+  </div>
+  <div class="aviso">
+    <strong>Importante:</strong> antes de donar, consultá los requisitos y las indicaciones del centro de salud.
+  </div>
+</section>
+
+<section class="cph" id="cph">
+  <div class="section-title">
+    <small>DONACIÓN DE CPH</small>
+    <h2>¿Qué son las células progenitoras hematopoyéticas?</h2>
+    <p>Las CPH son células que dan origen a los componentes de la sangre.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">🧬</div>
+      <h3>Compatibilidad</h3>
+      <p>Para un trasplante se estudian características genéticas llamadas HLA, que permiten evaluar la compatibilidad entre donante y paciente.</p>
+    </article>
+    <article class="card">
+      <div class="icon">📋</div>
+      <h3>Registro de donantes</h3>
+      <p>Las personas voluntarias pueden inscribirse en el Registro Nacional de Donantes de CPH.</p>
+    </article>
+    <article class="card">
+      <div class="icon">🤝</div>
+      <h3>Una oportunidad</h3>
+      <p>Encontrar una persona compatible puede representar una oportunidad de tratamiento para un paciente.</p>
+    </article>
+  </div>
+  <div class="aviso">
+    <strong>Recordá:</strong> inscribirse como donante no significa que la donación se realice inmediatamente.
+  </div>
+</section>
+
+<!-- TABLERO INTERACTIVO -->
+
+<section class="recorrido" id="recorrido">
+  <div class="section-title">
+    <small>JUEGO INTERACTIVO</small>
+    <h2>El camino de la donación de CPH</h2>
+    <p>Ordená las etapas del recorrido. Arrastrá cada ficha hasta el casillero que corresponda.</p>
+  </div>
+
+  <div class="tablero-juego">
+    <div class="instrucciones-tablero">
+      <strong>¿Cómo se juega?</strong>
+      <p>Arrastrá las fichas hasta el lugar correcto del tablero. En celulares, tocá primero una ficha y después el casillero donde querés colocarla.</p>
+    </div>
+
+    <div class="tablero-info">
+      <span id="progresoTablero">Fichas colocadas: 0 de 15</span>
+      <button class="btn" onclick="reiniciarTablero()">Reiniciar juego</button>
+    </div>
+
+    <div class="tablero-marco" id="tableroMarco">
+      <img src="tablero.jpg" class="tablero-imagen" alt="Tablero del camino de la donación de CPH">
+    </div>
+
+    <h3 class="fichas-titulo">Fichas para colocar</h3>
+    <div class="fichas-banco" id="fichasBanco"></div>
+    <p id="estadoTablero" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- PREGUNTAS -->
+
+<section class="juego" id="juego">
+  <div class="section-title">
+    <small>DESAFÍO DE CONOCIMIENTOS</small>
+    <h2>¿Cuánto aprendiste?</h2>
+    <p>Respondé las preguntas y comprobá cuánto sabés sobre la donación.</p>
+  </div>
+
+  <div class="quiz">
+    <div id="contenidoQuiz">
+      <div class="progreso">
+        <div class="progreso-barra" id="barra"></div>
+      </div>
+      <div class="quiz-footer">
+        <span id="contador">Pregunta 1 de 20</span>
+        <span id="puntos">Puntos: 0</span>
+      </div>
+      <h3 id="pregunta"></h3>
+      <div class="opciones" id="opciones"></div>
+      <div id="explicacion"></div>
+      <div class="quiz-footer">
+        <button class="btn" id="siguiente" onclick="siguiente()" disabled>Siguiente →</button>
+      </div>
+    </div>
+
+    <div id="resultado">
+      <h3>¡Desafío terminado!</h3>
+      <p id="puntajeFinal"></p>
+      <p id="mensajeFinal"></p>
+      <button class="btn" onclick="reiniciar()">Volver a jugar</button>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="section-title">
+    <small>PARA INFORMARSE</small>
+    <h2>Preguntas frecuentes</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>¿Qué significa CPH?</summary>
+      <p>Significa Células Progenitoras Hematopoyéticas. Son células que dan origen a los componentes de la sangre.</p>
+    </details>
+    <details>
+      <summary>¿Qué es el HLA?</summary>
+      <p>Son características genéticas que se estudian para evaluar la compatibilidad entre un donante y un paciente.</p>
+    </details>
+    <details>
+      <summary>¿Inscribirse en el registro significa donar inmediatamente?</summary>
+      <p>No. La persona queda registrada y puede ser contactada si aparece una posible compatibilidad.</p>
+    </details>
+    <details>
+      <summary>¿Cómo se realiza la donación de CPH?</summary>
+      <p>Existen procedimientos diferentes, como la donación por sangre periférica y la donación por punción. El equipo médico informa y evalúa cada situación.</p>
+    </details>
+  </div>
+</section>
+
+<section class="enlaces" id="enlaces">
+  <div class="section-title">
+    <small>FUENTES DE INFORMACIÓN</small>
+    <h2>Enlaces útiles</h2>
+    <p>Consultá información en sitios oficiales.</p>
+  </div>
+  <div class="grid">
+    <a class="card enlace-card" href="https://www.argentina.gob.ar/salud" target="_blank" rel="noopener">
+      <div class="icon">🏥</div>
+      <h3>Ministerio de Salud</h3>
+      <p>Información oficial sobre salud.</p>
+      <span class="btn">Visitar sitio</span>
+    </a>
+    <a class="card enlace-card" href="https://www.argentina.gob.ar/salud/incucai" target="_blank" rel="noopener">
+      <div class="icon">❤️</div>
+      <h3>INCUCAI</h3>
+      <p>Información sobre donación y trasplantes.</p>
+      <span class="btn">Visitar sitio</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<div class="final">
+  <h2>Huanguelén Dona Vida ❤️</h2>
+  <p>Informarse, compartir y ayudar también es una forma de dar vida.</p>
+  <a href="#inicio" class="btn">Volver al inicio</a>
+</div>
+
+<footer>
+  <p>Huanguelén Dona Vida · Campaña de información y concientización</p>
+</footer>
+
+<script>
+
+/* MENÚ */
+
+function menu() {
+  document.getElementById("nav").classList.toggle("abierto");
+}
+
+function cerrarMenu() {
+  document.getElementById("nav").classList.remove("abierto");
+}
+
+/* TABLERO INTERACTIVO */
+
+const fichasCPH = [
+  {id:"1", texto:"Decidir ser donante", x:20.0,y:27.0,w:9.0,h:12.0},
+  {id:"2", texto:"Acercarse a un centro habilitado", x:30.0,y:26.0,w:9.7,h:12.0},
+  {id:"3", texto:"Se estudia mi código genético (HLA)", x:41.0,y:25.5,w:9.8,h:12.0},
+  {id:"4", texto:"Mis datos ingresan al Registro", x:52.0,y:25.5,w:9.8,h:12.0},
+  {id:"5", texto:"Ahora comienza la espera", x:68.7,y:26.0,w:10.0,h:12.0},
+  {id:"6", texto:"Mantener los datos actualizados", x:80.0,y:26.0,w:9.2,h:12.0},
+  {id:"7", texto:"¡Hay una posible compatibilidad!", x:77.0,y:47.0,w:10.0,h:12.5},
+  {id:"8", texto:"Confirmar la voluntad", x:56.5,y:47.0,w:10.0,h:12.5},
+  {id:"9", texto:"Me encuentro con el equipo médico", x:40.5,y:47.0,w:10.5,h:12.5},
+  {id:"10", texto:"Elegir el método de donación", x:11.0,y:63.5,w:11.5,h:15.0},
+  {id:"11A", texto:"Donación por sangre periférica", x:28.0,y:61.0,w:12.0,h:12.0},
+  {id:"11B", texto:"Donación por punción", x:28.0,y:75.0,w:12.0,h:11.5},
+  {id:"12", texto:"¡Las células fueron donadas!", x:46.5,y:66.0,w:10.5,h:14.5},
+  {id:"13", texto:"Las células viajan hacia el paciente", x:60.0,y:68.5,w:11.5,h:12.5},
+  {id:"14", texto:"Las CPH llegan al paciente y se realiza el trasplante", x:75.0,y:68.5,w:11.5,h:12.5}
+];
+
+let fichasCorrectas = new Set();
+let fichaElegida = null;
+
+function iniciarTablero() {
+  const marco = document.getElementById("tableroMarco");
+  marco.querySelectorAll(".casillero").forEach(e => e.remove());
+
+  fichasCPH.forEach(ficha => {
+    const zona = document.createElement("div");
+    zona.className = "casillero";
+    zona.dataset.id = ficha.id;
+    zona.style.left = ficha.x + "%";
+    zona.style.top = ficha.y + "%";
+    zona.style.width = ficha.w + "%";
+    zona.style.height = ficha.h + "%";
+
+    zona.addEventListener("dragover", e => {
+      e.preventDefault();
+      zona.classList.add("activo");
+    });
+
+    zona.addEventListener("dragleave", () => {
+      zona.classList.remove("activo");
+    });
+
+    zona.addEventListener("drop", e => {
+      e.preventDefault();
+      zona.classList.remove("activo");
+      colocarFichaTablero(e.dataTransfer.getData("text/plain"), zona);
+    });
+
+    zona.addEventListener("click", () => {
+      if (fichaElegida) colocarFichaTablero(fichaElegida, zona);
+    });
+
+    marco.appendChild(zona);
+  });
+
+  crearBancoFichas();
+  actualizarTablero();
+}
+
+function crearBancoFichas() {
+  const banco = document.getElementById("fichasBanco");
+  banco.innerHTML = "";
+
+  const mezcladas = [...fichasCPH].sort(() => Math.random() - 0.5);
+
+  mezcladas.forEach(ficha => {
+    if (fichasCorrectas.has(ficha.id)) return;
+
+    const elemento = document.createElement("div");
+    elemento.className = "ficha-juego";
+    elemento.textContent = ficha.texto;
+    elemento.draggable = true;
+    elemento.dataset.id = ficha.id;
+
+    elemento.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", ficha.id);
+    });
+
+    elemento.addEventListener("click", () => {
+      fichaElegida = ficha.id;
+      document.querySelectorAll(".ficha-juego").forEach(f => {
+        f.classList.toggle("seleccionada", f.dataset.id === ficha.id);
+      });
+      document.getElementById("estadoTablero").textContent =
+        "Ahora tocá el casillero donde corresponde esta etapa.";
+      document.getElementById("estadoTablero").className = "";
+    });
+
+    banco.appendChild(elemento);
+  });
+}
+
+function colocarFichaTablero(idFicha, zona) {
+  if (!idFicha || fichasCorrectas.has(idFicha)) return;
+  if (zona.classList.contains("resuelto")) return;
+
+  const ficha = fichasCPH.find(f => f.id === idFicha);
+  if (!ficha) return;
+
+  if (ficha.id === zona.dataset.id) {
+    fichasCorrectas.add(ficha.id);
+    zona.classList.add("resuelto");
+
+    const texto = document.createElement("div");
+    texto.className = "ficha-colocada";
+    texto.textContent = ficha.texto;
+    zona.appendChild(texto);
+
+    fichaElegida = null;
+    document.querySelectorAll(".ficha-juego").forEach(f => f.classList.remove("seleccionada"));
+
+    document.getElementById("estadoTablero").textContent =
+      "✅ ¡Correcto! Esa etapa está en su lugar.";
+    document.getElementById("estadoTablero").className = "exito";
+    actualizarTablero();
+  } else {
+    zona.classList.add("error");
+    const cruz = document.createElement("span");
+    cruz.className = "cruz-error";
+    cruz.textContent = "✖";
+    zona.appendChild(cruz);
+
+    setTimeout(() => {
+      zona.classList.remove("error");
+      cruz.remove();
+    }, 850);
+
+    document.getElementById("estadoTablero").textContent =
+      "❌ Esa ficha no corresponde a ese lugar. Probá en otro casillero.";
+    document.getElementById("estadoTablero").className = "";
+  }
+}
+
+function actualizarTablero() {
+  document.getElementById("progresoTablero").textContent =
+    "Fichas colocadas: " + fichasCorrectas.size + " de " + fichasCPH.length;
+
+  if (fichasCorrectas.size === fichasCPH.length) {
+    document.getElementById("estadoTablero").textContent =
+      "🎉 ¡Felicitaciones! Completaste el camino de la donación de CPH. ¡Cada paso cuenta!";
+    document.getElementById("estadoTablero").className = "exito";
+  }
+}
+
+function reiniciarTablero() {
+  fichasCorrectas.clear();
+  fichaElegida = null;
+  document.getElementById("estadoTablero").textContent = "";
+  document.getElementById("estadoTablero").className = "";
+  iniciarTablero();
+}
+
+/* JUEGO DE PREGUNTAS */
+
+const preguntas = [
+{
+ pregunta:"¿Para qué se utiliza la sangre donada?",
+ opciones:["Para transfusiones y tratamientos médicos","Solamente para investigaciones","Para fabricar medicamentos comunes"],
+ correcta:0,
+ explicacion:"La sangre donada ayuda a pacientes que necesitan transfusiones por diferentes motivos médicos."
+},
+{
+ pregunta:"¿Es necesario ir en ayunas para donar sangre?",
+ opciones:["Sí, siempre","No, generalmente se recomienda desayunar o comer liviano","Solamente si es por la mañana"],
+ correcta:1,
+ explicacion:"No se debe concurrir en ayunas. Hay que seguir las indicaciones del centro de donación."
+},
+{
+ pregunta:"¿Qué significa CPH?",
+ opciones:["Células de Protección Humana","Centro de Pacientes Hospitalarios","Células Progenitoras Hematopoyéticas"],
+ correcta:2,
+ explicacion:"Las CPH son células que dan origen a los componentes de la sangre."
+},
+{
+ pregunta:"¿Qué es el Registro Nacional de Donantes de CPH?",
+ opciones:["Una lista de hospitales","Un registro de personas voluntarias para donar","Una lista de pacientes operados"],
+ correcta:1,
+ explicacion:"El registro permite buscar posibles donantes compatibles para pacientes que necesitan un trasplante."
+},
+{
+ pregunta:"¿Inscribirse en el registro significa donar inmediatamente?",
+ opciones:["Sí, siempre","No, primero debe aparecer una posible compatibilidad","Sí, al día siguiente"],
+ correcta:1,
+ explicacion:"La inscripción no implica una donación inmediata."
+},
+{
+ pregunta:"¿Qué se estudia para conocer la compatibilidad?",
+ opciones:["Las características HLA","El color de ojos","La altura"],
+ correcta:0,
+ explicacion:"Las características HLA son importantes para evaluar la compatibilidad entre donante y paciente."
+},
+{
+ pregunta:"¿La médula ósea es lo mismo que la médula espinal?",
+ opciones:["Sí, son iguales","No, son estructuras diferentes","Solamente en adultos"],
+ correcta:1,
+ explicacion:"La médula ósea participa en la producción de células sanguíneas. La médula espinal pertenece al sistema nervioso."
+},
+{
+ pregunta:"¿Qué es la aféresis?",
+ opciones:["Un análisis de vista","Un tipo de cirugía cardíaca","Un procedimiento para obtener células de la sangre"],
+ correcta:2,
+ explicacion:"La aféresis permite recolectar determinadas células de la sangre periférica."
+},
+{
+ pregunta:"¿Quién realiza la evaluación antes de donar?",
+ opciones:["El equipo de salud","Cualquier persona","El propio donante sin controles"],
+ correcta:0,
+ explicacion:"El personal de salud evalúa las condiciones para que el procedimiento sea seguro."
+},
+{
+ pregunta:"¿Qué debe hacer un donante registrado con sus datos personales?",
+ opciones:["No volver a revisarlos","Mantenerlos actualizados","Compartirlos públicamente"],
+ correcta:1,
+ explicacion:"Mantener los datos actualizados facilita que el registro pueda comunicarse con el donante."
+},
+{
+ pregunta:"¿La donación de sangre es un acto voluntario?",
+ opciones:["Sí","No","Solamente en hospitales privados"],
+ correcta:0,
+ explicacion:"La donación voluntaria y solidaria es fundamental para contar con sangre disponible."
+},
+{
+ pregunta:"¿Dónde se debe donar sangre?",
+ opciones:["En cualquier domicilio","En centros y establecimientos habilitados","En cualquier lugar público"],
+ correcta:1,
+ explicacion:"La donación debe realizarse en lugares habilitados y con personal capacitado."
+},
+{
+ pregunta:"¿Qué puede producir la médula ósea?",
+ opciones:["Solamente huesos","Solamente músculos","Células de la sangre"],
+ correcta:2,
+ explicacion:"La médula ósea produce células que dan origen a glóbulos rojos, blancos y plaquetas."
+},
+{
+ pregunta:"¿Qué ocurre si aparece una posible compatibilidad?",
+ opciones:["Se contacta al posible donante para continuar la evaluación","Se realiza la donación sin avisar","Se elimina al donante del registro"],
+ correcta:0,
+ explicacion:"El registro contacta al posible donante y se realizan nuevos pasos de evaluación."
+},
+{
+ pregunta:"¿Qué es la donación voluntaria?",
+ opciones:["Una donación obligatoria","Una decisión libre y solidaria","Una actividad comercial"],
+ correcta:1,
+ explicacion:"La donación voluntaria nace de la decisión libre de ayudar a otras personas."
+},
+{
+ pregunta:"¿Qué se utiliza para estudiar las características HLA?",
+ opciones:["Una fotografía","Una radiografía de los pies","Una muestra biológica"],
+ correcta:2,
+ explicacion:"Se obtiene una muestra para realizar los estudios de compatibilidad."
+},
+{
+ pregunta:"¿La donación de CPH puede realizarse mediante sangre periférica?",
+ opciones:["Sí, mediante aféresis","No, nunca","Solamente mediante transfusión"],
+ correcta:0,
+ explicacion:"Una de las formas de obtener CPH es mediante aféresis de sangre periférica."
+},
+{
+ pregunta:"¿Qué debe hacer una persona antes de registrarse como donante?",
+ opciones:["Informarse y consultar los requisitos","Donar sin evaluación","Tomar medicamentos por su cuenta"],
+ correcta:0,
+ explicacion:"Es importante conocer los requisitos vigentes y recibir información del personal habilitado."
+},
+{
+ pregunta:"¿Se puede encontrar un donante compatible entre personas no emparentadas?",
+ opciones:["No, nunca","Sí, puede ocurrir","Solamente entre vecinos"],
+ correcta:1,
+ explicacion:"La búsqueda puede encontrar compatibilidad entre personas que no tienen parentesco."
+},
+{
+ pregunta:"¿Qué es lo más importante de esta campaña?",
+ opciones:["Compartir mitos","Evitar informarse","Promover información confiable y solidaridad"],
+ correcta:2,
+ explicacion:"Informar y promover la donación voluntaria ayuda a construir una comunidad solidaria."
+}
+];
+
+let indice = 0;
+let puntaje = 0;
+let respondida = false;
+
+function mostrarPregunta() {
+  respondida = false;
+  const q = preguntas[indice];
+
+  document.getElementById("contador").textContent =
+    `Pregunta ${indice + 1} de ${preguntas.length}`;
+
+  document.getElementById("pregunta").textContent = q.pregunta;
+  document.getElementById("puntos").textContent = `Puntos: ${puntaje}`;
+
+  document.getElementById("barra").style.width =
+    `${(indice / preguntas.length) * 100}%`;
+
+  document.getElementById("explicacion").style.display = "none";
+
+  const contenedor = document.getElementById("opciones");
+  contenedor.innerHTML = "";
+
+  q.opciones.forEach((opcion, i) => {
+    const boton = document.createElement("button");
+    boton.className = "opcion";
+    boton.textContent = `${String.fromCharCode(65 + i)}. ${opcion}`;
+    boton.onclick = () => responder(i, boton);
+    contenedor.appendChild(boton);
+  });
+
+  document.getElementById("siguiente").disabled = true;
+}
+
+function responder(eleccion, boton) {
+  if (respondida) return;
+  respondida = true;
+
+  const q = preguntas[indice];
+  const botones = document.querySelectorAll(".opcion");
+  botones.forEach(b => b.disabled = true);
+
+  if (eleccion === q.correcta) {
+    puntaje++;
+    boton.classList.add("correcta");
+  } else {
+    boton.classList.add("incorrecta");
+    botones[q.correcta].classList.add("correcta");
+  }
+
+  document.getElementById("puntos").textContent = `Puntos: ${puntaje}`;
+  document.getElementById("explicacion").textContent = q.explicacion;
+  document.getElementById("explicacion").style.display = "block";
+  document.getElementById("siguiente").disabled = false;
+
+  document.getElementById("siguiente").textContent =
+    indice === preguntas.length - 1 ? "Ver resultado" : "Siguiente →";
+}
+
+function siguiente() {
+  if (!respondida) return;
+  indice++;
+
+  if (indice < preguntas.length) {
+    mostrarPregunta();
+  } else {
+    finalizar();
+  }
+}
+
+function finalizar() {
+  document.getElementById("contenidoQuiz").style.display = "none";
+  document.getElementById("resultado").style.display = "block";
+
+  document.getElementById("puntajeFinal").textContent =
+    `Tu resultado: ${puntaje} de ${preguntas.length} respuestas correctas.`;
+
+  let mensaje = "";
+
+  if (puntaje >= 17) {
+    mensaje = "¡Excelente! Tenés muchos conocimientos sobre la donación. ❤️";
+  } else if (puntaje >= 12) {
+    mensaje = "¡Muy bien! Aprendiste información importante.";
+  } else if (puntaje >= 7) {
+    mensaje = "¡Buen trabajo! Seguí aprendiendo sobre la donación.";
+  } else {
+    mensaje = "¡Gracias por participar! Cada pregunta es una oportunidad para aprender.";
+  }
+
+  document.getElementById("mensajeFinal").textContent = mensaje;
+}
+
+function reiniciar() {
+  indice = 0;
+  puntaje = 0;
+  document.getElementById("resultado").style.display = "none";
+  document.getElementById("contenidoQuiz").style.display = "block";
+  document.getElementById("siguiente").textContent = "Siguiente →";
+  mostrarPregunta();
+}
+
+/* INICIAR JUEGOS */
+
+iniciarTablero();
+mostrarPregunta();
+
+</script>
+</body>
+</html>
