@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Huanguelén Dona Vida: información sobre donación de sangre y células progenitoras hematopoyéticas.">
   <title>Huanguelén Dona Vida</title>
-  <link rel="stylesheet" href="style.css">
+<style>
+:root{--red:#e52332;--green:#13864d;--blue:#1685d2;--purple:#7131a5;--orange:#f2a51a;--ink:#18323d;--muted:#5c6d73;--paper:#fffdf9;--soft:#f4f8f6;--shadow:0 14px 36px rgba(21,55,62,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}a{color:inherit}header{position:sticky;top:0;z-index:50;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:13px clamp(18px,5vw,70px);box-shadow:0 3px 18px #173a4412}.logo{font-weight:900;font-size:clamp(18px,2.3vw,27px);letter-spacing:-.7px}.logo span{color:var(--red)}nav{display:flex;gap:22px;align-items:center}nav a{text-decoration:none;font-weight:700;font-size:14px}nav a:hover{color:var(--red)}.menu-btn{display:none;border:0;background:var(--red);color:white;border-radius:10px;padding:9px 13px;font-size:20px}.hero{min-height:520px;display:flex;align-items:center;padding:70px clamp(22px,8vw,120px);background:linear-gradient(90deg,#fffdf9 0%,#fffdf9ee 48%,#fffdf955 100%),radial-gradient(circle at 80% 25%,#ffdfe0 0 13%,transparent 13.5%),linear-gradient(135deg,#f7e9df,#f5f8ed 55%,#e9f5f3)}.hero-content{max-width:680px}.etiqueta,.section-title small{font-size:12px;font-weight:900;letter-spacing:2px;color:var(--red)}h1{font-size:clamp(42px,6vw,72px);line-height:1.04;letter-spacing:-2.5px;margin:15px 0}h1 span{color:var(--red)}.hero p{font-size:19px;color:#53636a;max-width:600px}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;background:var(--red);color:white;text-decoration:none;padding:12px 22px;font-weight:800;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(.96)}.btn-secundario{background:white;color:var(--red);border:2px solid #f1c5c8;margin-left:8px}section{padding:76px clamp(18px,6vw,90px)}.section-title{text-align:center;max-width:800px;margin:0 auto 34px}.section-title h2{font-size:clamp(29px,4vw,44px);line-height:1.15;margin:8px 0 12px;letter-spacing:-1px}.section-title p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1120px;margin:0 auto}.card{background:white;border:1px solid #e8eeee;border-radius:20px;padding:26px;box-shadow:var(--shadow)}.card h3{margin:10px 0 6px}.card p{color:var(--muted);margin:0}.icon{font-size:36px}.aviso{max-width:1120px;margin:26px auto 0;background:#fff5e8;border-left:5px solid var(--orange);padding:17px 20px;border-radius:12px}.sangre{background:#fff}.cph{background:#f2f8f6}.recorrido{background:linear-gradient(180deg,#fff 0%,#f7fbfa 100%)}.tablero-juego{max-width:1200px;margin:auto;background:white;padding:clamp(14px,2vw,26px);border-radius:24px;box-shadow:var(--shadow);border:1px solid #e7eeee}.instrucciones-tablero{background:#f0f8f5;padding:15px 18px;border-radius:14px}.instrucciones-tablero p{margin:4px 0 0;color:#53636a}.tablero-info{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 0;font-weight:800}.tablero-marco{position:relative;width:100%;line-height:0;overflow:hidden;border-radius:13px;background:#fff}.tablero-imagen{display:block;width:100%;height:auto}.casillero{position:absolute;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.97);border:3px dashed var(--zone-color,#1685d2);border-radius:15px;overflow:hidden;line-height:1;transition:.15s;box-shadow:0 2px 8px #132b331a}.casillero.activo{background:#eaf7ff;border-style:solid;transform:scale(1.025)}.casillero.error{border-color:#e52332;background:#fff0f0}.casillero.resuelto{border:0;background:transparent;box-shadow:none}.casillero img{width:100%;height:100%;object-fit:contain;display:block}.casillero .cruz-error{font-size:clamp(18px,3vw,42px);color:#e52332;font-weight:900}.fichas-titulo{margin:30px 0 12px}.fichas-banco{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.ficha-juego{padding:0;border:2px solid #e7eeee;border-radius:14px;background:white;overflow:hidden;cursor:grab;box-shadow:0 4px 12px #193c4410;transition:.15s}.ficha-juego:hover{transform:translateY(-3px);box-shadow:0 8px 20px #193c4420}.ficha-juego img{width:100%;height:auto;display:block}.ficha-juego.seleccionada{outline:4px solid #f2b82d;transform:translateY(-3px)}#estadoTablero{min-height:28px;font-weight:800;margin:16px 0 0}#estadoTablero.exito{color:#12834c}.juego{background:#fff5f4}.quiz{max-width:760px;margin:auto;background:white;padding:clamp(18px,4vw,34px);border-radius:22px;box-shadow:var(--shadow)}.progreso{height:9px;background:#edf0f0;border-radius:99px;overflow:hidden}.progreso-barra{height:100%;width:0;background:var(--red);transition:width .25s}.quiz-footer{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-weight:800;font-size:14px;margin:17px 0}.quiz h3{font-size:23px}.opciones{display:grid;gap:10px}.opcion{border:2px solid #e7eeee;background:#fff;border-radius:12px;padding:13px 15px;text-align:left;font-size:15px;cursor:pointer;color:var(--ink)}.opcion:hover:not(:disabled){border-color:#e99aa0;background:#fff8f8}.opcion:disabled{cursor:default}.opcion.correcta{background:#eaf8ef;border-color:#2c9a5d}.opcion.incorrecta{background:#fff0f0;border-color:#e52332}#explicacion{display:none;background:#f1f8f5;padding:14px;border-radius:12px;margin-top:15px}#resultado{display:none;text-align:center}.faq{max-width:850px;margin:auto}.faq details{padding:17px 20px;border:1px solid #e4ebeb;border-radius:13px;margin:10px 0;background:white}.faq summary{font-weight:800;cursor:pointer}.faq p{color:var(--muted);margin-bottom:0}.enlaces{background:#f2f8f6}.enlace-card{display:block;text-decoration:none;transition:.2s}.enlace-card:hover{transform:translateY(-4px)}.enlace-card .btn{margin-top:17px}.final{text-align:center;padding:55px 20px;background:#173d45;color:white}.final h2{font-size:clamp(28px,4vw,42px);margin:0 0 8px}.final p{color:#d7e5e5}footer{text-align:center;padding:20px;background:#102e35;color:#d6e4e4;font-size:13px}
+@media(max-width:800px){.menu-btn{display:block}nav{display:none;position:absolute;top:100%;left:0;right:0;background:white;padding:18px 24px;box-shadow:0 10px 15px #0001;flex-direction:column;align-items:flex-start}nav.abierto{display:flex}.grid{grid-template-columns:1fr}.hero{min-height:440px}.tablero-info{align-items:flex-start;flex-direction:column}.fichas-banco{grid-template-columns:repeat(2,minmax(0,1fr))}.casillero{border-width:2px;border-radius:7px}}
+@media(max-width:440px){section{padding:55px 14px}.tablero-juego{padding:10px;border-radius:15px}.ficha-juego{border-radius:9px}.casillero{border-width:1px;border-radius:5px}}
+</style>
 </head>
 <body>
-
-<div class="logo-flotante">
-    <img src="logo.png" alt="Huanguelén Dona Vida">
-</div>
 
 <header>
   <div class="logo">HUANGUELÉN <span>DONA VIDA</span> ❤️</div>
@@ -115,7 +116,7 @@
     </div>
 
     <div class="tablero-marco" id="tableroMarco">
-      <img src="tablero.jpg" class="tablero-imagen" alt="Tablero del camino de la donación de CPH">
+      <img src="assets/tablero.jpg" class="tablero-imagen" alt="Tablero del camino de la donación de CPH">
     </div>
 
     <h3 class="fichas-titulo">Fichas para colocar</h3>
@@ -233,157 +234,66 @@ function cerrarMenu() {
 /* TABLERO INTERACTIVO */
 
 const fichasCPH = [
-  {id:"1", texto:"Decidir ser donante", x:20.0,y:27.0,w:9.0,h:12.0},
-  {id:"2", texto:"Acercarse a un centro habilitado", x:30.0,y:26.0,w:9.7,h:12.0},
-  {id:"3", texto:"Se estudia mi código genético (HLA)", x:41.0,y:25.5,w:9.8,h:12.0},
-  {id:"4", texto:"Mis datos ingresan al Registro", x:52.0,y:25.5,w:9.8,h:12.0},
-  {id:"5", texto:"Ahora comienza la espera", x:68.7,y:26.0,w:10.0,h:12.0},
-  {id:"6", texto:"Mantener los datos actualizados", x:80.0,y:26.0,w:9.2,h:12.0},
-  {id:"7", texto:"¡Hay una posible compatibilidad!", x:77.0,y:47.0,w:10.0,h:12.5},
-  {id:"8", texto:"Confirmar la voluntad", x:56.5,y:47.0,w:10.0,h:12.5},
-  {id:"9", texto:"Me encuentro con el equipo médico", x:40.5,y:47.0,w:10.5,h:12.5},
-  {id:"10", texto:"Elegir el método de donación", x:11.0,y:63.5,w:11.5,h:15.0},
-  {id:"11A", texto:"Donación por sangre periférica", x:28.0,y:61.0,w:12.0,h:12.0},
-  {id:"11B", texto:"Donación por punción", x:28.0,y:75.0,w:12.0,h:11.5},
-  {id:"12", texto:"¡Las células fueron donadas!", x:46.5,y:66.0,w:10.5,h:14.5},
-  {id:"13", texto:"Las células viajan hacia el paciente", x:60.0,y:68.5,w:11.5,h:12.5},
-  {id:"14", texto:"Las CPH llegan al paciente y se realiza el trasplante", x:75.0,y:68.5,w:11.5,h:12.5}
+  {id:"1",texto:"Decidir ser donante",x:19.4,y:28.0,w:9.8,h:13.0,color:"#13864d"},
+  {id:"2",texto:"Acercarse a un centro habilitado",x:29.3,y:27.0,w:10.8,h:13.0,color:"#13864d"},
+  {id:"3",texto:"Se estudia mi código genético (HLA)",x:41.0,y:26.2,w:10.6,h:13.0,color:"#13864d"},
+  {id:"4",texto:"Mis datos ingresan al Registro",x:52.5,y:26.2,w:12.8,h:13.0,color:"#13864d"},
+  {id:"5",texto:"Ahora comienza la espera",x:68.8,y:27.0,w:10.7,h:13.0,color:"#f2a51a"},
+  {id:"6",texto:"Mantener los datos actualizados",x:80.0,y:27.0,w:11.2,h:13.0,color:"#f2a51a"},
+  {id:"7",texto:"¡Hay una posible compatibilidad!",x:73.2,y:47.0,w:14.5,h:13.7,color:"#1685d2"},
+  {id:"8",texto:"Confirmar la voluntad",x:56.0,y:47.0,w:13.3,h:13.7,color:"#1685d2"},
+  {id:"9",texto:"Me encuentro con el equipo médico",x:41.5,y:47.0,w:13.0,h:13.7,color:"#1685d2"},
+  {id:"10",texto:"Elegir el método de donación",x:11.2,y:63.0,w:12.0,h:18.0,color:"#e52332"},
+  {id:"11A",texto:"Donación por sangre periférica",x:27.5,y:61.5,w:13.2,h:13.5,color:"#e52332"},
+  {id:"11B",texto:"Donación por punción",x:27.5,y:75.0,w:13.2,h:13.0,color:"#e52332"},
+  {id:"12",texto:"¡Las células fueron donadas!",x:46.3,y:66.0,w:12.2,h:16.0,color:"#e52332"},
+  {id:"13",texto:"Las células viajan hacia el paciente",x:61.5,y:67.5,w:13.0,h:15.0,color:"#7131a5"},
+  {id:"14",texto:"Las CPH llegan al paciente y se realiza el trasplante",x:76.0,y:66.5,w:13.0,h:17.0,color:"#7131a5"}
 ];
-
 let fichasCorrectas = new Set();
 let fichaElegida = null;
-
-function iniciarTablero() {
-  const marco = document.getElementById("tableroMarco");
-  marco.querySelectorAll(".casillero").forEach(e => e.remove());
-
-  fichasCPH.forEach(ficha => {
-    const zona = document.createElement("div");
-    zona.className = "casillero";
-    zona.dataset.id = ficha.id;
-    zona.style.left = ficha.x + "%";
-    zona.style.top = ficha.y + "%";
-    zona.style.width = ficha.w + "%";
-    zona.style.height = ficha.h + "%";
-
-    zona.addEventListener("dragover", e => {
-      e.preventDefault();
-      zona.classList.add("activo");
-    });
-
-    zona.addEventListener("dragleave", () => {
-      zona.classList.remove("activo");
-    });
-
-    zona.addEventListener("drop", e => {
-      e.preventDefault();
-      zona.classList.remove("activo");
-      colocarFichaTablero(e.dataTransfer.getData("text/plain"), zona);
-    });
-
-    zona.addEventListener("click", () => {
-      if (fichaElegida) colocarFichaTablero(fichaElegida, zona);
-    });
-
-    marco.appendChild(zona);
-  });
-
-  crearBancoFichas();
-  actualizarTablero();
+function iniciarTablero(){
+ const marco=document.getElementById("tableroMarco");
+ marco.querySelectorAll(".casillero").forEach(e=>e.remove());
+ fichasCPH.forEach(f=>{
+  const zona=document.createElement("div"); zona.className="casillero"; zona.dataset.id=f.id;
+  zona.style.left=f.x+"%";zona.style.top=f.y+"%";zona.style.width=f.w+"%";zona.style.height=f.h+"%";zona.style.setProperty("--zone-color",f.color);
+  zona.addEventListener("dragover",e=>{e.preventDefault();zona.classList.add("activo")});
+  zona.addEventListener("dragleave",()=>zona.classList.remove("activo"));
+  zona.addEventListener("drop",e=>{e.preventDefault();zona.classList.remove("activo");colocarFichaTablero(e.dataTransfer.getData("text/plain"),zona)});
+  zona.addEventListener("click",()=>{if(fichaElegida)colocarFichaTablero(fichaElegida,zona)});
+  marco.appendChild(zona);
+ });
+ crearBancoFichas();actualizarTablero();
 }
-
-function crearBancoFichas() {
-  const banco = document.getElementById("fichasBanco");
-  banco.innerHTML = "";
-
-  const mezcladas = [...fichasCPH].sort(() => Math.random() - 0.5);
-
-  mezcladas.forEach(ficha => {
-    if (fichasCorrectas.has(ficha.id)) return;
-
-    const elemento = document.createElement("div");
-    elemento.className = "ficha-juego";
-    elemento.textContent = ficha.texto;
-    elemento.draggable = true;
-    elemento.dataset.id = ficha.id;
-
-    elemento.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", ficha.id);
-    });
-
-    elemento.addEventListener("click", () => {
-      fichaElegida = ficha.id;
-      document.querySelectorAll(".ficha-juego").forEach(f => {
-        f.classList.toggle("seleccionada", f.dataset.id === ficha.id);
-      });
-      document.getElementById("estadoTablero").textContent =
-        "Ahora tocá el casillero donde corresponde esta etapa.";
-      document.getElementById("estadoTablero").className = "";
-    });
-
-    banco.appendChild(elemento);
-  });
+function crearBancoFichas(){
+ const banco=document.getElementById("fichasBanco");banco.innerHTML="";
+ [...fichasCPH].sort(()=>Math.random()-.5).forEach(f=>{
+  if(fichasCorrectas.has(f.id))return;
+  const el=document.createElement("button");el.type="button";el.className="ficha-juego";el.dataset.id=f.id;el.draggable=true;el.setAttribute("aria-label",`Ficha ${f.id}: ${f.texto}`);
+  const img=document.createElement("img");img.src=`assets/ficha-${f.id}.png`;img.alt=`${f.id}. ${f.texto}`;el.appendChild(img);
+  el.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",f.id);e.dataTransfer.effectAllowed="move"});
+  el.addEventListener("click",()=>{fichaElegida=f.id;document.querySelectorAll(".ficha-juego").forEach(b=>b.classList.toggle("seleccionada",b.dataset.id===f.id));const estado=document.getElementById("estadoTablero");estado.textContent=`Ficha ${f.id} seleccionada. Ahora tocá el casillero donde corresponde.`;estado.className=""});
+  banco.appendChild(el);
+ });
 }
-
-function colocarFichaTablero(idFicha, zona) {
-  if (!idFicha || fichasCorrectas.has(idFicha)) return;
-  if (zona.classList.contains("resuelto")) return;
-
-  const ficha = fichasCPH.find(f => f.id === idFicha);
-  if (!ficha) return;
-
-  if (ficha.id === zona.dataset.id) {
-    fichasCorrectas.add(ficha.id);
-    zona.classList.add("resuelto");
-
-    const texto = document.createElement("div");
-    texto.className = "ficha-colocada";
-    texto.textContent = ficha.texto;
-    zona.appendChild(texto);
-
-    fichaElegida = null;
-    document.querySelectorAll(".ficha-juego").forEach(f => f.classList.remove("seleccionada"));
-
-    document.getElementById("estadoTablero").textContent =
-      "✅ ¡Correcto! Esa etapa está en su lugar.";
-    document.getElementById("estadoTablero").className = "exito";
-    actualizarTablero();
-  } else {
-    zona.classList.add("error");
-    const cruz = document.createElement("span");
-    cruz.className = "cruz-error";
-    cruz.textContent = "✖";
-    zona.appendChild(cruz);
-
-    setTimeout(() => {
-      zona.classList.remove("error");
-      cruz.remove();
-    }, 850);
-
-    document.getElementById("estadoTablero").textContent =
-      "❌ Esa ficha no corresponde a ese lugar. Probá en otro casillero.";
-    document.getElementById("estadoTablero").className = "";
-  }
+function colocarFichaTablero(id,zona){
+ if(!id||fichasCorrectas.has(id)||zona.classList.contains("resuelto"))return;
+ const f=fichasCPH.find(x=>x.id===id);if(!f)return;
+ if(f.id===zona.dataset.id){
+  fichasCorrectas.add(f.id);zona.classList.add("resuelto");zona.innerHTML="";
+  const img=document.createElement("img");img.src=`assets/ficha-${f.id}.png`;img.alt=`Ficha ${f.id}: ${f.texto}`;zona.appendChild(img);
+  fichaElegida=null;document.getElementById("estadoTablero").textContent="¡Correcto! Esa ficha está en su lugar.";document.getElementById("estadoTablero").className="exito";crearBancoFichas();actualizarTablero();
+ }else{
+  zona.classList.add("error");const x=document.createElement("span");x.className="cruz-error";x.textContent="✕";zona.appendChild(x);setTimeout(()=>{zona.classList.remove("error");x.remove()},700);
+  const estado=document.getElementById("estadoTablero");estado.textContent="Esa ficha no corresponde a ese lugar. ¡Probá otra vez!";estado.className="";
+ }
 }
-
-function actualizarTablero() {
-  document.getElementById("progresoTablero").textContent =
-    "Fichas colocadas: " + fichasCorrectas.size + " de " + fichasCPH.length;
-
-  if (fichasCorrectas.size === fichasCPH.length) {
-    document.getElementById("estadoTablero").textContent =
-      "🎉 ¡Felicitaciones! Completaste el camino de la donación de CPH. ¡Cada paso cuenta!";
-    document.getElementById("estadoTablero").className = "exito";
-  }
+function actualizarTablero(){
+ document.getElementById("progresoTablero").textContent=`Fichas colocadas: ${fichasCorrectas.size} de ${fichasCPH.length}`;
+ if(fichasCorrectas.size===fichasCPH.length){const e=document.getElementById("estadoTablero");e.textContent="¡Felicitaciones! Completaste el camino de la donación de CPH. ¡Cada paso cuenta!";e.className="exito"}
 }
-
-function reiniciarTablero() {
-  fichasCorrectas.clear();
-  fichaElegida = null;
-  document.getElementById("estadoTablero").textContent = "";
-  document.getElementById("estadoTablero").className = "";
-  iniciarTablero();
-}
+function reiniciarTablero(){fichasCorrectas.clear();fichaElegida=null;document.getElementById("estadoTablero").textContent="";document.getElementById("estadoTablero").className="";iniciarTablero()}
 
 /* JUEGO DE PREGUNTAS */
 
