@@ -1143,6 +1143,7 @@ footer p {
   </p>
   <p class="aviso" style="margin-top:12px; margin-bottom:18px;">
     Si intentás colocar una ficha incorrecta o en un lugar ya ocupado, aparece una <strong>X</strong> y no se queda en el tablero.
+    Usá <strong>Modo calibrar</strong> para obtener las coordenadas de cada casillero y así poder ajustar el lugar correcto de cada ficha.
   </p>
 
   <div class="juego">
@@ -1166,6 +1167,7 @@ footer p {
     <div class="juego-acciones">
       <button class="boton" id="deshacer" type="button">Deshacer última</button>
       <button class="boton boton-secundario" id="reiniciar" type="button">Reiniciar juego</button>
+      <button class="boton boton-secundario" id="calibrar" type="button" aria-pressed="false">Modo calibrar: apagado</button>
     </div>
 
     <div class="colocadas-wrap">
@@ -1275,6 +1277,7 @@ const fichas = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
 const historial = [];
 
 let fichaSeleccionada = null;
+let modoCalibrar = false;
 
 const contenedorFichas = document.getElementById("fichas");
 const tablero = document.getElementById("tablero");
@@ -1284,6 +1287,7 @@ const colocadas = document.getElementById("colocadas");
 const mensajeTablero = document.getElementById("mensajeTablero");
 const btnReiniciar = document.getElementById("reiniciar");
 const btnDeshacer = document.getElementById("deshacer");
+const btnCalibrar = document.getElementById("calibrar");
 
 function estaUsada(numero) {
   return historial.some((item) => item.numero === numero);
@@ -1314,6 +1318,11 @@ function actualizarEstado(texto, tipo) {
   if (texto) {
     mensajeTablero.textContent = texto;
     if (tipo) mensajeTablero.classList.add(tipo);
+    return;
+  }
+
+  if (modoCalibrar) {
+    mensajeTablero.textContent = "Modo calibrar activo: hacé clic en el tablero para ver las coordenadas (x%, y%) del lugar correcto.";
     return;
   }
 
@@ -1490,6 +1499,24 @@ tablero.addEventListener("drop", (evento) => {
 
 tablero.addEventListener("click", (evento) => {
   if (evento.target.closest(".ficha-colocada")) return;
+  const pos = obtenerPosicion(evento);
+
+  if (modoCalibrar) {
+    const x = pos.x.toFixed(1);
+    const y = pos.y.toFixed(1);
+    const marca = document.createElement("div");
+    marca.className = "marca-error";
+    marca.style.left = x + "%";
+    marca.style.top = y + "%";
+    marca.style.background = "rgba(23, 105, 194, 0.92)";
+    marca.textContent = "•";
+    marca.title = `x:${x} y:${y}`;
+    zonaFichas.appendChild(marca);
+    setTimeout(() => marca.remove(), 1200);
+    actualizarEstado(`Coordenadas del punto: x ${x}%, y ${y}%. Usalas para ubicar la ficha correcta.`);
+    return;
+  }
+
   if (fichaSeleccionada === null) {
     const esperada = fichaEsperada();
     actualizarEstado(
@@ -1498,7 +1525,6 @@ tablero.addEventListener("click", (evento) => {
     );
     return;
   }
-  const pos = obtenerPosicion(evento);
   colocarFicha(fichaSeleccionada, pos.x, pos.y);
 });
 
@@ -1508,6 +1534,13 @@ btnDeshacer.addEventListener("click", () => {
   fichaSeleccionada = ultima.numero;
   dibujarColocadas();
   dibujarFichas();
+});
+
+btnCalibrar.addEventListener("click", () => {
+  modoCalibrar = !modoCalibrar;
+  btnCalibrar.textContent = `Modo calibrar: ${modoCalibrar ? "encendido" : "apagado"}`;
+  btnCalibrar.setAttribute("aria-pressed", String(modoCalibrar));
+  actualizarEstado();
 });
 
 btnReiniciar.addEventListener("click", () => {
