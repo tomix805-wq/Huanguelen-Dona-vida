@@ -1141,8 +1141,7 @@ footer p {
     Colocá las fichas en el orden correcto del recorrido. Podés arrastrarlas al tablero o seleccionar una y hacer clic donde corresponda.
   </p>
   <p class="aviso" style="margin-top:12px; margin-bottom:18px;">
-    Si intentás colocar una ficha incorrecta o en un lugar ya ocupado, aparece una <strong>X</strong> y no se queda en el tablero.
-    Usá <strong>Modo calibrar</strong> para obtener las coordenadas de cada casillero y así poder ajustar el lugar correcto de cada ficha.
+    Cada ficha debe colocarse en su <strong>espacio correcto</strong> del recorrido: si la soltás en otro lugar, aparece una <strong>X</strong> y no se queda. Cuando el lugar es correcto, la ficha se ajusta y se pega en su espacio.
   </p>
 
   <div class="juego">
@@ -1273,6 +1272,25 @@ footer p {
 ========================= */
 
 const fichas = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
+
+// Espacios correctos del recorrido (porcentaje x/y sobre el tablero).
+// Cada ficha del recorrido se ajusta a su espacio correspondiente en orden.
+const ESPACIOS = [
+  { x: 12, y: 84 },
+  { x: 28, y: 84 },
+  { x: 44, y: 84 },
+  { x: 60, y: 84 },
+  { x: 76, y: 84 },
+  { x: 88, y: 68 },
+  { x: 76, y: 52 },
+  { x: 60, y: 52 },
+  { x: 44, y: 52 },
+  { x: 28, y: 52 },
+  { x: 12, y: 52 },
+  { x: 20, y: 32 }
+];
+
+const RADIO_ESPACIO = 9;
 const historial = [];
 
 let fichaSeleccionada = null;
@@ -1304,8 +1322,15 @@ function distancia(a, b) {
   return Math.hypot(a.x - b.x, a.y - b.y);
 }
 
-function hayFichaCerca(x, y) {
-  return historial.some((item) => distancia({ x, y }, item) < 10);
+function espacioDeFicha(numero) {
+  const indice = fichas.indexOf(Number(numero));
+  return indice >= 0 ? ESPACIOS[indice] : null;
+}
+
+function estaEnEspacioCorrecto(numero, x, y) {
+  const espacio = espacioDeFicha(numero);
+  if (!espacio) return false;
+  return distancia({ x, y }, espacio) <= RADIO_ESPACIO;
 }
 
 function actualizarEstado(texto, tipo) {
@@ -1326,14 +1351,14 @@ function actualizarEstado(texto, tipo) {
   }
 
   if (historial.length === 0) {
-    mensajeTablero.textContent = `Elegí la ficha ${fichaEsperada()} para comenzar el recorrido.`;
+    mensajeTablero.textContent = `Elegí la ficha ${fichaEsperada()} y colócala en su espacio correcto para comenzar.`;
   } else if (historial.length === fichas.length) {
     mensajeTablero.textContent = `¡Excelente! Completaste las ${fichas.length} fichas del tablero.`;
     mensajeTablero.classList.add("exito");
   } else if (fichaSeleccionada !== null) {
-    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Colocala en el tablero si corresponde al siguiente paso.`;
+    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Llevála a su espacio correcto del recorrido.`;
   } else {
-    mensajeTablero.textContent = `Siguiente ficha correcta: ${fichaEsperada()}.`;
+    mensajeTablero.textContent = `Siguiente ficha: ${fichaEsperada()}. Colócala en su espacio correcto.`;
   }
 }
 
@@ -1442,6 +1467,7 @@ function colocarFicha(numero, x = 50, y = 50) {
   const posX = Math.min(94, Math.max(6, x));
   const posY = Math.min(94, Math.max(6, y));
   const esperada = fichaEsperada();
+  const espacio = espacioDeFicha(numero);
 
   if (numero !== esperada) {
     mostrarError(numero, posX, posY, `La ficha ${numero} no es la correcta ahora. Te toca la ficha ${esperada}.`);
@@ -1450,14 +1476,14 @@ function colocarFicha(numero, x = 50, y = 50) {
     return;
   }
 
-  if (hayFichaCerca(posX, posY)) {
-    mostrarError(numero, posX, posY, "Ese lugar ya está ocupado. Colocá la ficha en otro casillero del recorrido.");
+  if (!estaEnEspacioCorrecto(numero, posX, posY)) {
+    mostrarError(numero, posX, posY, `Ese no es el espacio correcto para la ficha ${numero}.`);
     fichaSeleccionada = null;
     dibujarFichas();
     return;
   }
 
-  historial.push({ numero, x: posX, y: posY });
+  historial.push({ numero, x: espacio.x, y: espacio.y });
   fichaSeleccionada = null;
   dibujarColocadas();
   dibujarFichas();
