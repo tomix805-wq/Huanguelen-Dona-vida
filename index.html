@@ -451,6 +451,15 @@ button:focus-visible {
   box-shadow: 0 8px 25px #1231;
 }
 
+.juego-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
 .estado {
   display: inline-block;
   background: var(--celeste);
@@ -458,19 +467,28 @@ button:focus-visible {
   padding: 9px 14px;
   border-radius: 20px;
   font-weight: bold;
-  margin: 10px 0;
+}
+
+.mensaje-tablero {
+  margin: 8px 0 14px;
+  color: var(--azul-profundo);
+  font-weight: bold;
+}
+
+.mensaje-tablero.exito {
+  color: #17643a;
 }
 
 .tablero {
+  position: relative;
   margin: 20px auto;
   max-width: 850px;
-  min-height: 150px;
   background: var(--celeste);
   border: 2px dashed #8bbce9;
   border-radius: 14px;
   overflow: hidden;
-  text-align: center;
   transition: .2s;
+  cursor: crosshair;
 }
 
 .tablero img {
@@ -479,15 +497,15 @@ button:focus-visible {
   display: block;
 }
 
-.tablero p {
-  padding: 12px;
-  color: var(--azul-profundo);
-  font-weight: bold;
+#zonaFichas {
+  position: absolute;
+  inset: 0;
 }
 
 .tablero.activo {
   outline: 4px solid var(--azul);
   background: #d6eaff;
+  border-color: var(--azul);
 }
 
 .juego h3 {
@@ -517,7 +535,7 @@ button:focus-visible {
   transition: .2s;
 }
 
-.ficha:hover {
+.ficha:hover:not(:disabled) {
   background: #e1efff;
   border-color: var(--azul);
   transform: translateY(-2px);
@@ -526,6 +544,7 @@ button:focus-visible {
 .ficha.seleccionada {
   outline: 3px solid var(--azul);
   background: #d9edff;
+  box-shadow: 0 0 0 2px #fff inset;
 }
 
 .ficha.usada {
@@ -534,11 +553,58 @@ button:focus-visible {
   transform: none;
 }
 
+.ficha-colocada {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #1769c2, #2786d5);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px #001b3c40;
+  border: 2px solid #fff;
+  pointer-events: none;
+  animation: aparecer-ficha .2s ease;
+}
+
+@keyframes aparecer-ficha {
+  from {
+    transform: translate(-50%, -50%) scale(.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.juego-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.boton-secundario {
+  background: #4f7091;
+}
+
+.boton-secundario:hover {
+  background: #36566f;
+}
+
+.colocadas-wrap h3 {
+  margin-bottom: 10px;
+}
+
 .colocadas {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 20px 0;
+  min-height: 36px;
 }
 
 .etiqueta {
@@ -778,6 +844,16 @@ footer p {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .juego-cabecera,
+  .juego-acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .juego-acciones .boton {
+    width: 100%;
+  }
+
   .juego,
   .quiz {
     padding: 17px;
@@ -811,81 +887,6 @@ footer p {
   .fichas {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-/* TABLERO CON FICHAS REALES */
-
-#tablero {
-  position: relative;
-  width: 100%;
-  max-width: 850px;
-  margin: 20px auto;
-  border: 2px solid #b9d7f4;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #eaf4ff;
-  padding: 0;
-}
-
-#tablero img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-#zonaFichas {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.ficha-tablero {
-  position: absolute;
-  width: 9%;
-  aspect-ratio: 1.25;
-  transform: translate(-50%, -50%);
-  background-image: url("assets/fichas.png");
-  background-repeat: no-repeat;
-  background-size: 500% 300%;
-  border: 2px solid white;
-  border-radius: 7px;
-  box-shadow: 0 2px 7px #0006;
-  cursor: grab;
-  pointer-events: auto;
-  z-index: 2;
-}
-
-.ficha-tablero:active {
-  cursor: grabbing;
-}
-
-.ficha-disponible {
-  width: 100%;
-  aspect-ratio: 1.25;
-  background-image: url("assets/fichas.png");
-  background-repeat: no-repeat;
-  background-size: 500% 300%;
-  border: 2px solid #b9d7f4;
-  border-radius: 10px;
-  background-color: white;
-  cursor: grab;
-  transition: .2s;
-}
-
-.ficha-disponible:hover {
-  border-color: #1769c2;
-  transform: translateY(-3px);
-}
-
-.ficha-disponible.seleccionada {
-  outline: 3px solid #1769c2;
-}
-
-.ficha-disponible.usada {
-  opacity: .3;
-  cursor: default;
-  transform: none;
-}
-
 }
 </style>
 </head>
@@ -1061,36 +1062,36 @@ footer p {
   <h2>El camino de la donación de CPH</h2>
 
   <p>
-    Arrastrá las fichas hasta el tablero. También podés tocar
-    una ficha y después tocar el tablero.
+    Arrastrá cada ficha y soltala sobre el tablero, o seleccioná una ficha y luego hacé clic en el lugar del tablero donde quieras colocarla.
   </p>
 
   <div class="juego">
+    <div class="juego-cabecera">
+      <strong>Tablero interactivo</strong>
+      <span class="estado" id="contador">Fichas colocadas: 0 de 15</span>
+    </div>
 
-
-<section id="juego">
-  <span class="subtitulo">Actividad interactiva</span>
-  <h2>El camino de la donación de CPH</h2>
-
-  <p>Arrastrá las fichas desde abajo y soltá cada una en el lugar que quieras del tablero. También podés seleccionarlas con un clic.</p>
-
-  <div class="juego">
-
-    <strong>Tablero interactivo</strong>
-    <span class="estado" id="contador">Fichas colocadas: 0 de 15</span>
+    <p id="mensajeTablero" class="mensaje-tablero" aria-live="polite">
+      Elegí una ficha para comenzar.
+    </p>
 
     <div class="tablero" id="tablero">
       <img src="assets/tablero.png" alt="Tablero de donación de CPH">
-      <div id="zonaFichas"></div>
+      <div id="zonaFichas" aria-label="Fichas colocadas en el tablero"></div>
     </div>
 
     <h3>Fichas disponibles</h3>
     <div class="fichas" id="fichas"></div>
 
-    <button class="boton" id="reiniciar" type="button">
-      Reiniciar juego
-    </button>
+    <div class="juego-acciones">
+      <button class="boton" id="deshacer" type="button">Deshacer última</button>
+      <button class="boton boton-secundario" id="reiniciar" type="button">Reiniciar juego</button>
+    </div>
 
+    <div class="colocadas-wrap">
+      <h3>Progreso</h3>
+      <div class="colocadas" id="colocadas"></div>
+    </div>
   </div>
 </section>
 
@@ -1190,146 +1191,169 @@ footer p {
    JUEGO DE LAS 15 FICHAS
 ========================= */
 
-const fichas = Array.from(
-  { length: 15 },
-  (_, i) => i + 1
-);
-
-const usadas = new Set();
+const fichas = Array.from({ length: 15 }, (_, i) => i + 1);
+const historial = [];
 
 let fichaSeleccionada = null;
 
 const contenedorFichas = document.getElementById("fichas");
 const tablero = document.getElementById("tablero");
+const zonaFichas = document.getElementById("zonaFichas");
 const contador = document.getElementById("contador");
 const colocadas = document.getElementById("colocadas");
+const mensajeTablero = document.getElementById("mensajeTablero");
+const btnReiniciar = document.getElementById("reiniciar");
+const btnDeshacer = document.getElementById("deshacer");
+
+function estaUsada(numero) {
+  return historial.some((item) => item.numero === numero);
+}
+
+function actualizarEstado() {
+  contador.textContent = `Fichas colocadas: ${historial.length} de ${fichas.length}`;
+  btnDeshacer.disabled = historial.length === 0;
+
+  if (historial.length === 0) {
+    mensajeTablero.textContent = "Elegí una ficha para comenzar.";
+    mensajeTablero.classList.remove("exito");
+  } else if (historial.length === fichas.length) {
+    mensajeTablero.textContent = "¡Excelente! Completaste las 15 fichas del tablero.";
+    mensajeTablero.classList.add("exito");
+  } else if (fichaSeleccionada !== null) {
+    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Ahora hacé clic en el tablero o arrastrala.`;
+    mensajeTablero.classList.remove("exito");
+  } else {
+    mensajeTablero.textContent = "Podés seguir colocando fichas donde corresponda en el recorrido.";
+    mensajeTablero.classList.remove("exito");
+  }
+}
 
 function dibujarFichas() {
-
   contenedorFichas.innerHTML = "";
 
-  fichas.forEach(numero => {
-
+  fichas.forEach((numero) => {
     const ficha = document.createElement("button");
-
     ficha.type = "button";
-
     ficha.className = "ficha";
 
-    if (usadas.has(numero)) {
-      ficha.classList.add("usada");
-    }
-
-    if (fichaSeleccionada === numero) {
-      ficha.classList.add("seleccionada");
-    }
+    const usada = estaUsada(numero);
+    if (usada) ficha.classList.add("usada");
+    if (fichaSeleccionada === numero) ficha.classList.add("seleccionada");
 
     ficha.textContent = "Ficha " + numero;
-
-    ficha.draggable = !usadas.has(numero);
+    ficha.draggable = !usada;
+    ficha.disabled = usada;
 
     ficha.addEventListener("click", () => {
-
-      if (usadas.has(numero)) return;
-
-      fichaSeleccionada = numero;
-
+      if (estaUsada(numero)) return;
+      fichaSeleccionada = fichaSeleccionada === numero ? null : numero;
       dibujarFichas();
-
+      actualizarEstado();
     });
 
-    ficha.addEventListener("dragstart", evento => {
-
-      evento.dataTransfer.setData(
-        "text/plain",
-        numero
-      );
-
+    ficha.addEventListener("dragstart", (evento) => {
+      if (estaUsada(numero)) return;
+      fichaSeleccionada = numero;
+      evento.dataTransfer.effectAllowed = "move";
+      evento.dataTransfer.setData("text/plain", String(numero));
+      actualizarEstado();
     });
 
     contenedorFichas.appendChild(ficha);
-
   });
 
-  contador.textContent =
-    `Fichas colocadas: ${usadas.size} de 15`;
-
+  actualizarEstado();
 }
 
-function colocarFicha(numero) {
+function dibujarColocadas() {
+  zonaFichas.innerHTML = "";
+  colocadas.innerHTML = "";
 
+  historial.forEach((item) => {
+    const marca = document.createElement("span");
+    marca.className = "ficha-colocada";
+    marca.style.left = item.x + "%";
+    marca.style.top = item.y + "%";
+    marca.textContent = "Ficha " + item.numero;
+    zonaFichas.appendChild(marca);
+
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "etiqueta";
+    etiqueta.textContent = "✓ Ficha " + item.numero;
+    colocadas.appendChild(etiqueta);
+  });
+}
+
+function colocarFicha(numero, x = 50, y = 50) {
   numero = Number(numero);
+  if (!fichas.includes(numero) || estaUsada(numero)) return;
 
-  if (!fichas.includes(numero)) return;
+  const posX = Math.min(96, Math.max(4, x));
+  const posY = Math.min(96, Math.max(4, y));
 
-  if (usadas.has(numero)) return;
-
-  usadas.add(numero);
-
-  const etiqueta = document.createElement("span");
-
-  etiqueta.className = "etiqueta";
-
-  etiqueta.textContent = "✓ Ficha " + numero;
-
-  colocadas.appendChild(etiqueta);
-
+  historial.push({ numero, x: posX, y: posY });
   fichaSeleccionada = null;
-
+  dibujarColocadas();
   dibujarFichas();
-
-  if (usadas.size === 15) {
-    contador.textContent = "¡Completaste las 15 fichas!";
-  }
-
 }
 
-tablero.addEventListener("dragover", evento => {
+function obtenerPosicion(evento) {
+  const rect = tablero.getBoundingClientRect();
+  const clienteX = evento.clientX ?? (evento.changedTouches && evento.changedTouches[0]?.clientX);
+  const clienteY = evento.clientY ?? (evento.changedTouches && evento.changedTouches[0]?.clientY);
+  if (typeof clienteX !== "number" || typeof clienteY !== "number") {
+    return { x: 50, y: 50 };
+  }
+  return {
+    x: ((clienteX - rect.left) / rect.width) * 100,
+    y: ((clienteY - rect.top) / rect.height) * 100,
+  };
+}
 
+tablero.addEventListener("dragover", (evento) => {
   evento.preventDefault();
-
   tablero.classList.add("activo");
-
 });
 
 tablero.addEventListener("dragleave", () => {
-
   tablero.classList.remove("activo");
-
 });
 
-tablero.addEventListener("drop", evento => {
-
+tablero.addEventListener("drop", (evento) => {
   evento.preventDefault();
-
   tablero.classList.remove("activo");
-
   const numero = evento.dataTransfer.getData("text/plain");
-
-  colocarFicha(numero);
-
+  const pos = obtenerPosicion(evento);
+  colocarFicha(numero, pos.x, pos.y);
 });
 
-tablero.addEventListener("click", () => {
-
-  if (fichaSeleccionada !== null) {
-    colocarFicha(fichaSeleccionada);
+tablero.addEventListener("click", (evento) => {
+  if (evento.target.closest(".ficha-colocada")) return;
+  if (fichaSeleccionada === null) {
+    mensajeTablero.textContent = "Primero seleccioná una ficha de la lista.";
+    mensajeTablero.classList.remove("exito");
+    return;
   }
-
+  const pos = obtenerPosicion(evento);
+  colocarFicha(fichaSeleccionada, pos.x, pos.y);
 });
 
-document.getElementById("reiniciar").addEventListener("click", () => {
-
-  usadas.clear();
-
-  colocadas.innerHTML = "";
-
-  fichaSeleccionada = null;
-
+btnDeshacer.addEventListener("click", () => {
+  if (historial.length === 0) return;
+  const ultima = historial.pop();
+  fichaSeleccionada = ultima.numero;
+  dibujarColocadas();
   dibujarFichas();
-
 });
 
+btnReiniciar.addEventListener("click", () => {
+  historial.length = 0;
+  fichaSeleccionada = null;
+  dibujarColocadas();
+  dibujarFichas();
+});
+
+dibujarColocadas();
 dibujarFichas();
 
 
