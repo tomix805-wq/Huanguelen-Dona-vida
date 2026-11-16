@@ -1142,7 +1142,7 @@ footer p {
     Colocá las fichas en el orden correcto del recorrido. Podés arrastrarlas al tablero o seleccionar una y hacer clic donde corresponda.
   </p>
   <p class="aviso" style="margin-top:12px; margin-bottom:18px;">
-    Si intentás colocar una ficha incorrecta o en un lugar que no corresponde, aparece una <strong>X</strong> y no se queda en el tablero. Las posiciones correctas se pueden ajustar en el objeto <code>ZONAS</code> del script.
+    Si intentás colocar una ficha incorrecta o en un lugar ya ocupado, aparece una <strong>X</strong> y no se queda en el tablero.
   </p>
 
   <div class="juego">
@@ -1272,24 +1272,6 @@ footer p {
 ========================= */
 
 const fichas = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
-
-// Zonas correctas de cada ficha sobre el tablero (en porcentajes).
-// Ajustá x, y y radio según la posición real de cada casillero en la imagen.
-const ZONAS = {
-  1: { x: 10, y: 82, r: 10 },
-  2: { x: 24, y: 82, r: 10 },
-  3: { x: 38, y: 82, r: 10 },
-  4: { x: 52, y: 82, r: 10 },
-  5: { x: 66, y: 82, r: 10 },
-  6: { x: 80, y: 82, r: 10 },
-  9: { x: 80, y: 58, r: 10 },
-  10: { x: 66, y: 58, r: 10 },
-  11: { x: 52, y: 58, r: 10 },
-  12: { x: 38, y: 58, r: 10 },
-  13: { x: 24, y: 58, r: 10 },
-  14: { x: 10, y: 58, r: 10 }
-};
-
 const historial = [];
 
 let fichaSeleccionada = null;
@@ -1319,10 +1301,8 @@ function distancia(a, b) {
   return Math.hypot(a.x - b.x, a.y - b.y);
 }
 
-function esUbicacionCorrecta(numero, x, y) {
-  const zona = ZONAS[numero];
-  if (!zona) return true;
-  return distancia({ x, y }, { x: zona.x, y: zona.y }) <= zona.r;
+function hayFichaCerca(x, y) {
+  return historial.some((item) => distancia({ x, y }, item) < 10);
 }
 
 function actualizarEstado(texto, tipo) {
@@ -1462,18 +1442,14 @@ function colocarFicha(numero, x = 50, y = 50) {
     return;
   }
 
-  if (!esUbicacionCorrecta(numero, posX, posY)) {
-    mostrarError(numero, posX, posY, `La ficha ${numero} no va en ese lugar del tablero. Buscá su casillero correcto.`);
+  if (hayFichaCerca(posX, posY)) {
+    mostrarError(numero, posX, posY, "Ese lugar ya está ocupado. Colocá la ficha en otro casillero del recorrido.");
     fichaSeleccionada = null;
     dibujarFichas();
     return;
   }
 
-  const zona = ZONAS[numero];
-  const destinoX = zona ? zona.x : posX;
-  const destinoY = zona ? zona.y : posY;
-
-  historial.push({ numero, x: destinoX, y: destinoY });
+  historial.push({ numero, x: posX, y: posY });
   fichaSeleccionada = null;
   dibujarColocadas();
   dibujarFichas();
