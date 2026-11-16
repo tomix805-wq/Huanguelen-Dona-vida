@@ -811,6 +811,80 @@ footer p {
   .fichas {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+/* TABLERO CON FICHAS REALES */
+
+#tablero {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  margin: 20px auto;
+  border: 2px solid #b9d7f4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eaf4ff;
+  padding: 0;
+}
+
+#tablero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#zonaFichas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ficha-tablero {
+  position: absolute;
+  width: 9%;
+  aspect-ratio: 1.25;
+  transform: translate(-50%, -50%);
+  background-image: url("assets/fichas.png");
+  background-repeat: no-repeat;
+  background-size: 500% 300%;
+  border: 2px solid white;
+  border-radius: 7px;
+  box-shadow: 0 2px 7px #0006;
+  cursor: grab;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.ficha-tablero:active {
+  cursor: grabbing;
+}
+
+.ficha-disponible {
+  width: 100%;
+  aspect-ratio: 1.25;
+  background-image: url("assets/fichas.png");
+  background-repeat: no-repeat;
+  background-size: 500% 300%;
+  border: 2px solid #b9d7f4;
+  border-radius: 10px;
+  background-color: white;
+  cursor: grab;
+  transition: .2s;
+}
+
+.ficha-disponible:hover {
+  border-color: #1769c2;
+  transform: translateY(-3px);
+}
+
+.ficha-disponible.seleccionada {
+  outline: 3px solid #1769c2;
+}
+
+.ficha-disponible.usada {
+  opacity: .3;
+  cursor: default;
+  transform: none;
+}
 
 }
 </style>
@@ -993,35 +1067,25 @@ footer p {
 
   <div class="juego">
 
-    <div>
-      <b>Tablero interactivo</b>
-      <span class="estado" id="contador">
-        Fichas colocadas: 0 de 15
-      </span>
-    </div>
+
+<section id="juego">
+  <span class="subtitulo">Actividad interactiva</span>
+  <h2>El camino de la donación de CPH</h2>
+
+  <p>Arrastrá las fichas desde abajo y soltá cada una en el lugar que quieras del tablero. También podés seleccionarlas con un clic.</p>
+
+  <div class="juego">
+
+    <strong>Tablero interactivo</strong>
+    <span class="estado" id="contador">Fichas colocadas: 0 de 15</span>
 
     <div class="tablero" id="tablero">
-      <img
-        src="assets/tablero.png"
-        alt="Tablero del camino de la donación de CPH"
-        onerror="this.style.display='none'; document.getElementById('avisoImagen').hidden=false"
-      >
-
-      <p id="avisoImagen" hidden>
-        No se encontró assets/tablero.png.
-        Colocá tu imagen en la carpeta assets.
-      </p>
-
-      <p>Soltá aquí las fichas</p>
+      <img src="assets/tablero.png" alt="Tablero de donación de CPH">
+      <div id="zonaFichas"></div>
     </div>
 
     <h3>Fichas disponibles</h3>
-
     <div class="fichas" id="fichas"></div>
-
-    <div class="colocadas" id="colocadas"></div>
-
-    <br>
 
     <button class="boton" id="reiniciar" type="button">
       Reiniciar juego
@@ -1029,6 +1093,7 @@ footer p {
 
   </div>
 </section>
+
 
 <section id="preguntas">
   <span class="subtitulo">Repaso</span>
