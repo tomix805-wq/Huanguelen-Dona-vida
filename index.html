@@ -529,6 +529,50 @@ button:focus-visible {
   border-color: #d98585;
   background: #fff0f0;
   animation: tablero-error .35s ease;
+  position: relative;
+}
+
+.marca-error {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(217, 53, 53, 0.92);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px #0004;
+  pointer-events: none;
+  z-index: 5;
+  animation: marca-error-pop .9s ease forwards;
+}
+
+@keyframes marca-error-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.5);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.8);
+  }
 }
 
 .juego h3 {
@@ -1277,10 +1321,22 @@ function actualizarEstado(texto, tipo) {
   }
 }
 
-function mostrarError(numero, mensaje) {
+function mostrarError(numero, x = 50, y = 50, mensaje) {
   actualizarEstado(mensaje || `La ficha ${numero} no corresponde acá. Probá con otra.`, "error");
   tablero.classList.remove("activo");
   tablero.classList.add("error");
+
+  const posX = Math.min(94, Math.max(6, x));
+  const posY = Math.min(94, Math.max(6, y));
+  const marca = document.createElement("div");
+  marca.className = "marca-error";
+  marca.style.left = posX + "%";
+  marca.style.top = posY + "%";
+  marca.textContent = "✕";
+  marca.setAttribute("aria-hidden", "true");
+  zonaFichas.appendChild(marca);
+  setTimeout(() => marca.remove(), 900);
+
   const boton = contenedorFichas.querySelector(`[data-numero="${numero}"]`);
   if (boton) {
     boton.classList.add("ficha-error");
@@ -1341,7 +1397,7 @@ function dibujarFichas() {
 }
 
 function dibujarColocadas() {
-  zonaFichas.innerHTML = "";
+  zonaFichas.querySelectorAll(".ficha-colocada").forEach((el) => el.remove());
   colocadas.innerHTML = "";
 
   historial.forEach((item) => {
@@ -1367,16 +1423,16 @@ function colocarFicha(numero, x = 50, y = 50) {
   numero = Number(numero);
   if (!fichas.includes(numero) || estaUsada(numero)) return;
 
+  const posX = Math.min(94, Math.max(6, x));
+  const posY = Math.min(94, Math.max(6, y));
   const esperada = fichaEsperada();
+
   if (numero !== esperada) {
-    mostrarError(numero, `La ficha ${numero} no es la correcta ahora. Te toca la ficha ${esperada}.`);
+    mostrarError(numero, posX, posY, `La ficha ${numero} no es la correcta ahora. Te toca la ficha ${esperada}.`);
     fichaSeleccionada = null;
     dibujarFichas();
     return;
   }
-
-  const posX = Math.min(94, Math.max(6, x));
-  const posY = Math.min(94, Math.max(6, y));
 
   historial.push({ numero, x: posX, y: posY });
   fichaSeleccionada = null;
