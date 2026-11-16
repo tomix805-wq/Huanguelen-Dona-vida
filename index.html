@@ -526,13 +526,23 @@ button:focus-visible {
 .ficha {
   background: #f4f9ff;
   border: 2px solid #b9d7f4;
-  color: var(--azul-profundo);
   border-radius: 12px;
-  padding: 15px 8px;
-  min-height: 65px;
-  font-weight: bold;
+  padding: 8px;
+  min-height: 80px;
   cursor: grab;
   transition: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ficha img {
+  width: 100%;
+  max-width: 110px;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
 }
 
 .ficha:hover:not(:disabled) {
@@ -556,17 +566,17 @@ button:focus-visible {
 .ficha-colocada {
   position: absolute;
   transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #1769c2, #2786d5);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: bold;
-  white-space: nowrap;
-  box-shadow: 0 4px 10px #001b3c40;
-  border: 2px solid #fff;
+  width: min(16%, 110px);
+  min-width: 48px;
   pointer-events: none;
   animation: aparecer-ficha .2s ease;
+  filter: drop-shadow(0 4px 8px #001b3c55);
+}
+
+.ficha-colocada img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 @keyframes aparecer-ficha {
@@ -1064,11 +1074,14 @@ footer p {
   <p>
     Arrastrá cada ficha y soltala sobre el tablero, o seleccioná una ficha y luego hacé clic en el lugar del tablero donde quieras colocarla.
   </p>
+  <p class="aviso" style="margin-top:12px; margin-bottom:18px;">
+    Se muestran las fichas que están disponibles en la carpeta <code>assets/</code>.
+  </p>
 
   <div class="juego">
     <div class="juego-cabecera">
       <strong>Tablero interactivo</strong>
-      <span class="estado" id="contador">Fichas colocadas: 0 de 15</span>
+      <span class="estado" id="contador">Fichas colocadas: 0 de 12</span>
     </div>
 
     <p id="mensajeTablero" class="mensaje-tablero" aria-live="polite">
@@ -1191,7 +1204,7 @@ footer p {
    JUEGO DE LAS 15 FICHAS
 ========================= */
 
-const fichas = Array.from({ length: 15 }, (_, i) => i + 1);
+const fichas = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
 const historial = [];
 
 let fichaSeleccionada = null;
@@ -1209,6 +1222,10 @@ function estaUsada(numero) {
   return historial.some((item) => item.numero === numero);
 }
 
+function rutaFicha(numero) {
+  return `assets/ficha-${numero}.png`;
+}
+
 function actualizarEstado() {
   contador.textContent = `Fichas colocadas: ${historial.length} de ${fichas.length}`;
   btnDeshacer.disabled = historial.length === 0;
@@ -1217,10 +1234,10 @@ function actualizarEstado() {
     mensajeTablero.textContent = "Elegí una ficha para comenzar.";
     mensajeTablero.classList.remove("exito");
   } else if (historial.length === fichas.length) {
-    mensajeTablero.textContent = "¡Excelente! Completaste las 15 fichas del tablero.";
+    mensajeTablero.textContent = `¡Excelente! Completaste las ${fichas.length} fichas del tablero.`;
     mensajeTablero.classList.add("exito");
   } else if (fichaSeleccionada !== null) {
-    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Ahora hacé clic en el tablero o arrastrala.`;
+    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Hacé clic en el tablero o arrastrala hasta el lugar indicado.`;
     mensajeTablero.classList.remove("exito");
   } else {
     mensajeTablero.textContent = "Podés seguir colocando fichas donde corresponda en el recorrido.";
@@ -1235,12 +1252,19 @@ function dibujarFichas() {
     const ficha = document.createElement("button");
     ficha.type = "button";
     ficha.className = "ficha";
+    ficha.title = `Ficha ${numero}`;
+    ficha.setAttribute("aria-label", `Ficha ${numero}`);
 
     const usada = estaUsada(numero);
     if (usada) ficha.classList.add("usada");
     if (fichaSeleccionada === numero) ficha.classList.add("seleccionada");
 
-    ficha.textContent = "Ficha " + numero;
+    const img = document.createElement("img");
+    img.src = rutaFicha(numero);
+    img.alt = `Ficha ${numero}`;
+    img.draggable = false;
+    ficha.appendChild(img);
+
     ficha.draggable = !usada;
     ficha.disabled = usada;
 
@@ -1256,7 +1280,14 @@ function dibujarFichas() {
       fichaSeleccionada = numero;
       evento.dataTransfer.effectAllowed = "move";
       evento.dataTransfer.setData("text/plain", String(numero));
+      if (evento.dataTransfer.setDragImage) {
+        evento.dataTransfer.setDragImage(img, img.width / 2 || 40, img.height / 2 || 40);
+      }
       actualizarEstado();
+    });
+
+    ficha.addEventListener("dragend", () => {
+      tablero.classList.remove("activo");
     });
 
     contenedorFichas.appendChild(ficha);
@@ -1270,16 +1301,20 @@ function dibujarColocadas() {
   colocadas.innerHTML = "";
 
   historial.forEach((item) => {
-    const marca = document.createElement("span");
+    const marca = document.createElement("div");
     marca.className = "ficha-colocada";
     marca.style.left = item.x + "%";
     marca.style.top = item.y + "%";
-    marca.textContent = "Ficha " + item.numero;
+
+    const img = document.createElement("img");
+    img.src = rutaFicha(item.numero);
+    img.alt = `Ficha ${item.numero} colocada`;
+    marca.appendChild(img);
     zonaFichas.appendChild(marca);
 
     const etiqueta = document.createElement("span");
     etiqueta.className = "etiqueta";
-    etiqueta.textContent = "✓ Ficha " + item.numero;
+    etiqueta.textContent = `✓ Ficha ${item.numero}`;
     colocadas.appendChild(etiqueta);
   });
 }
@@ -1288,8 +1323,8 @@ function colocarFicha(numero, x = 50, y = 50) {
   numero = Number(numero);
   if (!fichas.includes(numero) || estaUsada(numero)) return;
 
-  const posX = Math.min(96, Math.max(4, x));
-  const posY = Math.min(96, Math.max(4, y));
+  const posX = Math.min(94, Math.max(6, x));
+  const posY = Math.min(94, Math.max(6, y));
 
   historial.push({ numero, x: posX, y: posY });
   fichaSeleccionada = null;
@@ -1299,8 +1334,8 @@ function colocarFicha(numero, x = 50, y = 50) {
 
 function obtenerPosicion(evento) {
   const rect = tablero.getBoundingClientRect();
-  const clienteX = evento.clientX ?? (evento.changedTouches && evento.changedTouches[0]?.clientX);
-  const clienteY = evento.clientY ?? (evento.changedTouches && evento.changedTouches[0]?.clientY);
+  const clienteX = evento.clientX ?? evento.changedTouches?.[0]?.clientX;
+  const clienteY = evento.clientY ?? evento.changedTouches?.[0]?.clientY;
   if (typeof clienteX !== "number" || typeof clienteY !== "number") {
     return { x: 50, y: 50 };
   }
@@ -1312,10 +1347,12 @@ function obtenerPosicion(evento) {
 
 tablero.addEventListener("dragover", (evento) => {
   evento.preventDefault();
+  if (evento.dataTransfer) evento.dataTransfer.dropEffect = "move";
   tablero.classList.add("activo");
 });
 
-tablero.addEventListener("dragleave", () => {
+tablero.addEventListener("dragleave", (evento) => {
+  if (evento.relatedTarget && tablero.contains(evento.relatedTarget)) return;
   tablero.classList.remove("activo");
 });
 
@@ -1323,6 +1360,7 @@ tablero.addEventListener("drop", (evento) => {
   evento.preventDefault();
   tablero.classList.remove("activo");
   const numero = evento.dataTransfer.getData("text/plain");
+  if (!numero) return;
   const pos = obtenerPosicion(evento);
   colocarFicha(numero, pos.x, pos.y);
 });
