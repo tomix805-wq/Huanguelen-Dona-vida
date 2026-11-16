@@ -479,6 +479,10 @@ button:focus-visible {
   color: #17643a;
 }
 
+.mensaje-tablero.error {
+  color: #9b3030;
+}
+
 .tablero {
   position: relative;
   margin: 20px auto;
@@ -506,6 +510,25 @@ button:focus-visible {
   outline: 4px solid var(--azul);
   background: #d6eaff;
   border-color: var(--azul);
+}
+
+.tablero.error {
+  outline: 4px solid #d98585;
+  border-color: #d98585;
+  background: #fff0f0;
+  animation: tablero-error .35s ease;
+}
+
+@keyframes tablero-error {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.ficha.ficha-error {
+  border-color: #d98585;
+  background: #fff0f0;
+  animation: tablero-error .35s ease;
 }
 
 .juego h3 {
@@ -1072,10 +1095,10 @@ footer p {
   <h2>El camino de la donación de CPH</h2>
 
   <p>
-    Arrastrá cada ficha y soltala sobre el tablero, o seleccioná una ficha y luego hacé clic en el lugar del tablero donde quieras colocarla.
+    Colocá las fichas en el orden correcto del recorrido. Podés arrastrarlas al tablero o seleccionar una y hacer clic donde corresponda.
   </p>
   <p class="aviso" style="margin-top:12px; margin-bottom:18px;">
-    Se muestran las fichas que están disponibles en la carpeta <code>assets/</code>.
+    Si intentás colocar una ficha incorrecta, no se quedará en el tablero. Se muestran las fichas disponibles en la carpeta <code>assets/</code>.
   </p>
 
   <div class="juego">
@@ -1226,23 +1249,44 @@ function rutaFicha(numero) {
   return `assets/ficha-${numero}.png`;
 }
 
-function actualizarEstado() {
+function fichaEsperada() {
+  return fichas[historial.length] ?? null;
+}
+
+function actualizarEstado(texto, tipo) {
   contador.textContent = `Fichas colocadas: ${historial.length} de ${fichas.length}`;
   btnDeshacer.disabled = historial.length === 0;
 
+  mensajeTablero.classList.remove("exito", "error");
+
+  if (texto) {
+    mensajeTablero.textContent = texto;
+    if (tipo) mensajeTablero.classList.add(tipo);
+    return;
+  }
+
   if (historial.length === 0) {
-    mensajeTablero.textContent = "Elegí una ficha para comenzar.";
-    mensajeTablero.classList.remove("exito");
+    mensajeTablero.textContent = `Elegí la ficha ${fichaEsperada()} para comenzar el recorrido.`;
   } else if (historial.length === fichas.length) {
     mensajeTablero.textContent = `¡Excelente! Completaste las ${fichas.length} fichas del tablero.`;
     mensajeTablero.classList.add("exito");
   } else if (fichaSeleccionada !== null) {
-    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Hacé clic en el tablero o arrastrala hasta el lugar indicado.`;
-    mensajeTablero.classList.remove("exito");
+    mensajeTablero.textContent = `Ficha ${fichaSeleccionada} seleccionada. Colocala en el tablero si corresponde al siguiente paso.`;
   } else {
-    mensajeTablero.textContent = "Podés seguir colocando fichas donde corresponda en el recorrido.";
-    mensajeTablero.classList.remove("exito");
+    mensajeTablero.textContent = `Siguiente ficha correcta: ${fichaEsperada()}.`;
   }
+}
+
+function mostrarError(numero, mensaje) {
+  actualizarEstado(mensaje || `La ficha ${numero} no corresponde acá. Probá con otra.`, "error");
+  tablero.classList.remove("activo");
+  tablero.classList.add("error");
+  const boton = contenedorFichas.querySelector(`[data-numero="${numero}"]`);
+  if (boton) {
+    boton.classList.add("ficha-error");
+    setTimeout(() => boton.classList.remove("ficha-error"), 450);
+  }
+  setTimeout(() => tablero.classList.remove("error"), 450);
 }
 
 function dibujarFichas() {
@@ -1252,6 +1296,7 @@ function dibujarFichas() {
     const ficha = document.createElement("button");
     ficha.type = "button";
     ficha.className = "ficha";
+    ficha.dataset.numero = String(numero);
     ficha.title = `Ficha ${numero}`;
     ficha.setAttribute("aria-label", `Ficha ${numero}`);
 
@@ -1272,7 +1317,6 @@ function dibujarFichas() {
       if (estaUsada(numero)) return;
       fichaSeleccionada = fichaSeleccionada === numero ? null : numero;
       dibujarFichas();
-      actualizarEstado();
     });
 
     ficha.addEventListener("dragstart", (evento) => {
@@ -1323,6 +1367,14 @@ function colocarFicha(numero, x = 50, y = 50) {
   numero = Number(numero);
   if (!fichas.includes(numero) || estaUsada(numero)) return;
 
+  const esperada = fichaEsperada();
+  if (numero !== esperada) {
+    mostrarError(numero, `La ficha ${numero} no es la correcta ahora. Te toca la ficha ${esperada}.`);
+    fichaSeleccionada = null;
+    dibujarFichas();
+    return;
+  }
+
   const posX = Math.min(94, Math.max(6, x));
   const posY = Math.min(94, Math.max(6, y));
 
@@ -1368,8 +1420,11 @@ tablero.addEventListener("drop", (evento) => {
 tablero.addEventListener("click", (evento) => {
   if (evento.target.closest(".ficha-colocada")) return;
   if (fichaSeleccionada === null) {
-    mensajeTablero.textContent = "Primero seleccioná una ficha de la lista.";
-    mensajeTablero.classList.remove("exito");
+    const esperada = fichaEsperada();
+    actualizarEstado(
+      esperada ? `Primero seleccioná la ficha ${esperada}.` : "Ya completaste el tablero.",
+      esperada ? "error" : "exito"
+    );
     return;
   }
   const pos = obtenerPosicion(evento);
