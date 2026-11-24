@@ -21,13 +21,15 @@ const GOOGLE_CALENDAR_URL = "https://calendar.google.com/calendar/embed?src=REEM
 Reemplazar `REEMPLAZAR_ID_CALENDARIO` por el ID público del calendario.
 
 ### 2. Galería de Google Drive
-En `index.html`, buscar:
+En `index.html`, buscar la configuración de galería:
 
 ```js
-const DRIVE_GALERIA_URL = "https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid";
+const DRIVE_GALERIA_ID = "15sCK3t3Np5V8XJommeBpXkQNeiOTUfco";
+const DRIVE_GALERIA_URL = `https://drive.google.com/embeddedfolderview?id=${DRIVE_GALERIA_ID}#grid`;
+const DRIVE_GALERIA_CARPETA_URL = `https://drive.google.com/drive/folders/${DRIVE_GALERIA_ID}?usp=sharing`;
 ```
 
-Reemplazar `REEMPLAZAR_ID_CARPETA` por el ID de la carpeta de Drive compartida públicamente.
+Para cambiar la carpeta, reemplazar `DRIVE_GALERIA_ID` por el ID de la carpeta de Drive compartida públicamente.
 
 ### 3. Asistente virtual (Medulín)
 La lógica del asistente está en la función `responder(texto)` dentro de `index.html`.

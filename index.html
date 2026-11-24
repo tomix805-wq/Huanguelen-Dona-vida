@@ -1349,7 +1349,201 @@ footer p {
   box-shadow: 0 8px 25px #1231;
 }
 
-.galeria-marco,
+.galeria-contenedor.galeria-fotos {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid #e3edf7;
+  box-shadow: 0 12px 40px rgba(16, 61, 115, 0.10);
+}
+
+.galeria-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: #fff;
+  border-bottom: 1px solid #edf3f9;
+}
+
+.galeria-topbar-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.galeria-topbar-icono {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: linear-gradient(135deg, #eaf4ff, #d7ebff);
+  flex-shrink: 0;
+}
+
+.galeria-topbar-titulo strong {
+  display: block;
+  color: var(--azul-profundo);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.galeria-topbar-titulo span {
+  display: block;
+  color: #60758a;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.galeria-acciones { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.galeria-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: .2s;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.galeria-btn:hover { transform: translateY(-1px); }
+.galeria-btn-principal { background: var(--azul); color: #fff; box-shadow: 0 6px 18px rgba(23,105,194,.25); }
+.galeria-btn-principal:hover { background: var(--azul-profundo); }
+
+.galeria-secciones {
+  padding: 18px 22px 22px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.galeria-seccion-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.galeria-seccion-titulo {
+  margin: 0;
+  color: var(--azul-profundo);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.galeria-seccion-cuenta {
+  color: #68829a;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.galeria-carrusel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.galeria-fila {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 4px 2px 8px;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: #c7dbef transparent;
+}
+
+.galeria-fila::-webkit-scrollbar { height: 8px; }
+.galeria-fila::-webkit-scrollbar-thumb { background: #c7dbef; border-radius: 999px; }
+
+.galeria-flecha {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d7e8f8;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--azul-profundo);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16,61,115,.10);
+  flex-shrink: 0;
+  transition: .2s;
+  z-index: 2;
+}
+
+.galeria-flecha:hover:not(:disabled) { background: var(--azul); color: #fff; border-color: var(--azul); }
+.galeria-flecha:disabled { opacity: .35; cursor: default; box-shadow: none; }
+
+.galeria-item {
+  position: relative;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #eaf2fb;
+  cursor: pointer;
+  width: 210px;
+  min-width: 210px;
+  height: 210px;
+  box-shadow: 0 2px 8px rgba(16,61,115,.06);
+  transition: transform .2s, box-shadow .2s;
+  flex-shrink: 0;
+}
+
+.galeria-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,61,115,.14); }
+.galeria-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.galeria-item .galeria-item-tipo {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(8,46,92,.72);
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+.galeria-item .galeria-item-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px 10px 10px;
+  background: linear-gradient(transparent, rgba(8,46,92,.72));
+  color: #fff;
+  font-size: 12px;
+  text-align: left;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.galeria-item:hover .galeria-item-overlay,
+.galeria-item:focus-visible .galeria-item-overlay { opacity: 1; }
+
+.galeria-vacia {
+  padding: 40px 20px;
+  text-align: center;
+  color: #60758a;
+  background: #f8fbff;
+  border-radius: 12px;
+}
+
 .calendario-marco {
   border-radius: 12px;
   overflow: hidden;
@@ -1357,7 +1551,6 @@ footer p {
   border: 1px solid var(--borde);
 }
 
-.galeria-marco iframe,
 .calendario-marco iframe {
   width: 100%;
   height: min(70vh, 620px);
@@ -1365,11 +1558,112 @@ footer p {
   display: block;
 }
 
-.galeria-nota,
 .calendario-nota {
   margin-top: 12px;
   font-size: 13px;
   color: #60758a;
+}
+
+.galeria-fotos .galeria-nota {
+  margin: 0;
+  padding: 14px 22px;
+  background: #f8fbff;
+  border-top: 1px solid #edf3f9;
+  font-size: 12px;
+  color: #68829a;
+}
+
+.galeria-lightbox[hidden] { display: none !important; }
+.galeria-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: rgba(6, 24, 48, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.galeria-lightbox-inner {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.galeria-lb-figura {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+  text-align: center;
+}
+
+.galeria-lb-figura img,
+.galeria-lb-figura iframe {
+  max-width: 100%;
+  max-height: calc(100vh - 140px);
+  border-radius: 12px;
+  background: #000;
+}
+
+.galeria-lb-figura img { width: auto; height: auto; object-fit: contain; }
+.galeria-lb-figura iframe { width: min(900px, 100%); height: min(70vh, 560px); border: 0; }
+
+.galeria-lb-caption {
+  color: #e8f2ff;
+  margin-top: 10px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.galeria-lb-caption span:last-child { color: #b9cee4; font-size: 12px; }
+
+.galeria-lb-cerrar {
+  position: absolute;
+  top: -8px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.galeria-lb-nav {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.galeria-lb-nav:hover, .galeria-lb-cerrar:hover { background: rgba(255,255,255,.24); }
+
+@media (max-width: 700px) {
+  .galeria-topbar { flex-direction: column; align-items: stretch; padding: 16px; }
+  .galeria-acciones { width: 100%; }
+  .galeria-btn { flex: 1; justify-content: center; }
+  .galeria-secciones { padding: 14px 16px 16px; gap: 22px; }
+  .galeria-seccion-titulo { font-size: 17px; }
+  .galeria-flecha { width: 34px; height: 34px; font-size: 18px; }
+  .galeria-fila { gap: 10px; }
+  .galeria-item { width: 160px; min-width: 160px; height: 160px; }
+  .galeria-fotos .galeria-nota { padding: 12px 16px; }
+  .galeria-lb-nav { width: 36px; height: 36px; font-size: 26px; }
+  .galeria-lightbox { padding: 12px; }
 }
 
 .lista-efemerides {
@@ -1703,13 +1997,40 @@ footer p {
   <h2>Galería de fotos</h2>
   <p>Momentos, jornadas y personas que forman parte de Huanguelén Dona Vida.</p>
 
-  <div class="galeria-contenedor">
-    <div class="galeria-marco">
-      <iframe id="iframeGaleriaDirecta" src="https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid" title="Galería de fotos de Huanguelén Dona Vida" loading="lazy"></iframe>
+  <div class="galeria-contenedor galeria-fotos">
+    <div class="galeria-topbar">
+      <div class="galeria-topbar-titulo">
+        <div class="galeria-topbar-icono" aria-hidden="true">📷</div>
+        <div>
+          <strong>Fotos de la campaña</strong>
+          <span id="galeriaContador">Huanguelén Dona Vida · Álbum compartido</span>
+        </div>
+      </div>
+      <div class="galeria-acciones">
+        <a id="abrirGaleriaDrive" class="galeria-btn galeria-btn-principal" href="https://drive.google.com/drive/folders/15sCK3t3Np5V8XJommeBpXkQNeiOTUfco?usp=sharing" target="_blank" rel="noopener noreferrer">Abrir en Drive</a>
+      </div>
     </div>
-    <p class="galeria-nota">La galería está preparada para mostrar una carpeta de Google Drive. Cuando el equipo comparta la carpeta final, reemplazá <code>REEMPLAZAR_ID_CARPETA</code> en la configuración del sitio (<code>DRIVE_GALERIA_URL</code> en <code>index.html</code>).</p>
+
+    <div class="galeria-secciones" id="galeriaGrid" aria-live="polite"></div>
+    <p class="galeria-nota" id="galeriaNota">Mostrando fotos directamente en la página. Tocá una imagen para verla en grande o usá las flechas para recorrer cada campaña.</p>
   </div>
 </section>
+
+<div class="galeria-lightbox" id="galeriaLightbox" hidden>
+  <div class="galeria-lightbox-inner" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+    <button type="button" class="galeria-lb-cerrar" id="galeriaLbCerrar" aria-label="Cerrar">×</button>
+    <button type="button" class="galeria-lb-nav galeria-lb-prev" id="galeriaLbPrev" aria-label="Anterior">‹</button>
+    <figure class="galeria-lb-figura">
+      <img id="galeriaLbImg" src="" alt="" referrerpolicy="no-referrer" hidden>
+      <iframe id="galeriaLbVideo" src="" title="Video" allow="autoplay; fullscreen" allowfullscreen hidden></iframe>
+      <figcaption class="galeria-lb-caption">
+        <span id="galeriaLbTitulo"></span>
+        <span id="galeriaLbMeta"></span>
+      </figcaption>
+    </figure>
+    <button type="button" class="galeria-lb-nav galeria-lb-next" id="galeriaLbNext" aria-label="Siguiente">›</button>
+  </div>
+</div>
 
 
 
@@ -1821,15 +2142,15 @@ footer p {
   </div>
 
   <div class="chat-flotante-mensajes" id="mensajesFlotantes">
-    <div class="burbuja-chat bot">¡Hola! Soy <strong>Medulín</strong>, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, edades, registro, mapa de donación en PBA, actividades y fuentes oficiales.<br><br><small>Información orientativa: los requisitos y edades corresponden principalmente a la Provincia de Buenos Aires y pueden variar según la jurisdicción.</small></div>
+    <div class="burbuja-chat bot">¡Hola! Soy <strong>Medulín</strong>, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, registro y donación de CPH (médula ósea), requisitos, edades, ley de donación y fuentes oficiales.<br><br><small>Información orientativa: algunos requisitos corresponden principalmente a la Provincia de Buenos Aires y pueden variar según la jurisdicción. No reemplaza la evaluación del equipo de salud.</small></div>
   </div>
 
   <div class="chat-flotante-preguntas">
     <button type="button" data-pregunta="¿Cuáles son los requisitos para donar sangre?">🩸 Requisitos sangre</button>
-    <button type="button" data-pregunta="¿Qué edades están habilitadas para donar sangre?">📅 Edades sangre</button>
-    <button type="button" data-pregunta="¿Cuáles son los requisitos para inscribirse como donante de CPH?">🧬 Requisitos CPH</button>
-    <button type="button" data-pregunta="¿Hasta qué edad se puede permanecer en el registro de CPH?">📝 Registro CPH</button>
-    <button type="button" data-pregunta="¿Dónde puedo donar sangre en Provincia de Buenos Aires?">🗺️ Dónde donar</button>
+    <button type="button" data-pregunta="¿Hay que estar en ayunas para donar sangre?">🍽️ Ayuno</button>
+    <button type="button" data-pregunta="¿Cómo me inscribo como donante de CPH?">🧬 Registro CPH</button>
+    <button type="button" data-pregunta="¿Cómo se dona médula ósea?">🏥 Donar médula</button>
+    <button type="button" data-pregunta="¿Tengo una enfermedad o tomo medicamentos, puedo donar?">💊 Consulta médica</button>
     <button type="button" data-pregunta="¿Dónde puedo informarme en fuentes oficiales?">ℹ️ Fuentes</button>
   </div>
 
@@ -1837,22 +2158,6 @@ footer p {
     <input id="entradaChatFlotante" placeholder="Escribí tu consulta..." autocomplete="off" required>
     <button type="submit" aria-label="Enviar">➤</button>
   </form>
-</div>
-
-<div class="modal-galeria" id="modalGaleria" hidden>
-  <div class="modal-galeria-contenido" role="dialog" aria-modal="true" aria-labelledby="tituloGaleria">
-    <div class="modal-galeria-header">
-      <div>
-        <h3 id="tituloGaleria">Galería de donantes</h3>
-        <p>Fotos y momentos de la campaña Huanguelén Dona Vida.</p>
-      </div>
-      <button type="button" class="modal-galeria-cerrar" id="cerrarGaleria" aria-label="Cerrar galería">×</button>
-    </div>
-    <div class="modal-galeria-body">
-      <iframe id="iframeGaleria" src="about:blank" title="Galería de fotos de donantes" loading="lazy"></iframe>
-      <p class="modal-galeria-aviso">* Esta galería está preparada para mostrar una carpeta de Google Drive. Reemplazá el enlace en el código cuando tengan la carpeta final.</p>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -2513,18 +2818,176 @@ mostrarPregunta();
   const formulario = document.getElementById("formularioChatFlotante");
   const entrada = document.getElementById("entradaChatFlotante");
   const botonCalendario = document.getElementById("botonCalendarioFlotante");
-  const modalGaleria = document.getElementById("modalGaleria");
-  const cerrarGaleria = document.getElementById("cerrarGaleria");
-  const iframeGaleria = document.getElementById("iframeGaleria");
-
-  // Configuración editable del sitio
-  const DRIVE_GALERIA_URL = "https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid";
+  // ConfiguraciÃ³n editable del sitio
+  const DRIVE_GALERIA_ID = "15sCK3t3Np5V8XJommeBpXkQNeiOTUfco";
+  const DRIVE_GALERIA_CARPETA_URL = `https://drive.google.com/drive/folders/${DRIVE_GALERIA_ID}?usp=sharing`;
   const GOOGLE_CALENDAR_URL = "https://calendar.google.com/calendar/embed?src=REEMPLAZAR_ID_CALENDARIO&ctz=America%2FArgentina%2FBuenos_Aires";
 
-  const iframeGaleriaDirecta = document.getElementById("iframeGaleriaDirecta");
-  if (iframeGaleriaDirecta) iframeGaleriaDirecta.src = DRIVE_GALERIA_URL;
+  const abrirGaleriaDrive = document.getElementById("abrirGaleriaDrive");
+  if (abrirGaleriaDrive) abrirGaleriaDrive.href = DRIVE_GALERIA_CARPETA_URL;
   const iframeCalendario = document.getElementById("iframeCalendario");
   if (iframeCalendario) iframeCalendario.src = GOOGLE_CALENDAR_URL;
+
+  // GalerÃ­a: datos y render
+  const GALERIA_DATA = [{"title":"CampaÃ±a Perio 2025","id":"1HcjbWVlKzFzGxYdEmsn5pFM2Mg8hE4FF","items":[{"name":"071da933-cecd-4e3d-9a25-60efc5ffe7c0.jpeg","id":"1-udPxt2VZ2pgbPy9vO9ud-H0TEY2l3Ak","type":"image"},{"name":"07f02de5-5261-4f35-b0c1-86233f63e02a.jpeg","id":"1bxM8eTLSVuA4FUSI267Y8RoSA9aT8t85","type":"image"},{"name":"0CDC8763-CFC0-437B-B7D2-903B97ECEC8A.jpeg","id":"12OpNhFlTeh_TTDSiUWrfCVuVwgLgY7hJ","type":"image"},{"name":"1c3b3898-688c-4f58-ba77-5fa4af862913.jpeg","id":"15lND014_NN50g4-7zVwb6-EDt58wy-ul","type":"image"},{"name":"2193587d-0cda-41bb-b8fc-54e3db01acc2.jpeg","id":"19g24TpsXwd51dauo5Tbk7OJ47uj3SuZk","type":"image"},{"name":"221c6179-b08a-4a68-9671-481bc807f723.jpeg","id":"1ARQRVUys1jtKv32Md-Z5lN4UXOxKk3yc","type":"image"},{"name":"2b6f74f0-686d-4c95-bc50-dcef74ad04f0.jpeg","id":"1-a_arpOaCj_IRfb0nacdS-miPTO2xt5D","type":"image"},{"name":"2e72ece8-0e75-41e7-8f4c-1dd413dc41f3.jpeg","id":"1RmjZvwkVOH3vAPN4roXKjMpDdulhZAbt","type":"image"},{"name":"3b17ddfb-0675-412d-a26c-584d3d99f38f.jpeg","id":"1euFnDqK18mX5GDExm9WWf24Kykm8pH7l","type":"image"},{"name":"3ece5429-c664-43a9-bf29-88d0cfca5add.jpeg","id":"1AG6fp3DTyR6limXAcgzaOrTGoSBv_mTm","type":"image"},{"name":"528b7615-ff0c-4e0f-a272-7a977659e96d.jpeg","id":"1JrX44hOMVz7fgCm3iImsOVwYlfDF-wZ9","type":"image"},{"name":"584ecd43-dbcc-4f4d-8795-f3d0d4478ff1.jpeg","id":"1yyTVMtOD1c9I_HcbBc58TfkuUHATt6nC","type":"image"},{"name":"5875d0e4-7087-42a0-95e8-6c1668044c0d.jpeg","id":"1xS5dR85G-dy6a3cQEasbaHOqX2hnpx8x","type":"image"},{"name":"5875d0e4-7087-42a0-95e8-6c1668044c0d.jpeg","id":"1thz44iQRLiTakN9q9ge86GailIHiBlnh","type":"image"},{"name":"6863732a-873f-4482-b787-5bd06fd80035.mp4","id":"1MbUKeNigmFOcDTd5Akab359YFj-UsXMq","type":"video"},{"name":"70057d80-765c-4c62-8a5a-c408802e97c3.jpeg","id":"1lFkCWPwHteKlEM6JG86lUqShocfPP0bX","type":"image"},{"name":"735e92ef-c51c-4dda-9396-3cc848216314.jpeg","id":"1qVKsU5MuLm9eBS2ddjdiHQJkIG5si1aX","type":"image"},{"name":"8717a7e7-c5a3-4d3e-9a84-c59a577497e2.mp4","id":"1V3uQJcJ9OIcznj6BT9NjwXL1n9i5OqvQ","type":"video"},{"name":"8814df18-b991-48a7-8d4c-e4df0bc7ead2.jpeg","id":"1gI8LaWgex-i7E86tB8Oeb6cB3sWHkx6d","type":"image"},{"name":"8dd96b4f-f8e9-4e9c-b141-f39c69229ca8.jpeg","id":"1zf4DjEbLY7NgGipO0ABMATypB4D5H06x","type":"image"},{"name":"8dd96b4f-f8e9-4e9c-b141-f39c69229ca8.jpeg","id":"1rCg1JyCigCEL9DAp1i2WEfGUEyLkRat5","type":"image"},{"name":"944CE407-3AC4-4CDC-99F9-BAD914444B67.jpeg","id":"1tpTJc_AdD7p9J258EZuhv2-iH08yPZ7t","type":"image"},{"name":"955e509b-6dff-4656-8749-80226e406ad5.jpeg","id":"1XADM0XBAt5TPMZlwVZ4tRjqftPFNeF5_","type":"image"},{"name":"97be538d-c3af-45ce-9179-966f786c4df9.jpeg","id":"12Sh5THfEBbG0T6ADaJ64g79uwnDYPfiI","type":"image"},{"name":"97fc29a0-b475-4402-bfb2-8f30453c3eb4.jpeg","id":"1cIZE0MGxxZPDLuVa8Ls_gjTFFo_Myyec","type":"image"},{"name":"9b8fe010-6168-43b4-89dc-25c933041b3e.jpeg","id":"1aIE90-fD-8OEPiqy5qXKZUwoOjPXNuve","type":"image"},{"name":"9d5f1e06-089a-4146-b5a0-4a01c9829f9d.jpeg","id":"1odD0ww1GA3wBr477SiWRAhNZVWWE2vpA","type":"image"},{"name":"9fc394f2-e2f5-4e75-b091-90bbce610228.jpeg","id":"1ytejpUxtjMLA6R-i6-qV8FJ7fpjTNKQ-","type":"image"},{"name":"a7117cfa-656b-43bd-810c-0f63a3f10475.jpeg","id":"13LoWdp2ROIgjkRcvfJPAywEjN2caUjN_","type":"image"},{"name":"b0c9a09f-4a95-4e10-ad17-4cbc7ecffe6a.jpeg","id":"1Ukn0xvzEVf9F8yPLyZ8zi8y32vp6QQ9N","type":"image"},{"name":"bc6b7fe9-3ccb-4c40-be4d-aaed9b6461af.jpeg","id":"1byw0-i8bIPnKm8WpnXT8HSfN9CcU8Xpc","type":"image"},{"name":"cef57836-ef20-4b46-ae94-8bc6e0b933d4.jpeg","id":"1trz2GjBb6X_27zT2bjtFXWFJZ4BbtJsb","type":"image"},{"name":"da022b70-977b-400c-964f-73e9fc45a360.jpeg","id":"1Hm-4QxUopsti-EQCg1mm8Gg_wgeCOElb","type":"image"},{"name":"ee098e9b-8974-4800-8135-e23917c31232.jpeg","id":"1whp_0hJVYVbGepViVX3if3jByXqUp5VJ","type":"image"},{"name":"f5837bf0-4915-4a05-9d0c-5af6e673898a.jpeg","id":"19V4LtV2c59dL7BK8UB6uZiKkCLimKHFp","type":"image"},{"name":"IMG_4708.jpeg","id":"1-QkZbb1c7c-tarIzib0RS68yuV6HoIMl","type":"image"},{"name":"IMG_4710.jpeg","id":"1CMDtGF7cI8eORlEz_-s76jr9FhhLGqRA","type":"image"},{"name":"IMG_4750.jpeg","id":"1aOwaP42fOzGM3CJY-2TDhQA35GuhDOCp","type":"image"},{"name":"IMG_4751.jpeg","id":"1dHQh6vTQdYrgvCFNypwAMhrkwYV2rtI7","type":"image"},{"name":"IMG_4753.jpeg","id":"1F12rnooVlUkudiKkvl7-A0y6R4YN05gh","type":"image"},{"name":"IMG_4754.jpeg","id":"15RE2GSEPDt7ggw7xhsezFZvosTmTQI12","type":"image"},{"name":"IMG_4759.jpeg","id":"13PMulud52G7tNl-BxlGs6p6l6GWjB6CI","type":"image"},{"name":"IMG_4762.jpeg","id":"18doZ0UJ9zacQQEFqZqm6BTwcdAhEdjQX","type":"image"},{"name":"IMG_4764.mov","id":"1ZYYrLpVBq9UtxasdD1gflzgfFH5bnxhV","type":"video"},{"name":"IMG_4765.jpeg","id":"1s1QRfz7sAAtFbjurvPFK69NiKwl98HaB","type":"image"},{"name":"IMG_4766.jpeg","id":"1R0-qqTGEbngUz3QVmqqOeyCMtaYbpCAs","type":"image"},{"name":"IMG_4768.jpeg","id":"1Qc5FjznwjxH0IkRZaDexXl7QENScUdRh","type":"image"},{"name":"IMG_4773.jpeg","id":"1a7fv0v8WTx5AS78Red4O_zbBZB6SUL9f","type":"image"},{"name":"IMG_4774.jpeg","id":"1pOlsaH0ptSTNGTa40BZyXTvYZLwjLKLR","type":"image"},{"name":"IMG_4776.jpeg","id":"16wTK-g667FtD8uBrKnlimqr9A8P6SfRL","type":"image"},{"name":"IMG_4777.jpeg","id":"1fzWiDcZDyd0fHsfU-QrPGoQ6LzsuQ6P6","type":"image"},{"name":"IMG_4778.jpeg","id":"1CUOzCWptGhab7jjc2FBvL3pFeuOfQXEO","type":"image"},{"name":"IMG_4779.jpeg","id":"1kfkE2lRmiyqM0oBc--IXZIhvtmZJm9WE","type":"image"},{"name":"IMG_4781.jpeg","id":"1vWlWkhAAI7Gd1elT60H7XiGZ6FU0D_Z6","type":"image"},{"name":"PERIO SE SUMA A DONAR VIDA EN VIDA (6).jpeg","id":"1oZU27_yxJhdqXOTeCHTcBoTKiL45rsZJ","type":"image"}]},{"title":"Cantor Orillero - HuanguelÃ©n - octubre 2026","id":"17SgSCBXV5tQvuyBopE6K9oNI-aS70pas","items":[{"name":"00902c5a-39be-403e-a6a3-a29229757660.jpeg","id":"1jJHX1mw0PisUq0k_MCYEA2wc0_EaOTk5","type":"image"},{"name":"03dc17cc-20a3-4fcc-b250-9fc2c4c7bf64.jpeg","id":"1b2gLisPFGUZm2JBKuexljyg9OCzszSe2","type":"image"},{"name":"0651f9e7-a0c8-405a-b51a-54f5b09e7c53.jpeg","id":"1cpgXUe_5q08cqoZXa3RcmqlZfPNXuY_a","type":"image"},{"name":"0d31bdb6-e72e-471c-8e0e-d68f9d8494f3.jpeg","id":"1eCBi2s7f2hBw32oUny33kJjLa4Z51jMv","type":"image"},{"name":"1.png","id":"1oh4sGb6Znaip943zpSkmMqOkeLxqe62S","type":"image"},{"name":"10.png","id":"1yd-VzgTb8iFx_a3mBIYfhEujhJr-3abf","type":"image"},{"name":"11.png","id":"1skBuBIB__x-xZpUB13SQa5oifDm2MxO0","type":"image"},{"name":"19c87a14-0efe-460f-b37f-d6a319dcab28.jpeg","id":"1WTdODXxM_ZmNbzVT6jEVnTHNMEEFdqKl","type":"image"},{"name":"1c13c38e-bb5b-4c4f-9e18-a288ad880097.jpeg","id":"1nS41wr5z6eK7gDc0i8j6BjX-mJ5uRLZE","type":"image"},{"name":"2.png","id":"1PHqvCKi9mYVkBc839yvRNP0PdGiU4gv4","type":"image"},{"name":"2ba5b8d2-37d0-480d-9b50-f8a221b19a5c.jpeg","id":"15-QjMYdZgw5xJNHMAExnQsoSsSs7cM3a","type":"image"},{"name":"3.png","id":"14DN5bTUw2NrElPpiMcc2tSWESMODTtKS","type":"image"},{"name":"3fb46cd2-72fd-47f7-9651-9e9cef2d8017.jpeg","id":"1ffZZx3UUY8AhE3kwzko70th4dcYXPVUu","type":"image"},{"name":"3fb46cd2-72fd-47f7-9651-9e9cef2d8017.jpeg","id":"1o38JVsz8M6MskSOBXFCofAQlfKS72fuN","type":"image"},{"name":"46378e9c-3896-40db-b5c7-d992b24ebb92.jpeg","id":"1-n_-QsmIHFah0lsP0kp13HoNVX84uS-U","type":"image"},{"name":"464cfd54-42ff-4d20-a220-18d1f51a2d7f.jpeg","id":"1s6PmO1e7Upg7rcqNOvrn0xb8VBbwUdKf","type":"image"},{"name":"464cfd54-42ff-4d20-a220-18d1f51a2d7f.jpeg","id":"1SXnn3laq9v_qDWQlyYWSZb_3ZgGKPPjP","type":"image"},{"name":"48d77634-e15b-4dab-ad54-90096c822d61.jpeg","id":"13zefvjhYzsLWXUb89V9d1_2UaHjxXbIS","type":"image"},{"name":"5.png","id":"1FrI01Po3zzBKfCZ99tiWA8ldU_c34-Tb","type":"image"},{"name":"59d8b408-f267-435a-9f99-7c86c9bfa996.jpeg","id":"1kX1vRZo5RadAzRWS6n4fIZQRIy96PZ59","type":"image"},{"name":"65c4025f-2da2-4c36-b0fc-92596c7dd4c3.jpeg","id":"1d84zS8ixhxxAk0SMnwpvZ_tAc-5vRGcg","type":"image"},{"name":"6e07e9c2-64ab-4ae5-8242-1c8a32744819.jpeg","id":"1AWdXRafAMFGFBMnOzeR_J3Jf6GH6scfp","type":"image"},{"name":"7.png","id":"1x3FfTfA3kdpM5IA-q-3c5EcOAV176kt3","type":"image"},{"name":"722529bc-be6c-4e72-94f1-e1f4dbf65b55.jpeg","id":"1LlaQxEXFlgvSMWPLjJfKvVZhvRWNHw2i","type":"image"},{"name":"798d5e0e-c941-4a7a-b6b8-67a792ff76f8.jpeg","id":"1iIGBfj39eC2oTP9hgD06GgFjKS7AUKD_","type":"image"},{"name":"8.png","id":"1LlL5skP6LYoqadKL05Qpv1cwb0DJjCQE","type":"image"},{"name":"89b42225-d255-4200-9d5d-844dab4d51a6.jpeg","id":"1zV9cbBUgk4o6U9SEawqi2Jkw6YXoGO5-","type":"image"},{"name":"9.png","id":"10Iq3l0AwfduFwv-Ssfy3c3sb4pdd_LJt","type":"image"},{"name":"a0403afb-29ae-4768-a85f-fb3d5f267965.jpeg","id":"19ACGBc6AZzH84EUsuYA7rBiqbFZj3iJz","type":"image"},{"name":"a056ec68-482b-4d81-8fde-bc45c9b1a97f.jpeg","id":"1fqE6Ga8eBiJbxs0w0-YbEZbitBq3XiNx","type":"image"},{"name":"a5ddfb4f-fe7f-4d92-9a6b-99c1a9f5a53a.jpeg","id":"113MGLGi7yDwz_GnYAz7Y3KeJr1dwD-CI","type":"image"},{"name":"aac04bff-fd4c-4729-932b-821ff01c8e40.jpeg","id":"1DVPScMdqcqEWF4-R19rvnOmCVzbqiEcB","type":"image"},{"name":"b59ab22c-bac0-4e29-8b87-ed46b1df339c.jpeg","id":"1_y9Ki8-5wgzQeGl0mNqS11WupCqWvrKG","type":"image"},{"name":"ba5fe027-a6dc-48c6-a703-add1a379ce4d.jpeg","id":"1Eh7jciIdjmXL-BQAeT-pp-wvz1GoYgpQ","type":"image"},{"name":"bb8db282-59d6-4b74-9113-0f834e3e6ca3.jpeg","id":"1nDUsYjvG-YYZtyVVJxnXHl9FbasgG3Ts","type":"image"},{"name":"c1c23b6a-943c-422f-8596-aea5a1689c2f.jpeg","id":"1ON4Hrb-gWkbyHVp9zaGQubx4ZFRrSLxY","type":"image"},{"name":"c3649482-fc84-4338-820f-9b149938c186.jpeg","id":"1Njmpo39SIf2OPG8ch0Ot1PoE_SOmV0uO","type":"image"},{"name":"cd17e211-c930-4455-ae25-2076703fad9c.jpeg","id":"17kucvNvMgPzehw-MjdlcxX35NIB0KBc2","type":"image"},{"name":"d1dedc59-2a20-44f9-996d-ca3d17d41dd8.jpeg","id":"1xHDSi760gc1BCoozXHQh7kJ-b25lDdWZ","type":"image"},{"name":"debe914d-a4dc-455e-ba26-00a753f0eb64.jpeg","id":"15JoiMh82hIGrM5rMWRXpeR72jASycWz9","type":"image"},{"name":"E4254078-7DD5-4C8C-B013-C8DEE0273812.jpeg","id":"1Qg8e0e37-PDu-jXZUEPO0SR9-55eKvhs","type":"image"},{"name":"ea4c838a-f544-49dd-8750-65e4af5ce0fd.jpeg","id":"1UmHHxAZTp-Z9V9gFj2XAYgbEgeGYsa1K","type":"image"},{"name":"IMG_6374.jpeg","id":"1OPaamm17C1HRG2l9SwYBbJcj5sgE5tbo","type":"image"},{"name":"IMG_6477.jpeg","id":"1STY59y5swg1VjaNz50YUtLrlS2X_Boff","type":"image"},{"name":"IMG_6534.jpeg","id":"1Ne3-jsD-BBMk-SI64W43wjpnSdU0e78Z","type":"image"},{"name":"IMG_6537.jpeg","id":"1vz_YQySOXsqVWK-KUTy4JC86SdU1-I1q","type":"image"},{"name":"IMG_6538.jpeg","id":"1gCKnskCI4yzX9Yk80W-aPBNnIA9qaYp0","type":"image"},{"name":"IMG_6638.jpeg","id":"1ZgoD2O8Zvvi8QMHpTNEZFT5shWD2P49W","type":"image"},{"name":"IMG_6645.jpeg","id":"1Frfb4xyDoORKqgqoNizppMIX5uEP6EvQ","type":"image"},{"name":"IMG_6647.jpeg","id":"1YhQDX1Iivm1Tk2-5WgZxkjdoxZSelyo0","type":"image"},{"name":"IMG_6648.jpeg","id":"1Mt9obnx0twcLLOLnWURkYRo_wSlpt7-L","type":"image"},{"name":"IMG_6650.jpeg","id":"17daJtXmcxiFR6ImXA7lMPFwQTUcB5oeS","type":"image"},{"name":"IMG_6654.jpeg","id":"1uhANs8JpJldeY6UJdBrFJDI-s1wEt1PI","type":"image"},{"name":"IMG_6661.jpeg","id":"1t04gnFm6hT5nyUT2q7gnMODuTyEZyHqR","type":"image"},{"name":"IMG_6662.jpeg","id":"1LNf2tFl2Bx7g69r0tspNjEAiOb9ZJjc4","type":"image"},{"name":"IMG_6665.jpeg","id":"1FA7l4EsGnzZfD2Sj2AN5CzT9JHjFu42u","type":"image"},{"name":"IMG_6669.jpeg","id":"11a5ZvaLcLVM8JacQNKGuN6a-_T1kr4T-","type":"image"},{"name":"IMG_6672.jpeg","id":"1jQUIXRKlmuHg-Zh22sew8eiOOHidIUkP","type":"image"},{"name":"IMG_6673.jpeg","id":"1MEBFWeaaP-B4FKeqJ7r14tLW4KOuloqE","type":"image"},{"name":"IMG_6678.jpeg","id":"1N57OwcPekm5AhwzqmUwstUeKJuxNyzAv","type":"image"},{"name":"IMG_6683.jpeg","id":"1AWlHewUsE8Ly3tf9pAhF2TskpVE9tJnQ","type":"image"},{"name":"IMG_6686.jpeg","id":"1KJS3zgVKJu_qLq-wCmu8ftcMUoJ7rBzP","type":"image"},{"name":"IMG_6687.jpeg","id":"13QXHnsBmHUD5Iwj3pyeBJ18iU5LAeJrc","type":"image"},{"name":"IMG_6690.jpeg","id":"1-3p9NMWlKW1pbhjJs7OyAF8iyeAZ9OpO","type":"image"},{"name":"IMG_6691.jpeg","id":"1g_HALIkePclTKkkgNq1_2aSt7HKjUPGT","type":"image"},{"name":"IMG_6693.jpeg","id":"1xFpYBWeeZvy0Y0_o_JE0B69TdCB8d7o3","type":"image"},{"name":"IMG_6699.jpeg","id":"1ZuwmYmoxJHI2lrFKBcmSJv0KUlzEZ_wg","type":"image"},{"name":"IMG_6709.jpeg","id":"1FhGQRz1qWS_KneUGCVk4l9vwlQcb3kah","type":"image"},{"name":"IMG_6712.jpeg","id":"1Rjeh7fb4eYCBO1SAecHbcRljeNMFdWs5","type":"image"},{"name":"IMG_6714.jpeg","id":"1j8Vue8IW2PDV0jCjfPEG2QahqtpNoJ9s","type":"image"},{"name":"IMG_6716.jpeg","id":"1WC4yiurG5644ciys1XytOxjxrqpQfaj9","type":"image"},{"name":"IMG_6717.jpeg","id":"1e7u00vsB4lqCfQTdzzDrx-5lxRihXlWb","type":"image"},{"name":"IMG_6737.jpeg","id":"1Pr6VoucuvimjO2y4cQ46HuCNRDPyQsKn","type":"image"},{"name":"IMG_6739.jpeg","id":"127AhAIB3oyNdjmwHOr8wZ2_1gUq-6Li3","type":"image"},{"name":"IMG_6740.jpeg","id":"1T9NfB2uplw1W3CZbGbT3QSXmfbPmrxXL","type":"image"},{"name":"IMG_6741.jpeg","id":"14BK2k7MhbLB5j2orlu41lILqVc0GhOUX","type":"image"},{"name":"IMG_6743.jpeg","id":"1-LZrkgUQY8dlJK59K4pvDZgLnnmE41QJ","type":"image"},{"name":"IMG_6744.jpeg","id":"1mDTNElMOMdA3Rol1UfytRXxpngGdZ67s","type":"image"},{"name":"IMG_6808.jpeg","id":"1QOY2dCoAaqiQOwjTVu8Q3amOasePzsj1","type":"image"},{"name":"IMG_6891.jpeg","id":"1NBKTPc5tY6IdGL9nCNozwQVJYE48D3W6","type":"image"},{"name":"IMG_6895.jpeg","id":"1iiXO5j4h_pKRBfMIUyjuON6vI09BBuDK","type":"image"}]},{"title":"Facultad de Cs. MÃ©dicas UNLP - noviembre 2026","id":"1MH3PEwoGwEiSo6Lhajkzrc5JRjB2YRUa","items":[{"name":"IMG_7020.jpeg","id":"1QyhvfmiTFry98va5Eru3KxBm_zhi63VW","type":"image"},{"name":"IMG_7021.mov","id":"1jqMk-ZOp-7s-0l98tOkwlah4-91uRr8L","type":"video"},{"name":"IMG_7022.mov","id":"1aD_pVH8eQkOq1Eo9u2ma5oV780P6tZen","type":"video"},{"name":"IMG_7024.jpeg","id":"16oJlu9RO5_gtGNILleI26PkWn8ff21gA","type":"image"},{"name":"IMG_7026.jpeg","id":"1FXKp9IY6XI_xEoczH1ZEm_kH_AQvbm9I","type":"image"},{"name":"IMG_7027.jpeg","id":"1-GB1X4ZjML4ibLyklDoWJX1hdne7K6Fx","type":"image"},{"name":"IMG_7030.jpeg","id":"1X40JYGtO-Aol0VUoetkAI2y1iyCC75X9","type":"image"},{"name":"IMG_7031.jpeg","id":"1tyXq4WGd4kZWrhSSfmmiinfLaOqZQARU","type":"image"},{"name":"IMG_7032.jpeg","id":"1lDA1dB1oiPRLtU_9sKgsPzZJAGK3pzv7","type":"image"},{"name":"IMG_7035.mov","id":"14fxqOpItby4JxJxiRFErS6GQt1Z9zRUI","type":"video"},{"name":"IMG_7038.jpeg","id":"18T1u3xxSM4Rnf0-GGgctGDLxD27NBzwM","type":"image"},{"name":"IMG_7042.jpeg","id":"1QhppViRYH56TZnMO0GkMaWJVdAyXkSqE","type":"image"},{"name":"IMG_7045.jpeg","id":"1Tag593dTqAEp1T_n7cqPB0bt4TSOm9Ue","type":"image"},{"name":"IMG_7047.jpeg","id":"1bGnFnDhkwEkiurgKhixsK67cTToOPNcV","type":"image"},{"name":"IMG_7051.jpeg","id":"1KYn-Vlvl1iRXsdhRdDx00RQrRWTlMoWA","type":"image"},{"name":"IMG_7053.jpeg","id":"1wQ-Y2K-iEuYBuAX7d7HJ2d7pBD2Zvdi6","type":"image"},{"name":"IMG_7058.jpeg","id":"1G-UPTXz3z3VcoV-uKVMyTqqqhjDyic-g","type":"image"},{"name":"IMG_7060.jpeg","id":"1IFvkdWgZQy2MlMjKHppv3AD6VBPGCWyi","type":"image"},{"name":"IMG_7062.jpeg","id":"1N3PPqiOFiSFG-vykj5jOxfvFTLGMqDIS","type":"image"},{"name":"IMG_7066.jpeg","id":"1y8oVKtHShhBKe8yDZWrx7lwUBh-zpmYr","type":"image"},{"name":"IMG_7068.jpeg","id":"1jUZOqw9lsLXrjecppx0X1pDVRs5mkfPt","type":"image"},{"name":"IMG_7070.jpeg","id":"1X8wwPPMKi1UtSvpvocKlR1v9f-9epwpC","type":"image"},{"name":"IMG_7073.jpeg","id":"1Om8qLKc5WVcXIPJTa30RDVswnrcVnFv4","type":"image"},{"name":"IMG_7079.jpeg","id":"1L5MfBDdVaJmz-u4ITO5jD8Wcce9WBgo_","type":"image"},{"name":"IMG_7080.jpeg","id":"14jfwtDQ3ZUPZzLze6jlDcI5qj5B3gL_g","type":"image"},{"name":"IMG_7083.jpeg","id":"1oKjZydfZI64sJErSgvJ2PUCrmnO9ABYC","type":"image"},{"name":"IMG_7089.mov","id":"1T_xRtXJCX6nWrB8C7is1i9uOIEROpueg","type":"video"},{"name":"IMG_7092.jpeg","id":"10yJjbH-uhZC2-eny2XeOeC15do_IeKwm","type":"image"},{"name":"IMG_7093.jpeg","id":"18kcNZFl0f6doBtwj5Yv7-m7wE7uswaVm","type":"image"},{"name":"IMG_7096.jpeg","id":"1oZoUExRC5y05lnyZAZ-9StgfO8lwNeCN","type":"image"},{"name":"IMG_7100.jpeg","id":"12A0EN2NeCiYGhM-i1nCw1W0TmtskutQp","type":"image"},{"name":"IMG_7102.jpeg","id":"1dIClwR64VC0OZ3iNEkgSJZG4C5m_4R-t","type":"image"},{"name":"IMG_7107.jpeg","id":"1Z1KAv-m4DVRnwOGmc5qbQsjKVawP9YBb","type":"image"},{"name":"IMG_7108.jpeg","id":"1U_nPw-MrkpEfErP3oLvPjtj1Ga11dafg","type":"image"},{"name":"IMG_7111.jpeg","id":"1gznPSm2hg5qsHeAA2r3wyweYNbIUFJcO","type":"image"},{"name":"IMG_7114.jpeg","id":"19wbCsmVk0BDba0o-A54x9UTcRMsTQWtr","type":"image"},{"name":"IMG_7116.jpeg","id":"1V1dQaJziea5ksUsgE97grGImGCdd8eQN","type":"image"},{"name":"IMG_7118.jpeg","id":"1b5QV86n0QhPqGov5xEhY3HvtMtwjO5AE","type":"image"},{"name":"IMG_7120.jpeg","id":"17OgVxOJs83W8_bLycVdxJ7xauaxkrv8-","type":"image"},{"name":"IMG_7121.jpeg","id":"1XiqPRXYbqE0SinnpEJEd6ao_JAHF1h6R","type":"image"},{"name":"IMG_7125.jpeg","id":"1-EHGuFy3MDFJUYCgqWDzEsSZRTpYY7bi","type":"image"},{"name":"IMG_7127.jpeg","id":"1ondBoct74lQzJfC9Wv0tZz2wMkrQdGK4","type":"image"},{"name":"IMG_7128.mov","id":"1SUL24zKEZiccAnbch2v3hOjio53Q0x7Q","type":"video"},{"name":"IMG_7131.jpeg","id":"1MwGaxcmy1XpJVmcb3WpMKqouZZWsMoPD","type":"image"},{"name":"IMG_7134.jpeg","id":"1j9ZFuW1xbCR2Im5-22eM3smsvMRgh0NA","type":"image"},{"name":"IMG_7136.jpeg","id":"1VKv2VsyGadbNCez9PHp8CTV9Hw2cGDao","type":"image"},{"name":"IMG_7138.jpeg","id":"11njTaqOS6Tg9jZxe1Oyjk4Tv2hm32ZRQ","type":"image"},{"name":"IMG_7142.jpeg","id":"1NqDN0kVExq7wuisbHCMdJAWu9rKGE-Gd","type":"image"},{"name":"IMG_7146.jpeg","id":"1Nd0zt2ph21cJU5wjjZQ1YNg-D_C51kot","type":"image"},{"name":"IMG_7149.jpeg","id":"1eIpJWsYGMl9czYGWQINlwfATgJtjE65h","type":"image"},{"name":"IMG_7150.jpeg","id":"1M71Mb3pYRVMZHYlX5nX-3sS3S1fa82zB","type":"image"},{"name":"IMG_7152.jpeg","id":"1v0mQ_Ua6gWCVDf4c6eHkUxVCpiEA1182","type":"image"},{"name":"IMG_7154.jpeg","id":"1yO-0QV7KaZXfMtCzn30215W2lruSAMw_","type":"image"},{"name":"IMG_7156.jpeg","id":"1V4o1xHkGBVMJ23HQ--WHffLtA13_5cWC","type":"image"},{"name":"IMG_7160.jpeg","id":"1KoWAlkx8ZzQwdbc2cGpRpZVOw2Rpwmd0","type":"image"},{"name":"IMG_7161.jpeg","id":"1nCNz86qqcpPRhwYY-66-D8xEqmJikxaq","type":"image"},{"name":"IMG_7165.jpeg","id":"1WrPNmel2h4nWtuefl7oHYJrvDNABBVVI","type":"image"},{"name":"IMG_7168.jpeg","id":"1s7fIkpY-GyaWV1gqquIj6Qx6RAbIm9ea","type":"image"},{"name":"IMG_7170.jpeg","id":"10b8ea1L3vzqDOq4WFxs_xfHHS2jQtvkX","type":"image"},{"name":"IMG_7173.jpeg","id":"18VckUJYXrF1luho0pwdlF_IH3gd4DN81","type":"image"},{"name":"IMG_7175.jpeg","id":"1PuW376U2P4t67c6vNAl4sE2Kkc9xjVQX","type":"image"},{"name":"IMG_7178.jpeg","id":"1FRf1GeJJ7Mzk0bUIUV8ayAsVYSxX8ElW","type":"image"},{"name":"IMG_7179.jpeg","id":"1Txuwe5nb6WYtFBgwi0ZTrk3yZdxkAplu","type":"image"},{"name":"IMG_7180.jpeg","id":"1EUu-mjjFnxyWInxoC7aN7URXj2Bm2un7","type":"image"},{"name":"IMG_7183.jpeg","id":"1rui2i-X-Prbo4JqH8Hh8pZC2WTNsbg-6","type":"image"},{"name":"IMG_7188.jpeg","id":"1HTeo6bP-sGpCcV1wX3UvLH7bhO0NV51v","type":"image"},{"name":"IMG_7191.jpeg","id":"1mjWlty8LFoxPi-FO0it80I9SVmukLQ2s","type":"image"}]},{"title":"TravesÃ­a por la Vida - octubre 2026","id":"1d9iMYNu1uxCy30wqMKG56LuDuXzlN-uy","items":[{"name":"ac221f55-b18b-45fb-ae76-35ad508feeb4.jpeg","id":"1WvSnfgNvpuBgZjIgodPb2iviG1eUHwu-","type":"image"},{"name":"B4CE5176-D1F1-4DD7-A393-D03A27FBC7D4.jpeg","id":"1BCyL-S-MKiDs3Y4N1kVZ5I9dFwkhjy2s","type":"image"},{"name":"D0D8F57D-F838-4837-8E0D-8AD86C44E25C.jpeg","id":"1WtCWk3sTGbsqT2ma2U6GbggdCCdRu_lx","type":"image"},{"name":"IMG_6548.jpeg","id":"1-BPTHEOrcQQv4C-h6QBvryhlOivcJfcV","type":"image"},{"name":"IMG_6550.jpeg","id":"1HQYbOHFXfp58FkT5VUjnzP-vCNPBRWJb","type":"image"},{"name":"IMG_6555.jpeg","id":"1cu6Qe4ShJq8Xkh71aLGyHEoafABsX6-o","type":"image"},{"name":"IMG_6556.jpeg","id":"1EECM2Bj4o4BLnRilaSeR_CObyKZlfoYt","type":"image"},{"name":"IMG_6558.jpeg","id":"16XHR5R3VBodWKH_lq_zLK27CGf0zlfuv","type":"image"},{"name":"IMG_6566.mov","id":"1-2caZcYmPBoBfdPaBh5zK3FbgYBH0sgM","type":"video"},{"name":"IMG_6571.mov","id":"1Sjm8GbdC8WJ1ZLzmHjB55uKsz1fwnJLk","type":"video"},{"name":"IMG_6577.jpeg","id":"1ozH7F-H1Nu4Qq_NGxtjATuK_HeAyduqH","type":"image"},{"name":"IMG_6581.jpeg","id":"1vIDQPUa_Tfq9W7d0Td558UurPby-h7Vb","type":"image"},{"name":"IMG_6582.jpeg","id":"1iYh6clgtEl9Ku9CmNj75R1LyXzuQoZ1e","type":"image"},{"name":"IMG_6592.jpeg","id":"1_iUIpuJ-Yt_kK6ZaW5gOECNLovIK-wgX","type":"image"},{"name":"IMG_6594.jpeg","id":"1svXN-Y9yPodOnvcqaDJnqzr_usVfIK7n","type":"image"},{"name":"IMG_6595.jpeg","id":"1-RBLIe7NWAaqnpU1CaL6gT-gJTciZgx7","type":"image"},{"name":"IMG_6603.jpeg","id":"1Gfo2cEhybMhlSjas33KbIAwVx-FYQ2M0","type":"image"},{"name":"IMG_6611.jpeg","id":"1GHH2CQ6_-D5Gdj7yrcpxs0Pu2pO1ik-J","type":"image"},{"name":"IMG_6612.jpeg","id":"14VKo6TouErz5KJq3njO6TzVPSx7koeTh","type":"image"},{"name":"IMG_6618.jpeg","id":"1Pf4r__PJvp__o3ciwPQc5-ToSfxA__Ao","type":"image"},{"name":"IMG_6622.jpeg","id":"1o4ONlVudAdoFdd4D5U5BmOYC7ArrggBz","type":"image"},{"name":"IMG_6624.jpeg","id":"1XvFxNE2LxTDbTHg5-XEL6XFCqf7MbXS2","type":"image"},{"name":"IMG_6743.jpeg","id":"1fmFfcoMnLlnZV3xcHhRaRklngWhVmjyq","type":"image"},{"name":"IMG_6746.jpeg","id":"1RpEnugyroJLiRVz-fZYWQIM4A9DEBv_b","type":"image"},{"name":"IMG_6748.jpeg","id":"1GJcpNK6tiobSnELCEM-as_eXsCyO02Hv","type":"image"},{"name":"IMG_6749.jpeg","id":"1YV5KzLbu4MYD71MA1Ra_M33gFvL4R83I","type":"image"},{"name":"IMG_6750.jpeg","id":"1HBC6lPcp_hjtm5Uekcu0In5aurlIl8Za","type":"image"},{"name":"IMG_6752.jpeg","id":"1_Y1kYtpVoFfr-YBZZDQokKjtP5YfBy4e","type":"image"},{"name":"IMG_6753.jpeg","id":"1eh54Tws-k-90bb6dRFhYjjAFfRH4LipX","type":"image"},{"name":"IMG_6756.jpeg","id":"1oD4bOttvQwp1gat5x27tlk90eLwX3pz7","type":"image"},{"name":"IMG_6758.jpeg","id":"17NStcE5nSsLc5LVYUFMvV-F52wggRJ7X","type":"image"},{"name":"IMG_6764.jpeg","id":"1VLmHqOY6PkedJshx9VMMpyMV1vt4i7Hr","type":"image"},{"name":"IMG_6766.jpeg","id":"1u_YH57BkkdYgmOs5lFmzV-HwjbOw5Xmv","type":"image"},{"name":"IMG_6767.jpeg","id":"1DvvDQbgEAB8uWfoThdp6WUVP7wns0WYL","type":"image"},{"name":"IMG_6768.jpeg","id":"1caeX0IMaIFZBdjpZDq7LP9-EnP_tMVTR","type":"image"},{"name":"IMG_6772.jpeg","id":"1JQh2qDSeRiIEdOJGBsGM9tX-b5icftP4","type":"image"},{"name":"IMG_6773.jpeg","id":"1jhfzsCscEPD4l1zzr4Okn9IAesAfjsK9","type":"image"},{"name":"IMG_6774.jpeg","id":"1jP-PWxZQFVbMpc32dN07oM8BqSft_Y97","type":"image"},{"name":"IMG_6776.jpeg","id":"1MxTt6ETNq4zaziW4Osa5rePFJPYFBgJ1","type":"image"},{"name":"IMG_6777.jpeg","id":"1DRrd6sQx5JaZBA9CgJLqDYJHjMAoH69T","type":"image"},{"name":"IMG_6778.jpeg","id":"1ivPeFwahOZK5fH866ws_FiPBiifgcyfZ","type":"image"},{"name":"IMG_6779.jpeg","id":"1uTdQiS8FpyC7wjO1EP5zXdgF64L_BZ-z","type":"image"},{"name":"IMG_6784.jpeg","id":"1Nj_v3t78IAF7GJ-r9-FYyPmvj5f7rjNU","type":"image"},{"name":"IMG_6785.jpeg","id":"1sL99NmzqBGqBgvlxmRLyZbhuTpJhGQTr","type":"image"},{"name":"IMG_6790.jpeg","id":"1QQ_ncUpz5s40svtc9Z8zT2ROQWNBXqJ4","type":"image"},{"name":"IMG_6791.jpeg","id":"1JxP9W1Wgu6IHbkhdIIDdEkNZfIU80A1I","type":"image"},{"name":"IMG_6793.jpeg","id":"1XFM2nMg-oq8jt4PDJQ2pF1Enf6Rmy5Ji","type":"image"}]}];
+  const galeriaGrid = document.getElementById("galeriaGrid");
+  const galeriaFiltros = document.getElementById("galeriaFiltros");
+  const galeriaContador = document.getElementById("galeriaContador");
+  const galeriaLightbox = document.getElementById("galeriaLightbox");
+  const galeriaLbImg = document.getElementById("galeriaLbImg");
+  const galeriaLbVideo = document.getElementById("galeriaLbVideo");
+  const galeriaLbTitulo = document.getElementById("galeriaLbTitulo");
+  const galeriaLbMeta = document.getElementById("galeriaLbMeta");
+  const galeriaLbCerrar = document.getElementById("galeriaLbCerrar");
+  const galeriaLbPrev = document.getElementById("galeriaLbPrev");
+  const galeriaLbNext = document.getElementById("galeriaLbNext");
+
+  const galeriaItems = [];
+  GALERIA_DATA.forEach((folder) => {
+    (folder.items || []).forEach((item) => {
+      galeriaItems.push({ ...item, folderId: folder.id, folderTitle: folder.title });
+    });
+  });
+
+  let galeriaActual = 0;
+  let galeriaVisibles = galeriaItems.slice();
+
+  function galeriaThumb(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w600`; }
+  function galeriaFull(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`; }
+  function galeriaVideo(id) { return `https://drive.google.com/file/d/${id}/preview`; }
+
+  function crearItemGaleria(item, idx) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "galeria-item";
+    card.setAttribute("aria-label", `Ver ${item.name}`);
+    const img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = item.name;
+    img.referrerPolicy = "no-referrer";
+    img.src = galeriaThumb(item.id);
+    img.onerror = () => { img.style.objectFit = "contain"; img.style.padding = "24px"; img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect fill='%23eaf2fb' width='120' height='120'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='42'%3E%F0%9F%93%B7%3C/text%3E%3C/svg%3E"; };
+    card.appendChild(img);
+    if (item.type === "video") {
+      const badge = document.createElement("span");
+      badge.className = "galeria-item-tipo";
+      badge.textContent = "▶ Video";
+      card.appendChild(badge);
+    }
+    card.addEventListener("click", () => abrirGaleriaLightbox(idx));
+    return card;
+  }
+
+  function renderGaleria() {
+    if (!galeriaGrid) return;
+    galeriaVisibles = [];
+    galeriaGrid.innerHTML = "";
+    if (galeriaContador) galeriaContador.textContent = `Huanguelén Dona Vida · ${galeriaItems.length} archivos`;
+
+    GALERIA_DATA.forEach((folder) => {
+      const items = (folder.items || []).map((item) => ({ ...item, folderId: folder.id, folderTitle: folder.title }));
+      if (!items.length) return;
+      const startIndex = galeriaVisibles.length;
+      galeriaVisibles.push(...items);
+
+      const seccion = document.createElement("section");
+      seccion.className = "galeria-seccion";
+
+      const header = document.createElement("div");
+      header.className = "galeria-seccion-header";
+      header.innerHTML = `<h3 class="galeria-seccion-titulo">${folder.title}</h3><span class="galeria-seccion-cuenta">${items.length} archivos</span>`;
+      seccion.appendChild(header);
+
+      const wrap = document.createElement("div");
+      wrap.className = "galeria-carrusel-wrap";
+
+      const prev = document.createElement("button");
+      prev.type = "button";
+      prev.className = "galeria-flecha galeria-flecha-prev";
+      prev.setAttribute("aria-label", `Ver anteriores de ${folder.title}`);
+      prev.innerHTML = "&#10094;";
+
+      const fila = document.createElement("div");
+      fila.className = "galeria-fila";
+      fila.setAttribute("role", "list");
+      items.forEach((item, i) => {
+        const card = crearItemGaleria(item, startIndex + i);
+        card.setAttribute("role", "listitem");
+        fila.appendChild(card);
+      });
+
+      const next = document.createElement("button");
+      next.type = "button";
+      next.className = "galeria-flecha galeria-flecha-next";
+      next.setAttribute("aria-label", `Ver siguientes de ${folder.title}`);
+      next.innerHTML = "&#10095;";
+
+      const scrollByAmount = () => Math.max(fila.clientWidth * 0.8, 280);
+      prev.addEventListener("click", () => fila.scrollBy({ left: -scrollByAmount(), behavior: "smooth" }));
+      next.addEventListener("click", () => fila.scrollBy({ left: scrollByAmount(), behavior: "smooth" }));
+
+      const actualizarFlechas = () => {
+        const maxScroll = fila.scrollWidth - fila.clientWidth - 4;
+        prev.disabled = fila.scrollLeft <= 4;
+        next.disabled = fila.scrollLeft >= maxScroll;
+      };
+      fila.addEventListener("scroll", actualizarFlechas, { passive: true });
+      window.addEventListener("resize", actualizarFlechas);
+      setTimeout(actualizarFlechas, 0);
+
+      wrap.appendChild(prev);
+      wrap.appendChild(fila);
+      wrap.appendChild(next);
+      seccion.appendChild(wrap);
+      galeriaGrid.appendChild(seccion);
+    });
+  }
+
+  function abrirGaleriaLightbox(idx) {
+    galeriaActual = idx;
+    mostrarGaleriaActual();
+    if (galeriaLightbox) galeriaLightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function cerrarGaleriaLightbox() {
+    if (galeriaLightbox) galeriaLightbox.hidden = true;
+    if (galeriaLbVideo) galeriaLbVideo.src = "";
+    document.body.style.overflow = "";
+  }
+
+  function mostrarGaleriaActual() {
+    const item = galeriaVisibles[galeriaActual];
+    if (!item) return;
+    if (galeriaLbTitulo) galeriaLbTitulo.textContent = item.name;
+    if (galeriaLbMeta) galeriaLbMeta.textContent = `${item.folderTitle} · ${galeriaActual + 1} / ${galeriaVisibles.length}`;
+    if (item.type === "video") {
+      if (galeriaLbImg) { galeriaLbImg.hidden = true; galeriaLbImg.src = ""; }
+      if (galeriaLbVideo) { galeriaLbVideo.hidden = false; galeriaLbVideo.src = galeriaVideo(item.id); }
+    } else {
+      if (galeriaLbVideo) { galeriaLbVideo.hidden = true; galeriaLbVideo.src = ""; }
+      if (galeriaLbImg) { galeriaLbImg.hidden = false; galeriaLbImg.alt = item.name; galeriaLbImg.src = galeriaFull(item.id); }
+    }
+  }
+
+  function galeriaMover(dir) {
+    if (!galeriaVisibles.length) return;
+    galeriaActual = (galeriaActual + dir + galeriaVisibles.length) % galeriaVisibles.length;
+    mostrarGaleriaActual();
+  }
+
+  if (galeriaLbCerrar) galeriaLbCerrar.addEventListener("click", cerrarGaleriaLightbox);
+  if (galeriaLbPrev) galeriaLbPrev.addEventListener("click", () => galeriaMover(-1));
+  if (galeriaLbNext) galeriaLbNext.addEventListener("click", () => galeriaMover(1));
+  if (galeriaLightbox) galeriaLightbox.addEventListener("click", (e) => { if (e.target === galeriaLightbox) cerrarGaleriaLightbox(); });
+  document.addEventListener("keydown", (e) => {
+    if (!galeriaLightbox || galeriaLightbox.hidden) return;
+    if (e.key === "Escape") cerrarGaleriaLightbox();
+    if (e.key === "ArrowLeft") galeriaMover(-1);
+    if (e.key === "ArrowRight") galeriaMover(1);
+  });
+
+  renderGaleria();
 
   if (botonChat && chat && cerrarChat && mensajes && formulario && entrada) {
     botonChat.addEventListener("click", () => {
@@ -2563,25 +3026,6 @@ mostrarPregunta();
 
   if (botonCalendario) botonCalendario.addEventListener("click", abrirCalendario);
 
-  function abrirGaleria() {
-    if (!modalGaleria || !iframeGaleria) return;
-    iframeGaleria.src = DRIVE_GALERIA_URL;
-    modalGaleria.hidden = false;
-  }
-
-  function cerrarGaleriaModal() {
-    if (!modalGaleria || !iframeGaleria) return;
-    modalGaleria.hidden = true;
-    iframeGaleria.src = "about:blank";
-  }
-
-  if (cerrarGaleria) cerrarGaleria.addEventListener("click", cerrarGaleriaModal);
-  if (modalGaleria) {
-    modalGaleria.addEventListener("click", (e) => {
-      if (e.target === modalGaleria) cerrarGaleriaModal();
-    });
-  }
-
   function escaparHTML(texto) {
     return texto
       .replace(/&/g, "&amp;")
@@ -2608,98 +3052,149 @@ mostrarPregunta();
 
   function responder(texto) {
     const t = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const avisoPBA = "Importante: esta información es orientativa y corresponde principalmente a la Provincia de Buenos Aires. Los requisitos pueden variar según la jurisdicción. Si vivís en otra provincia, consultá con el centro de donación más cercano.";
+    const avisoPBA = "Importante: esta información es orientativa y corresponde principalmente a la Provincia de Buenos Aires. Los requisitos pueden variar según la jurisdicción. Si vivís en otra provincia, consultá con el Centro de Hemoterapia más cercano a tu domicilio.";
     const mapaPBA = "Mapa de lugares para donar sangre en PBA: https://www.google.com/maps/d/viewer?mid=1_zvbbz8uOrTO72ai5gIauPzIMKu2wGet&femb=1&ll=-37.15624584003135%2C-59.91622035&z=6";
+    const fuenteSangre = "Fuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    const fuenteHemoterapia = "Fuente oficial: https://www.ms.gba.gov.ar/sitios/hemoterapia/";
+    const fuenteCPH = "Fuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    const fuenteLey = "Fuente oficial: https://www.argentina.gob.ar/normativa/nacional/ley-22990-49103/actualizacion";
+    const esSangre = t.includes("sangre") || t.includes("plaqueta") || t.includes("donar sangre") || t.includes("transfusion");
+    const esCPH = t.includes("cph") || t.includes("medula") || t.includes("progenitor") || t.includes("hematopoy") || t.includes("registro de donantes");
 
     if (t.includes("hola") || t.includes("buenas") || t.includes("hello")) {
-      return "¡Hola! Soy Medulín, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, edades, registro, actividades y fuentes oficiales. ¿En qué te ayudo?";
+      return "¡Hola! Soy Medulín, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, registro y donación de CPH (médula ósea), requisitos, edades, ley de donación y fuentes oficiales. ¿En qué te ayudo?";
+    }
+    if (t.includes("gracias")) return "¡De nada! Gracias por interesarte en la donación. Informarse también es una forma de ayudar.";
+
+    // 3.1 Parálisis / médula espinal
+    if ((t.includes("paral") || t.includes("silla de ruedas") || t.includes("columna") || t.includes("espinal") || t.includes("movilidad") || t.includes("sistema nervioso")) && esCPH) {
+      return "No. Existe una confusión frecuente entre la médula ósea y la médula espinal, pero son estructuras completamente diferentes.\n\n• La médula ósea es el tejido ubicado en el interior de determinados huesos, donde se producen las células sanguíneas.\n• La médula espinal forma parte del sistema nervioso central y se encuentra dentro de la columna vertebral.\n\nLa donación de CPH no implica intervenir sobre la médula espinal. No se extraen células del sistema nervioso ni se realizan punciones en la médula espinal.";
     }
 
-    if (t.includes("gracias")) {
-      return "¡De nada! Gracias por interesarte en la donación. Informarse también es una forma de ayudar.";
+    // 3.2 Quirófano / aféresis
+    if ((t.includes("quirofano") || t.includes("oper") || t.includes("cirugia") || t.includes("anestesia") || t.includes("aferesis") || t.includes("como se dona") || t.includes("metodo")) && esCPH) {
+      return "Existen dos procedimientos para obtener células progenitoras hematopoyéticas de un donante adulto:\n\n• Por sangre periférica: mediante la administración previa de un medicamento que favorece el paso de las células progenitoras al torrente sanguíneo, se recolectan mediante aféresis.\n• Por médula ósea: se obtienen mediante punciones en los huesos de la pelvis, bajo anestesia.\n\nLa gran mayoría de las donaciones se realiza mediante sangre periférica, sin necesidad de anestesia ni de pasar por un quirófano. Ambos procedimientos requieren evaluación médica previa y seguimiento.";
     }
 
-    if ((t.includes("sangre") && t.includes("cph") && (t.includes("mismo") || t.includes("igual") || t.includes("difer"))) || t.includes("lo mismo")) {
-      return "No, donar sangre y donar CPH no es lo mismo. Son procesos diferentes, con objetivos, requisitos y evaluaciones propias. La aptitud y la compatibilidad se evalúan en cada caso por el equipo de salud.";
+    // 4.1 Consultas médicas individuales
+    if (t.includes("enfermedad") || t.includes("medicamento") || t.includes("medicacion") || t.includes("tratamiento") || t.includes("cirugia") || t.includes("oper") || t.includes("diabetes") || t.includes("hipertens") || t.includes("tiroid") || t.includes("asma") || t.includes("cancer") || t.includes("hepatitis") || t.includes("antibiot") || t.includes("antidepres") || t.includes("anticoagul") || t.includes("vacuna") || t.includes("tatuaje") || t.includes("embaraz") || t.includes("lactancia")) {
+      return "Cada persona tiene una historia de salud diferente. Tener una enfermedad, tomar medicamentos o haber realizado un tratamiento médico no necesariamente impide donar, aunque algunas condiciones pueden requerir una postergación temporal o impedir la donación.\n\n• Para donar sangre o plaquetas: consultá con el equipo de hemoterapia o con tu médico de cabecera. La evaluación definitiva corresponde al equipo de hemoterapia.\n• Si tu consulta es sobre inscripción o donación de CPH: escribí al Registro Nacional de Donantes de CPH del INCUCAI a donantes@incucai.gov.ar.\n\nNo suspendas ni modifiques ningún tratamiento médico con el propósito de donar. Si por algún motivo no podés donar o registrarte, también podés contribuir difundiendo información y promoviendo la donación voluntaria. ¡Todos podemos ser promotores!";
     }
 
-    if (t.includes("para que sirve") && t.includes("sangre")) {
-      return "Donar sangre sirve para ayudar en cirugías, urgencias, tratamientos oncológicos, trasplantes y otras situaciones donde se necesitan componentes sanguíneos. La sangre no se puede fabricar, por eso la donación voluntaria y habitual es fundamental.\n\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    // 2.7 Hisopado / sin donar sangre
+    if ((t.includes("hisopado") || t.includes("bucal") || t.includes("mejilla") || t.includes("sin donar sangre") || t.includes("miedo a las agujas")) && (esCPH || t.includes("registr") || t.includes("inscrib"))) {
+      return "En Argentina, desde 2025, se incorporó el hisopado bucal como método complementario de inscripción en el Registro Nacional de Donantes de CPH.\n\nModalidades de inscripción:\n• Mediante una donación de sangre: se obtiene una pequeña muestra adicional destinada al estudio de compatibilidad genética.\n• Mediante un hisopado bucal: se recolecta una muestra de células del interior de la mejilla (no requiere donación de sangre en ese momento).\n\nEn ambos casos, la inscripción debe realizarse a través de centros habilitados y cumpliendo los requisitos correspondientes.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("para que sirve") && (t.includes("cph") || t.includes("medula") || t.includes("registro"))) {
-      return "Registrarse como donante de CPH sirve para que, si sos compatible con un paciente que necesita un trasplante, puedas ser contactado para evaluar la donación. Inscribirse no significa donar de inmediato: la donación se concreta solo si hay compatibilidad y se cumplen las evaluaciones médicas.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    // 2.6 Donante de órganos vs médula
+    if (t.includes("organ") && (esCPH || t.includes("medula"))) {
+      return "Ser donante de órganos no implica estar automáticamente inscripto como donante de médula ósea.\n\nLa donación de órganos y tejidos después del fallecimiento y la donación voluntaria de CPH son procesos diferentes. La donación voluntaria de CPH se realiza en vida y requiere una inscripción específica en el Registro Nacional de Donantes Voluntarios de CPH, dependiente del INCUCAI.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("edad") && t.includes("perman") && (t.includes("registro") || t.includes("cph"))) {
-      return "El rango de edad para permanecer en el registro de donantes de CPH puede variar según la normativa vigente. Para información actualizada y oficial, consultá el Registro Nacional de Donantes de CPH.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    // 2.4 Actualizar datos
+    if ((t.includes("actualiz") || t.includes("cambie") || t.includes("cambio") || t.includes("telefono") || t.includes("correo") || t.includes("domicilio") || t.includes("mude") || t.includes("datos")) && (t.includes("registro") || esCPH || t.includes("incucai"))) {
+      return "Si ya estás registrado, no necesitás volver a inscribirte. Es fundamental mantener actualizados tus datos de contacto.\n\nSi cambiaste de teléfono, correo electrónico o dirección, escribí a donantes@incucai.gov.ar e indicá:\n• Nombre y apellido completos.\n• DNI.\n• Nueva información de contacto.\n\nEnviá estos datos directamente al correo oficial del INCUCAI, no a través de este chat.";
     }
 
-    if ((t.includes("edad") || t.includes("inscrib")) && (t.includes("cph") || t.includes("medula") || t.includes("progenitoras"))) {
-      return "Los requisitos y edades para inscribirse como donante de CPH dependen de la normativa vigente y deben confirmarse con fuentes oficiales. En general, la inscripción se realiza ante organismos habilitados y requiere cumplir criterios de salud.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    // 2.3 Permanencia en registro
+    if ((t.includes("perman") || t.includes("hasta que edad") || t.includes("hasta cuando") || t.includes("60") || t.includes("venc")) && (t.includes("registro") || esCPH)) {
+      return "Una vez que te inscribís en el Registro de Donantes de CPH, permanecés registrado hasta cumplir los 60 años.\n\nAunque hayas superado los 40 años, podés ser convocado para donar si ya estabas registrado y resultás compatible con un paciente. No necesitás renovar tu inscripción, pero es muy importante mantener actualizados tus datos de contacto.\n\nSi cambiaste de datos, escribí a donantes@incucai.gov.ar con nombre completo, DNI y nueva información de contacto.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("edad") && t.includes("sangre")) {
-      return "Las edades habilitadas para donar sangre dependen de la normativa vigente y pueden variar según la jurisdicción. El equipo de salud del centro de donación confirma la aptitud en cada caso.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    // 2.1 / 2.2 Requisitos e inscripción CPH
+    if ((t.includes("requisit") || t.includes("inscrib") || t.includes("anot") || t.includes("registr") || t.includes("edad") || t.includes("como me")) && esCPH) {
+      return "Para inscribirte en el Registro Nacional de Donantes de CPH necesitás:\n• Tener entre 18 y 40 años.\n• Gozar de buena salud.\n• Presentar tu DNI y completar el consentimiento correspondiente.\n\nPodés inscribirte mediante una donación de sangre en un centro habilitado (en ese caso debés pesar más de 50 kilos) o mediante hisopado bucal en un centro habilitado.\n\nInscribirte no significa donar CPH en ese momento: manifestás tu voluntad de hacerlo en el futuro si resultás compatible con un paciente. Una vez inscripto, permanecés en el Registro hasta los 60 años.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("requisit") && t.includes("sangre")) {
-      return "Los requisitos para donar sangre se evalúan en el lugar de donación por personal de salud. Incluyen aspectos como edad, peso, estado de salud y condiciones temporales o definitivas según la normativa vigente.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuentes oficiales:\n- https://www.argentina.gob.ar/salud/donarsangre\n- https://www.ms.gba.gov.ar/sitios/hemoterapia/";
+    // 2.5 Para qué sirve registro CPH
+    if ((t.includes("para que sirve") || t.includes("por que") || t.includes("importante")) && (t.includes("registro") || esCPH)) {
+      return "Inscribirte como donante de CPH puede ofrecer una oportunidad de tratamiento a personas con leucemia, linfoma, aplasia medular y otras enfermedades que requieren un trasplante.\n\nAproximadamente 3 de cada 4 pacientes que necesitan un donante no encuentran uno compatible en su familia. Al inscribirte, tus datos de compatibilidad genética se incorporan a un registro nacional conectado con una red internacional.\n\nInscribirte no significa donar de inmediato: el INCUCAI se comunicará con vos si se identifica una posible compatibilidad.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("inscrib") && (t.includes("ya voy a donar") || t.includes("significa") || t.includes("inmediatamente"))) {
-      return "No. Inscribirse como donante de CPH no significa que ya vayas a donar. La donación se concreta solo si se encuentra una persona compatible y se cumplen las evaluaciones médicas necesarias.";
+    // 1.3 Ayunas
+    if (t.includes("ayun") || t.includes("desayun") || t.includes("comer antes") || t.includes("almorzar") || (t.includes("tomar agua") && esSangre)) {
+      return "No. Para donar sangre no es necesario estar en ayunas.\n\nPor el contrario, se recomienda haber ingerido alimentos, estar bien hidratado y haber descansado adecuadamente. Una buena preparación contribuye a tu bienestar durante y después de la extracción.\n\n¡No dejes de desayunar antes de ir a donar!";
     }
 
-    if (t.includes("requisit") && (t.includes("cph") || t.includes("medula") || t.includes("registro"))) {
-      return "Los requisitos para inscribirse como donante de CPH dependen de la normativa vigente y de la evaluación del organismo correspondiente. Antes de inscribirte, consultá la información oficial actualizada.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    // 1.4 Seguridad / contagio
+    if (t.includes("segur") || t.includes("contag") || t.includes("infect") || t.includes("vih") || t.includes("hepatitis") || t.includes("aguja") || t.includes("esteril") || t.includes("descartable") || t.includes("peligro")) {
+      return "Donar sangre es seguro. Todos los materiales que entran en contacto con tu sangre son estériles y de un solo uso. Las agujas y las bolsas de extracción se descartan una vez finalizado el procedimiento.\n\nLa donación se realiza bajo protocolos de seguridad y con supervisión de personal capacitado. En un Centro de Hemoterapia habilitado, no existe riesgo de adquirir una infección transmitida por la sangre a través de material compartido.";
     }
 
-    if (t.includes("cph") || t.includes("medula") || t.includes("progenitoras") || t.includes("hematopoy")) {
-      return "Las CPH (células progenitoras hematopoyéticas) son células que pueden dar origen a los componentes de la sangre. Se encuentran principalmente en la médula ósea y también en sangre periférica. El registro permite buscar personas compatibles con pacientes que necesitan un trasplante.\n\nInscribirse no significa donar de inmediato: la donación depende de la compatibilidad y de evaluaciones médicas.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    // 1.5 Grupo común
+    if (t.includes("grupo") && (t.includes("comun") || t.includes("frecuente") || t.includes("necesit") || t.includes("sirve") || t.includes("importante") || t.includes("positivo") || t.includes("negativo") || t.includes("0+") || t.includes("a+") || t.includes("b+") || t.includes("ab+"))) {
+      return "Todos los grupos sanguíneos son necesarios.\n\nAunque algunos grupos son más frecuentes que otros, también existe una mayor cantidad de pacientes que pertenecen a esos grupos y pueden requerir sus componentes sanguíneos. Los bancos de sangre necesitan contar con reservas variadas.\n\nNo importa cuál sea tu grupo sanguíneo: tu donación siempre es importante.";
     }
 
-    if (t.includes("donde") && t.includes("donar")) {
+    // 1.6 Donar una vez / dependencia
+    if (t.includes("una vez") || t.includes("siempre") || t.includes("dependen") || t.includes("acostumb") || t.includes("adiccion") || t.includes("obligad")) {
+      return "No. La donación de sangre no genera dependencia ni obliga al organismo a producir sangre en exceso. Tu cuerpo posee mecanismos naturales de regulación y recuperación.\n\nDonar habitualmente es una decisión personal, voluntaria y solidaria. Cada donación debe respetar los intervalos establecidos y las condiciones de salud de la persona.";
+    }
+
+    // 1.7 Recuperación
+    if (t.includes("recuper") || t.includes("repon") || t.includes("regener") || t.includes("hierro") || t.includes("globulos rojos") || t.includes("menos sangre") || t.includes("produce sangre")) {
+      return "Sí. El organismo posee la capacidad natural de reponer los componentes sanguíneos.\n\nDespués de una donación, el volumen de líquido se recupera relativamente rápido, mientras que los glóbulos rojos y las reservas de hierro requieren más tiempo. Por eso existen intervalos mínimos entre las donaciones, destinados a proteger la salud de quienes donan.";
+    }
+
+    // 1.9 Donación voluntaria / no para paciente particular
+    if (t.includes("voluntaria") || t.includes("altruista") || t.includes("paciente en particular") || t.includes("para alguien") || t.includes("conocido") || t.includes("familia necesita") || t.includes("nombre de un paciente")) {
+      return "No necesariamente tenés que donar para un paciente en particular. Lo ideal es que no esperes a que alguien conocido necesite una transfusión.\n\nLa donación voluntaria y altruista es la que se realiza libremente, sin esperar una contraprestación y sin estar destinada a una persona en particular. Permite mantener reservas permanentes, responder ante emergencias y disminuir la presión sobre pacientes y familias.\n\nDonar sin que nadie te lo pida es una forma de cuidar a toda la comunidad.";
+    }
+
+    // 1.10 Ley
+    if (t.includes("ley") || t.includes("22990") || t.includes("licencia") || t.includes("trabajo") || t.includes("certificado") || t.includes("remuner") || t.includes("pagan") || t.includes("derecho") || t.includes("faltar") || t.includes("descont")) {
+      return "En Argentina, la donación de sangre está regulada por la Ley Nacional de Sangre N.º 22.990. Establece que la donación es voluntaria, solidaria, altruista y no remunerada.\n\nDerechos reconocidos:\n• Justificación de inasistencia laboral por 24 horas, incluido el día de la donación.\n• Justificación por 36 horas cuando la donación se realiza mediante hemaféresis.\n• Ausencia de disminución salarial por estos conceptos.\n\nPodés solicitar el certificado correspondiente en el Centro de Hemoterapia donde realices la donación.\n\n" + fuenteLey;
+    }
+
+    // 1.2 Edad sangre
+    if (t.includes("edad") && esSangre) {
+      return "En la provincia de Buenos Aires podés donar sangre entre los 16 y los 65 años, siempre que cumplas los demás requisitos.\n\n" + avisoPBA + "\n\n" + fuenteSangre;
+    }
+
+    // 1.1 Requisitos sangre
+    if ((t.includes("requisit") || t.includes("condicion") || t.includes("que necesito") || t.includes("puedo donar") || t.includes("peso") || t.includes("dni") || t.includes("document")) && esSangre) {
+      return "Para donar sangre en la provincia de Buenos Aires necesitás:\n• Tener entre 16 y 65 años.\n• Pesar más de 50 kilos.\n• Gozar de buena salud.\n• Presentar tu DNI.\n• Haber desayunado o almorzado normalmente. No debés estar en ayunas.\n\nAntes de la donación, el equipo de salud realizará una entrevista confidencial para evaluar si estás en condiciones de donar.\n\n" + avisoPBA + "\n\n" + fuenteHemoterapia;
+    }
+
+    // 1.8 Para qué sirve sangre
+    if ((t.includes("para que sirve") || t.includes("por que") || t.includes("importante") || t.includes("ayuda") || t.includes("componentes") || t.includes("plasma") || t.includes("plaqueta") || t.includes("globulos rojos")) && esSangre) {
+      return "Donar sangre permite salvar vidas y contribuir a la recuperación de personas que necesitan transfusiones. La sangre donada se separa en componentes:\n• Glóbulos rojos: cirugías, trasplantes, anemias y hemorragias.\n• Plaquetas: prevenir o tratar sangrados, incluidos pacientes con quimioterapia.\n• Plasma: alteraciones de la coagulación y elaboración de medicamentos.\n\nMuchos pacientes con enfermedades hematológicas, anemias crónicas, tratamientos oncológicos o trasplantes necesitan transfusiones frecuentes. Una sola donación puede beneficiar hasta a tres personas.\n\n" + fuenteSangre;
+    }
+
+    // Dónde donar / mapa
+    if ((t.includes("donde") && t.includes("donar")) || t.includes("mapa") || t.includes("lugar") || t.includes("centro de hemoterapia")) {
       return "En la Provincia de Buenos Aires podés consultar el mapa de lugares habilitados para donar sangre:\n" + mapaPBA + "\n\n" + avisoPBA;
     }
 
-    if (t.includes("mapa") || t.includes("lugar") || t.includes("centro")) {
-      return "Podés consultar el mapa de lugares para donar sangre en la Provincia de Buenos Aires:\n" + mapaPBA + "\n\nSi vivís en otra provincia, consultá con el centro de donación más cercano o con el organismo de salud de tu jurisdicción.";
+    // Diferencia sangre vs CPH
+    if ((t.includes("sangre") && esCPH && (t.includes("mismo") || t.includes("igual") || t.includes("difer"))) || t.includes("lo mismo")) {
+      return "No, donar sangre y donar CPH no es lo mismo. Son procesos diferentes, con objetivos, requisitos y evaluaciones propias. La aptitud y la compatibilidad se evalúan en cada caso por el equipo de salud.";
     }
 
-    if (t.includes("provincia") || t.includes("buenos aires") || t.includes("varia") || t.includes("jurisdic")) {
-      return avisoPBA + "\n\n" + mapaPBA;
+    // CPH general
+    if (esCPH) {
+      return "Las CPH (células progenitoras hematopoyéticas) son células que pueden dar origen a los componentes de la sangre. Se encuentran principalmente en la médula ósea y también en sangre periférica.\n\nInscribirte en el Registro Nacional de Donantes de CPH puede ayudar a pacientes que necesitan un trasplante. Inscribirse no significa donar de inmediato: la donación depende de la compatibilidad y evaluaciones médicas.\n\n" + fuenteCPH;
     }
 
-    if (t.includes("requisit") || t.includes("puedo donar") || t.includes("puede donar")) {
-      return "Los requisitos para donar dependen del tipo de donación y de la normativa vigente. El equipo de salud evalúa en el lugar si una persona puede donar.\n\n" + avisoPBA + "\n\n" + mapaPBA;
-    }
-
-    if (t.includes("registro") || t.includes("inscrib") || t.includes("incucai")) {
-      return "El registro de donantes de CPH permite encontrar personas compatibles con pacientes que necesitan un trasplante. Inscribirse es un primer paso solidario, pero no implica donar inmediatamente. La donación se concreta solo si hay compatibilidad y se realizan las evaluaciones necesarias.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
-    }
-
-    if (t.includes("sangre") || t.includes("donar sangre") || t.includes("transfusion")) {
-      return "La donación de sangre es voluntaria, solidaria y segura. La sangre no se puede fabricar, por eso las donaciones son fundamentales para cirugías, tratamientos y urgencias.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    // Sangre general
+    if (esSangre) {
+      return "La donación de sangre es voluntaria, solidaria y segura. La sangre no se puede fabricar, por eso las donaciones son fundamentales para cirugías, tratamientos y urgencias.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\n" + fuenteSangre;
     }
 
     if (t.includes("calendario") || t.includes("actividad") || t.includes("jornada") || t.includes("colecta") || t.includes("efemer")) {
       return "Podés consultar el calendario de actividades y efemérides en la sección Calendario del sitio. Cuando el calendario oficial de Google esté conectado, se verán las próximas fechas y colectas.";
     }
-
     if (t.includes("foto") || t.includes("galeria") || t.includes("drive")) {
-      return "Podés ver la galería de fotos en la sección Galería del sitio. Está preparada para conectarse a la carpeta de Google Drive de Huanguelén Dona Vida cuando el equipo comparta el enlace final.";
+      return "Podés ver la galería de fotos en la sección Galería del sitio, organizada por campañas.";
     }
-
-    if (t.includes("donde") || t.includes("inform") || t.includes("fuente") || t.includes("link") || t.includes("oficial")) {
-      return "Podés informarte en fuentes oficiales:\n- Donación de sangre (Nación): https://www.argentina.gob.ar/salud/donarsangre\n- Hemoterapia PBA: https://www.ms.gba.gov.ar/sitios/hemoterapia/\n- Registro CPH (INCUCAI): https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph\n- Mapa para donar sangre en PBA: " + mapaPBA;
-    }
-
     if (t.includes("contact") || t.includes("instagram") || t.includes("red")) {
-      return "Podés seguir a Huanguelén Dona Vida en Instagram desde el botón flotante de la página: https://www.instagram.com/huanguelendonavida?igsh=MXZ3YmRwZGN2M2dncQ==";
+      return "Podés seguir a Huanguelén Dona Vida en Instagram: https://www.instagram.com/huanguelendonavida?igsh=MXZ3YmRwZGN2M2dncQ==";
+    }
+    if (t.includes("fuente") || t.includes("oficial") || t.includes("inform") || t.includes("link")) {
+      return "Fuentes oficiales de referencia:\n- Donación de sangre (Nación): https://www.argentina.gob.ar/salud/donarsangre\n- Hemoterapia PBA: https://www.ms.gba.gov.ar/sitios/hemoterapia/\n- Donar médula ósea: https://www.argentina.gob.ar/donar-medula\n- Registro CPH (INCUCAI): https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph\n- Ley 22.990: https://www.argentina.gob.ar/normativa/nacional/ley-22990-49103/actualizacion\n- Mapa PBA: " + mapaPBA;
     }
 
-    return "Gracias por tu consulta. Puedo ayudarte con donación de sangre, CPH, requisitos, edades, registro, mapa de donación en PBA, actividades y fuentes oficiales.\n\n" + avisoPBA;
+    return "Gracias por tu consulta. Puedo ayudarte con donación de sangre, CPH (médula ósea), requisitos, edades, registro, ley 22.990, mapa de donación en PBA y fuentes oficiales.\n\n" + avisoPBA;
   }
 
   function enviarConsulta(texto) {
@@ -2724,7 +3219,6 @@ mostrarPregunta();
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      if (modalGaleria && !modalGaleria.hidden) cerrarGaleriaModal();
       if (chat && !chat.hidden) chat.hidden = true;
     }
   });
