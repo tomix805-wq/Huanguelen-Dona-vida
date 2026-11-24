@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HUANGUELÉN DONA VIDA</title>
-<link rel="icon" href="logo.png" type="image/png">
-
-
-  </head>
-  </body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Huanguelén Dona Vida: información sobre donación de sangre y CPH, actividades, juegos educativos y recursos oficiales.">
+  <meta name="theme-color" content="#1769c2">
+  <title>Huanguelén Dona Vida</title>
+  <link rel="icon" href="logo.png" type="image/png">
 
 <style>
 
@@ -1223,6 +1221,17 @@ footer p {
   margin-left: 25px;
 }
 
+.burbuja-chat a {
+  color: inherit;
+  font-weight: bold;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+.burbuja-chat.bot a {
+  color: var(--azul-profundo);
+}
+
 .chat-flotante-preguntas {
   padding: 10px;
   display: flex;
@@ -1331,6 +1340,75 @@ footer p {
   color: #60758a;
 }
 
+.galeria-contenedor,
+.calendario-contenedor {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 25px #1231;
+}
+
+.galeria-marco,
+.calendario-marco {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f9ff;
+  border: 1px solid var(--borde);
+}
+
+.galeria-marco iframe,
+.calendario-marco iframe {
+  width: 100%;
+  height: min(70vh, 620px);
+  border: 0;
+  display: block;
+}
+
+.galeria-nota,
+.calendario-nota {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #60758a;
+}
+
+.lista-efemerides {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.efemeride {
+  background: var(--celeste);
+  border-left: 4px solid var(--azul);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--azul-profundo);
+}
+
+.efemeride strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .tarjeta[style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+}
+
 @media (max-width: 600px) {
   .barra-flotante { right: 10px; gap: 11px; }
   .flotante-btn { width: 49px; height: 49px; font-size: 22px; }
@@ -1351,6 +1429,9 @@ footer p {
     <a href="#curiosidades">Curiosidades</a>
     <a href="#juego">Tablero</a>
     <a href="#memotest">Memotest</a>
+    <a href="#preguntas">Trivia</a>
+    <a href="#galeria">Galería</a>
+    <a href="#calendario">Calendario</a>
     <a href="#asistente">Asistente</a>
     <a href="#enlaces">Enlaces</a>
   </nav>
@@ -1465,7 +1546,9 @@ footer p {
   </div>
 
   <div class="aviso">
-    <b>Importante:</b> los requisitos para donar sangre dependen de cada provincia y pueden variar entre una y otra. Ante cualquier duda, consultá con el equipo de salud del lugar de donación.
+    <b>Importante:</b> los requisitos para donar sangre dependen de cada provincia y pueden variar entre una y otra. La información orientativa de esta web corresponde principalmente a la <strong>Provincia de Buenos Aires</strong>. Ante cualquier duda, consultá con el equipo de salud del lugar de donación.
+    <br><br>
+    <a href="https://www.google.com/maps/d/viewer?mid=1_zvbbz8uOrTO72ai5gIauPzIMKu2wGet&femb=1&ll=-37.15624584003135%2C-59.91622035&z=6" target="_blank" rel="noopener noreferrer" style="color: var(--azul); font-weight: bold; text-decoration: underline;">Ver mapa de lugares donde donar sangre en Provincia de Buenos Aires ↗</a>
   </div>
 </section>
 
@@ -1513,7 +1596,7 @@ footer p {
 
 <section id="curiosidades">
   <span class="subtitulo">¿Sabías qué?</span>
-  <h2>Curiosidades sobre la donación de sangre</h2>
+  <h2>Curiosidades y datos de interés</h2>
 
   <div class="tarjetas">
     <article class="tarjeta">
@@ -1526,11 +1609,24 @@ footer p {
     </article>
     <article class="tarjeta">
       <h3>🔄 El cuerpo se recupera</h3>
-      <p>El organismo repone el volumen de líquido donado en poco tiempo, y la donación se realiza bajo controles seguros.</p>
+      <p>El organismo repone el volumen donado con el tiempo, y la donación se realiza bajo controles seguros por personal de salud.</p>
     </article>
     <article class="tarjeta">
       <h3>📅 La donación voluntaria es clave</h3>
       <p>La donación voluntaria y habitual ayuda a que siempre haya sangre disponible para quienes la necesitan.</p>
+    </article>
+    <article class="tarjeta" style="grid-column: span 2;">
+      <h3>🇦🇷 ¿Sabías que un argentino revolucionó las transfusiones de sangre?</h3>
+      <p><strong>Luis Agote</strong>, médico e investigador argentino, desarrolló un método de transfusión sanguínea indirecta utilizando <strong>citrato de sodio</strong> para evitar la coagulación de la sangre fuera del cuerpo.</p>
+      <p><strong>El problema:</strong> antes de este descubrimiento, la sangre se coagulaba rápidamente, por lo que muchas transfusiones requerían conectar directamente al donante con el receptor.</p>
+      <p><strong>La solución:</strong> Agote demostró que, al agregar citrato de sodio, la sangre extraída podía conservarse por un tiempo y utilizarse de forma indirecta.</p>
+      <p><strong>La primera prueba:</strong> se realizó el <strong>9 de noviembre de 1914</strong> en el Instituto Modelo de Clínica Médica del Hospital Rawson, en Buenos Aires.</p>
+      <p><strong>Un legado solidario:</strong> Agote decidió no patentar su descubrimiento y permitió que su método se difundiera libremente por el mundo.</p>
+      <p><strong>Fecha conmemorativa:</strong> cada <strong>9 de noviembre</strong> se celebra en Argentina el <strong>Día Nacional del Donante Voluntario de Sangre</strong>, en homenaje a este acontecimiento.</p>
+    </article>
+    <article class="tarjeta">
+      <h3>🧬 CPH: compatibilidad que puede salvar vidas</h3>
+      <p>Inscribirse en el registro de donantes de CPH es un acto solidario. La donación solo se concreta si hay compatibilidad con un paciente y se completan las evaluaciones médicas correspondientes.</p>
     </article>
   </div>
 </section>
@@ -1567,7 +1663,7 @@ footer p {
     <div class="juego-acciones">
       <button class="boton" id="deshacer" type="button">Deshacer última</button>
       <button class="boton boton-secundario" id="reiniciar" type="button">Reiniciar juego</button>
-      <button class="boton boton-secundario" id="calibrar" type="button" aria-pressed="false">Modo calibrar: apagado</button>
+      <button class="boton boton-secundario" id="calibrar" type="button" aria-pressed="false" hidden>Modo calibrar: apagado</button>
     </div>
 
     <div class="colocadas-wrap">
@@ -1611,7 +1707,7 @@ footer p {
     <div class="galeria-marco">
       <iframe id="iframeGaleriaDirecta" src="https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid" title="Galería de fotos de Huanguelén Dona Vida" loading="lazy"></iframe>
     </div>
-    <p class="galeria-nota">La galería está conectada para mostrar una carpeta de Google Drive. Reemplazá <code>REEMPLAZAR_ID_CARPETA</code> por el ID real de la carpeta cuando esté disponible.</p>
+    <p class="galeria-nota">La galería está preparada para mostrar una carpeta de Google Drive. Cuando el equipo comparta la carpeta final, reemplazá <code>REEMPLAZAR_ID_CARPETA</code> en la configuración del sitio (<code>DRIVE_GALERIA_URL</code> en <code>index.html</code>).</p>
   </div>
 </section>
 
@@ -1630,6 +1726,25 @@ footer p {
     <div class="memotest-grid" id="memotestGrid" aria-label="Memotest de la donación"></div>
     <div class="juego-acciones">
       <button class="boton" id="reiniciarMemo" type="button">Reiniciar memotest</button>
+    </div>
+  </div>
+</section>
+
+<section id="calendario">
+  <span class="subtitulo">Agenda</span>
+  <h2>Calendario de actividades y efemérides</h2>
+  <p>Consultá las próximas colectas, jornadas y fechas importantes relacionadas con la donación de sangre, CPH, hemoterapia y salud.</p>
+
+  <div class="calendario-contenedor">
+    <div class="calendario-marco">
+      <iframe id="iframeCalendario" src="https://calendar.google.com/calendar/embed?src=REEMPLAZAR_ID_CALENDARIO&ctz=America%2FArgentina%2FBuenos_Aires" title="Calendario de actividades de Huanguelén Dona Vida" loading="lazy"></iframe>
+    </div>
+    <p class="calendario-nota">Para mostrar el calendario real, reemplazá <code>REEMPLAZAR_ID_CALENDARIO</code> por el ID público del calendario de Google. Mientras tanto, podés usar el botón de calendario para abrir Google Calendar.</p>
+
+    <div class="lista-efemerides" aria-label="Efemérides destacadas">
+      <div class="efemeride"><strong>9 de noviembre – Día Nacional del Donante Voluntario de Sangre</strong>Homenaje al descubrimiento de Luis Agote y a la donación voluntaria en Argentina.</div>
+      <div class="efemeride"><strong>14 de junio – Día Mundial del Donante de Sangre</strong>Fecha de concientización global sobre la importancia de la donación voluntaria y habitual.</div>
+      <div class="efemeride"><strong>21 de septiembre – Día Mundial del Donante de Médula Ósea</strong>Jornada para visibilizar la importancia del registro y la donación de CPH/médula ósea.</div>
     </div>
   </div>
 </section>
@@ -1657,9 +1772,17 @@ footer p {
 
     <article class="tarjeta">
       <h3>INCUCAI / Registro CPH</h3>
-      <p>Información sobre donación y trasplante de células progenitoras hematopoyéticas.</p>
-      <a href="https://www.argentina.gob.ar/salud/incucai" target="_blank" rel="noopener noreferrer">
-        Visitar INCUCAI ↗
+      <p>Información oficial sobre el Registro Nacional de Donantes de Células Progenitoras Hematopoyéticas (CPH).</p>
+      <a href="https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph" target="_blank" rel="noopener noreferrer">
+        Visitar Registro CPH ↗
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <h3>Dónde donar sangre en PBA</h3>
+      <p>Mapa de lugares habilitados para donar sangre en la Provincia de Buenos Aires.</p>
+      <a href="https://www.google.com/maps/d/viewer?mid=1_zvbbz8uOrTO72ai5gIauPzIMKu2wGet&femb=1&ll=-37.15624584003135%2C-59.91622035&z=6" target="_blank" rel="noopener noreferrer">
+        Ver mapa en PBA ↗
       </a>
     </article>
   </div>
@@ -1686,6 +1809,7 @@ footer p {
   </button>
 </div>
 
+<div id="asistente" class="sr-only" aria-hidden="true">Asistente virtual</div>
 <div class="chat-flotante" id="chatFlotante" hidden>
   <div class="chat-flotante-header">
     <div class="chat-avatar">🤖</div>
@@ -1697,14 +1821,16 @@ footer p {
   </div>
 
   <div class="chat-flotante-mensajes" id="mensajesFlotantes">
-    <div class="burbuja-chat bot">¡Hola! Soy Medulín, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales. ¿En qué te ayudo?</div>
+    <div class="burbuja-chat bot">¡Hola! Soy <strong>Medulín</strong>, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, edades, registro, mapa de donación en PBA, actividades y fuentes oficiales.<br><br><small>Información orientativa: los requisitos y edades corresponden principalmente a la Provincia de Buenos Aires y pueden variar según la jurisdicción.</small></div>
   </div>
 
   <div class="chat-flotante-preguntas">
-    <button type="button" data-pregunta="¿Qué es la donación de sangre?">🩸 Sangre</button>
-    <button type="button" data-pregunta="¿Qué es la donación de CPH?">🧬 CPH</button>
-    <button type="button" data-pregunta="¿Cuáles son los requisitos para donar?">📋 Requisitos</button>
-    <button type="button" data-pregunta="¿Dónde puedo informarme?">ℹ️ Informarme</button>
+    <button type="button" data-pregunta="¿Cuáles son los requisitos para donar sangre?">🩸 Requisitos sangre</button>
+    <button type="button" data-pregunta="¿Qué edades están habilitadas para donar sangre?">📅 Edades sangre</button>
+    <button type="button" data-pregunta="¿Cuáles son los requisitos para inscribirse como donante de CPH?">🧬 Requisitos CPH</button>
+    <button type="button" data-pregunta="¿Hasta qué edad se puede permanecer en el registro de CPH?">📝 Registro CPH</button>
+    <button type="button" data-pregunta="¿Dónde puedo donar sangre en Provincia de Buenos Aires?">🗺️ Dónde donar</button>
+    <button type="button" data-pregunta="¿Dónde puedo informarme en fuentes oficiales?">ℹ️ Fuentes</button>
   </div>
 
   <form id="formularioChatFlotante">
@@ -1735,7 +1861,24 @@ footer p {
    JUEGO DE LAS 15 FICHAS
 ========================= */
 
-const fichas = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
+const fichas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+const descripcionesFichas = {
+  1: "Inicio del recorrido: informate sobre la donación de CPH y resolvé tus dudas con fuentes confiables.",
+  2: "Conocé los requisitos y el proceso de inscripción en el registro de donantes de CPH.",
+  3: "Inscripción en el registro: se registran tus datos y se realiza la extracción de una muestra según corresponda.",
+  4: "Tus datos quedan disponibles para la búsqueda de compatibilidad con pacientes que lo necesiten.",
+  5: "Si aparece una posible compatibilidad, el equipo de salud se contacta para continuar con estudios.",
+  6: "Se realizan evaluaciones y estudios específicos para confirmar la compatibilidad y la aptitud.",
+  7: "Recibís información clara sobre el proceso, tiempos y cuidados. Siempre podés consultar tus dudas.",
+  8: "Con la confirmación médica, se organiza la donación de forma segura y acompañada.",
+  9: "La donación se realiza según el método indicado por el equipo de salud.",
+  10: "La muestra/donación se prepara y traslada con los cuidados necesarios.",
+  11: "El paciente recibe el trasplante en un centro especializado.",
+  12: "El seguimiento médico es importante tanto para el donante como para el paciente.",
+  13: "La donación puede representar una oportunidad de vida. Gracias por informarte y sumar conciencia.",
+  14: "Compartir información confiable también ayuda: invitá a otras personas a conocer sobre la donación."
+};
 
 const historial = [];
 
@@ -1925,6 +2068,13 @@ function colocarFicha(numero, x = 50, y = 50) {
   fichaSeleccionada = null;
   dibujarColocadas();
   dibujarFichas();
+
+  const descripcion = descripcionesFichas[numero] || "";
+  if (historial.length === fichas.length) {
+    actualizarEstado(`¡Excelente! Completaste el recorrido. ${descripcion}`, "exito");
+  } else {
+    actualizarEstado(`Ficha ${numero} colocada correctamente. ${descripcion}`, "exito");
+  }
 }
 
 function obtenerPosicion(evento) {
@@ -2068,7 +2218,10 @@ dibujarFichas();
     btn.className = "memo-card";
     btn.dataset.id = carta.id;
     btn.dataset.index = String(index);
-    btn.innerHTML = `<span class="memo-back">❓</span><span class="memo-front">${carta.texto}</span>`;
+    const frente = carta.img
+      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:72px;object-fit:cover;border-radius:8px;display:block;margin-bottom:6px;"><span>${carta.texto}</span>`
+      : `<span>${carta.texto}</span>`;
+    btn.innerHTML = `<span class="memo-back">❓</span><span class="memo-front">${frente}</span>`;
     btn.addEventListener("click", () => revelar(btn));
     return btn;
   }
@@ -2360,16 +2513,18 @@ mostrarPregunta();
   const formulario = document.getElementById("formularioChatFlotante");
   const entrada = document.getElementById("entradaChatFlotante");
   const botonCalendario = document.getElementById("botonCalendarioFlotante");
-  const btnCalendarioGoogle = document.getElementById("btnCalendarioGoogle");
-  const btnFotosDonantes = document.getElementById("btnFotosDonantes");
   const modalGaleria = document.getElementById("modalGaleria");
   const cerrarGaleria = document.getElementById("cerrarGaleria");
   const iframeGaleria = document.getElementById("iframeGaleria");
 
-  // Reemplazá este enlace por el de la carpeta de Drive (formato embed/preview).
+  // Configuración editable del sitio
   const DRIVE_GALERIA_URL = "https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid";
-  // Reemplazá este enlace por el embed público de Google Calendar.
   const GOOGLE_CALENDAR_URL = "https://calendar.google.com/calendar/embed?src=REEMPLAZAR_ID_CALENDARIO&ctz=America%2FArgentina%2FBuenos_Aires";
+
+  const iframeGaleriaDirecta = document.getElementById("iframeGaleriaDirecta");
+  if (iframeGaleriaDirecta) iframeGaleriaDirecta.src = DRIVE_GALERIA_URL;
+  const iframeCalendario = document.getElementById("iframeCalendario");
+  if (iframeCalendario) iframeCalendario.src = GOOGLE_CALENDAR_URL;
 
   if (botonChat && chat && cerrarChat && mensajes && formulario && entrada) {
     botonChat.addEventListener("click", () => {
@@ -2380,9 +2535,24 @@ mostrarPregunta();
     cerrarChat.addEventListener("click", () => {
       chat.hidden = true;
     });
+
+    function abrirChat() {
+      chat.hidden = false;
+      entrada.focus();
+    }
+
+    if (location.hash === "#asistente") abrirChat();
+    window.addEventListener("hashchange", () => {
+      if (location.hash === "#asistente") abrirChat();
+    });
   }
 
   function abrirCalendario() {
+    const seccionCalendario = document.getElementById("calendario");
+    if (seccionCalendario) {
+      seccionCalendario.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     const url = GOOGLE_CALENDAR_URL;
     if (url.includes("REEMPLAZAR_ID_CALENDARIO")) {
       window.open("https://calendar.google.com/", "_blank", "noopener,noreferrer");
@@ -2392,7 +2562,6 @@ mostrarPregunta();
   }
 
   if (botonCalendario) botonCalendario.addEventListener("click", abrirCalendario);
-  if (btnCalendarioGoogle) btnCalendarioGoogle.addEventListener("click", abrirCalendario);
 
   function abrirGaleria() {
     if (!modalGaleria || !iframeGaleria) return;
@@ -2406,7 +2575,6 @@ mostrarPregunta();
     iframeGaleria.src = "about:blank";
   }
 
-  if (btnFotosDonantes) btnFotosDonantes.addEventListener("click", abrirGaleria);
   if (cerrarGaleria) cerrarGaleria.addEventListener("click", cerrarGaleriaModal);
   if (modalGaleria) {
     modalGaleria.addEventListener("click", (e) => {
@@ -2414,20 +2582,37 @@ mostrarPregunta();
     });
   }
 
+  function escaparHTML(texto) {
+    return texto
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function formatearMensaje(texto) {
+    const seguro = escaparHTML(texto);
+    const conLinks = seguro.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+    return conLinks.replace(/\n/g, "<br>");
+  }
+
   function agregarMensaje(texto, tipo) {
     if (!mensajes) return;
     const div = document.createElement("div");
     div.className = "burbuja-chat " + tipo;
-    div.textContent = texto;
+    div.innerHTML = formatearMensaje(texto);
     mensajes.appendChild(div);
     mensajes.scrollTop = mensajes.scrollHeight;
   }
 
   function responder(texto) {
     const t = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const avisoPBA = "Importante: esta información es orientativa y corresponde principalmente a la Provincia de Buenos Aires. Los requisitos pueden variar según la jurisdicción. Si vivís en otra provincia, consultá con el centro de donación más cercano.";
+    const mapaPBA = "Mapa de lugares para donar sangre en PBA: https://www.google.com/maps/d/viewer?mid=1_zvbbz8uOrTO72ai5gIauPzIMKu2wGet&femb=1&ll=-37.15624584003135%2C-59.91622035&z=6";
 
     if (t.includes("hola") || t.includes("buenas") || t.includes("hello")) {
-      return "¡Hola! Soy el asistente de Huanguelén Dona Vida. Puedo ayudarte con información sobre donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales.";
+      return "¡Hola! Soy Medulín, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, edades, registro, actividades y fuentes oficiales. ¿En qué te ayudo?";
     }
 
     if (t.includes("gracias")) {
@@ -2435,54 +2620,86 @@ mostrarPregunta();
     }
 
     if ((t.includes("sangre") && t.includes("cph") && (t.includes("mismo") || t.includes("igual") || t.includes("difer"))) || t.includes("lo mismo")) {
-      return "No, donar sangre y donar CPH no es lo mismo. Son procesos diferentes, con objetivos, requisitos y evaluaciones propias.";
+      return "No, donar sangre y donar CPH no es lo mismo. Son procesos diferentes, con objetivos, requisitos y evaluaciones propias. La aptitud y la compatibilidad se evalúan en cada caso por el equipo de salud.";
     }
 
-    if (t.includes("todas las personas pueden donar") || (t.includes("todas") && t.includes("pueden") && t.includes("donar"))) {
-      return "No todas las personas pueden donar en todos los casos. La aptitud se determina mediante requisitos y controles que realiza el equipo de salud en el lugar de donación.";
+    if (t.includes("para que sirve") && t.includes("sangre")) {
+      return "Donar sangre sirve para ayudar en cirugías, urgencias, tratamientos oncológicos, trasplantes y otras situaciones donde se necesitan componentes sanguíneos. La sangre no se puede fabricar, por eso la donación voluntaria y habitual es fundamental.\n\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    }
+
+    if (t.includes("para que sirve") && (t.includes("cph") || t.includes("medula") || t.includes("registro"))) {
+      return "Registrarse como donante de CPH sirve para que, si sos compatible con un paciente que necesita un trasplante, puedas ser contactado para evaluar la donación. Inscribirse no significa donar de inmediato: la donación se concreta solo si hay compatibilidad y se cumplen las evaluaciones médicas.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    }
+
+    if (t.includes("edad") && t.includes("perman") && (t.includes("registro") || t.includes("cph"))) {
+      return "El rango de edad para permanecer en el registro de donantes de CPH puede variar según la normativa vigente. Para información actualizada y oficial, consultá el Registro Nacional de Donantes de CPH.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    }
+
+    if ((t.includes("edad") || t.includes("inscrib")) && (t.includes("cph") || t.includes("medula") || t.includes("progenitoras"))) {
+      return "Los requisitos y edades para inscribirse como donante de CPH dependen de la normativa vigente y deben confirmarse con fuentes oficiales. En general, la inscripción se realiza ante organismos habilitados y requiere cumplir criterios de salud.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
+    }
+
+    if (t.includes("edad") && t.includes("sangre")) {
+      return "Las edades habilitadas para donar sangre dependen de la normativa vigente y pueden variar según la jurisdicción. El equipo de salud del centro de donación confirma la aptitud en cada caso.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
+    }
+
+    if (t.includes("requisit") && t.includes("sangre")) {
+      return "Los requisitos para donar sangre se evalúan en el lugar de donación por personal de salud. Incluyen aspectos como edad, peso, estado de salud y condiciones temporales o definitivas según la normativa vigente.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuentes oficiales:\n- https://www.argentina.gob.ar/salud/donarsangre\n- https://www.ms.gba.gov.ar/sitios/hemoterapia/";
     }
 
     if (t.includes("inscrib") && (t.includes("ya voy a donar") || t.includes("significa") || t.includes("inmediatamente"))) {
-      return "No. Inscribirse como donante de CPH no significa que ya vayas a donar. La donación se concreta solo si se encuentra una persona compatible y se cumplen las evaluaciones necesarias.";
+      return "No. Inscribirse como donante de CPH no significa que ya vayas a donar. La donación se concreta solo si se encuentra una persona compatible y se cumplen las evaluaciones médicas necesarias.";
+    }
+
+    if (t.includes("requisit") && (t.includes("cph") || t.includes("medula") || t.includes("registro"))) {
+      return "Los requisitos para inscribirse como donante de CPH dependen de la normativa vigente y de la evaluación del organismo correspondiente. Antes de inscribirte, consultá la información oficial actualizada.\n\n" + avisoPBA + "\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
     }
 
     if (t.includes("cph") || t.includes("medula") || t.includes("progenitoras") || t.includes("hematopoy")) {
-      return "Las CPH (células progenitoras hematopoyéticas) son células que pueden dar origen a los componentes de la sangre. Se encuentran principalmente en la médula ósea y también en sangre periférica. El registro permite buscar personas compatibles con pacientes que necesitan un trasplante. Inscribirse no significa donar de inmediato: la donación depende de la compatibilidad y de evaluaciones médicas.";
+      return "Las CPH (células progenitoras hematopoyéticas) son células que pueden dar origen a los componentes de la sangre. Se encuentran principalmente en la médula ósea y también en sangre periférica. El registro permite buscar personas compatibles con pacientes que necesitan un trasplante.\n\nInscribirse no significa donar de inmediato: la donación depende de la compatibilidad y de evaluaciones médicas.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
     }
 
-    if (t.includes("requisit") || t.includes("edad") || t.includes("puedo donar") || t.includes("puede donar")) {
-      return "Los requisitos para donar dependen del tipo de donación y de la normativa vigente. En el caso de la sangre, los requisitos pueden variar según cada provincia. El equipo de salud evalúa en el lugar si una persona puede donar. Ante dudas, consultá en un centro de donación o hemoterapia.";
+    if (t.includes("donde") && t.includes("donar")) {
+      return "En la Provincia de Buenos Aires podés consultar el mapa de lugares habilitados para donar sangre:\n" + mapaPBA + "\n\n" + avisoPBA;
     }
 
-    if (t.includes("provincia") || t.includes("buenos aires") || t.includes("varia")) {
-      return "Sí: los requisitos para donar sangre dependen de cada provincia y pueden ser distintos entre una y otra. Por eso es importante consultar con el centro de donación o el organismo de salud de tu provincia.";
+    if (t.includes("mapa") || t.includes("lugar") || t.includes("centro")) {
+      return "Podés consultar el mapa de lugares para donar sangre en la Provincia de Buenos Aires:\n" + mapaPBA + "\n\nSi vivís en otra provincia, consultá con el centro de donación más cercano o con el organismo de salud de tu jurisdicción.";
+    }
+
+    if (t.includes("provincia") || t.includes("buenos aires") || t.includes("varia") || t.includes("jurisdic")) {
+      return avisoPBA + "\n\n" + mapaPBA;
+    }
+
+    if (t.includes("requisit") || t.includes("puedo donar") || t.includes("puede donar")) {
+      return "Los requisitos para donar dependen del tipo de donación y de la normativa vigente. El equipo de salud evalúa en el lugar si una persona puede donar.\n\n" + avisoPBA + "\n\n" + mapaPBA;
     }
 
     if (t.includes("registro") || t.includes("inscrib") || t.includes("incucai")) {
-      return "El registro de donantes de CPH permite encontrar personas compatibles con pacientes que necesitan un trasplante. Inscribirse es un primer paso solidario, pero no implica donar inmediatamente. La donación se concreta solo si hay compatibilidad y se realizan las evaluaciones necesarias. Podés informarte en INCUCAI: https://www.argentina.gob.ar/salud/incucai";
+      return "El registro de donantes de CPH permite encontrar personas compatibles con pacientes que necesitan un trasplante. Inscribirse es un primer paso solidario, pero no implica donar inmediatamente. La donación se concreta solo si hay compatibilidad y se realizan las evaluaciones necesarias.\n\nFuente oficial: https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph";
     }
 
     if (t.includes("sangre") || t.includes("donar sangre") || t.includes("transfusion")) {
-      return "La donación de sangre es voluntaria, solidaria y segura. La sangre no se puede fabricar, por eso las donaciones son fundamentales para cirugías, tratamientos y urgencias. Para información oficial podés visitar: https://www.argentina.gob.ar/salud/donarsangre";
+      return "La donación de sangre es voluntaria, solidaria y segura. La sangre no se puede fabricar, por eso las donaciones son fundamentales para cirugías, tratamientos y urgencias.\n\n" + avisoPBA + "\n\n" + mapaPBA + "\nFuente oficial: https://www.argentina.gob.ar/salud/donarsangre";
     }
 
-    if (t.includes("donde") || t.includes("inform") || t.includes("fuente") || t.includes("link")) {
-      return "Podés informarte en fuentes oficiales: Donación de sangre (Nación) https://www.argentina.gob.ar/salud/donarsangre · Hemoterapia PBA https://www.ms.gba.gov.ar/sitios/hemoterapia/ · INCUCAI https://www.argentina.gob.ar/salud/incucai";
-    }
-
-    if (t.includes("calendario") || t.includes("actividad") || t.includes("jornada") || t.includes("colecta")) {
-      return "Podés consultar las actividades y jornadas en Google Calendar desde el botón de calendario del sitio. Cuando esté conectado el calendario oficial, vas a ver ahí las próximas fechas.";
+    if (t.includes("calendario") || t.includes("actividad") || t.includes("jornada") || t.includes("colecta") || t.includes("efemer")) {
+      return "Podés consultar el calendario de actividades y efemérides en la sección Calendario del sitio. Cuando el calendario oficial de Google esté conectado, se verán las próximas fechas y colectas.";
     }
 
     if (t.includes("foto") || t.includes("galeria") || t.includes("drive")) {
-      return "La galería de fotos de donantes se puede abrir desde el botón de galería. Está preparada para mostrar una carpeta de Google Drive cuando tengan el enlace final.";
+      return "Podés ver la galería de fotos en la sección Galería del sitio. Está preparada para conectarse a la carpeta de Google Drive de Huanguelén Dona Vida cuando el equipo comparta el enlace final.";
+    }
+
+    if (t.includes("donde") || t.includes("inform") || t.includes("fuente") || t.includes("link") || t.includes("oficial")) {
+      return "Podés informarte en fuentes oficiales:\n- Donación de sangre (Nación): https://www.argentina.gob.ar/salud/donarsangre\n- Hemoterapia PBA: https://www.ms.gba.gov.ar/sitios/hemoterapia/\n- Registro CPH (INCUCAI): https://www.argentina.gob.ar/salud/incucai/registro-nacional-de-donantes-de-cph\n- Mapa para donar sangre en PBA: " + mapaPBA;
     }
 
     if (t.includes("contact") || t.includes("instagram") || t.includes("red")) {
-      return "Podés seguir a Huanguelén Dona Vida en Instagram desde el botón flotante de la página.";
+      return "Podés seguir a Huanguelén Dona Vida en Instagram desde el botón flotante de la página: https://www.instagram.com/huanguelendonavida?igsh=MXZ3YmRwZGN2M2dncQ==";
     }
 
-    return "Gracias por tu consulta. Puedo ayudarte con donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales. Si necesitás información específica, también te recomiendo consultar con un equipo de salud o en los enlaces oficiales del sitio.";
+    return "Gracias por tu consulta. Puedo ayudarte con donación de sangre, CPH, requisitos, edades, registro, mapa de donación en PBA, actividades y fuentes oficiales.\n\n" + avisoPBA;
   }
 
   function enviarConsulta(texto) {
