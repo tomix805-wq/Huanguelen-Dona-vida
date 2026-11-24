@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HUANGUELÉN DONA VIDA ❤️</title>
+<title>HUANGUELÉN DONA VIDA</title>
+<link rel="icon" href="logo.png" type="image/png">
 
-  
-</body>
-</html>
+
+  </head>
+  </body>
+
 <style>
 
 
@@ -273,23 +275,17 @@ nav a:hover {
   font-size: 100px;
 }
 
-.corazon {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  font-size: 35px;
-}
-
 .logo-corazon {
   position: absolute;
   bottom: 14px;
   right: 14px;
-  width: 84px;
-  height: 84px;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18px;
-  padding: 6px;
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  background: #fff;
+  border-radius: 50%;
+  padding: 4px;
+  border: 3px solid #fff;
   box-shadow: 0 8px 20px #001b3c33;
 }
 
@@ -857,7 +853,7 @@ button:focus-visible {
 }
 
 /* =========================================
-   PREGUNTAS FRECUENTES
+   PREGUNTAS FRECUENTES (estilos generales)
 ========================================= */
 
 .faq details {
@@ -1059,6 +1055,274 @@ footer p {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* =========================================
+   BARRA LATERAL Y CHAT
+========================================= */
+
+.barra-flotante {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.flotante-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  box-shadow: 0 5px 18px rgba(0,0,0,.18);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 24px;
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  background: #fff;
+  color: var(--azul-profundo);
+}
+
+.flotante-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(16,61,115,.25);
+}
+
+.boton-instagram {
+  overflow: hidden;
+  padding: 0;
+  background: #fff;
+}
+
+.boton-instagram img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.boton-calendario {
+  background: linear-gradient(135deg, var(--azul), var(--azul-claro));
+  color: #fff;
+  font-size: 26px;
+}
+
+.boton-chat {
+  background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-claro));
+  color: #fff;
+}
+
+.chat-notificacion {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #35c879;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.chat-flotante {
+  position: fixed;
+  right: 95px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 350px;
+  max-width: calc(100vw - 115px);
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 10000;
+  box-shadow: 0 12px 45px rgba(0,0,0,.2);
+  border: 1px solid var(--borde);
+}
+
+.chat-flotante[hidden] { display: none; }
+
+.chat-flotante-header {
+  background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  color: var(--azul-profundo);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.chat-flotante-header strong { display: block; font-size: 14px; }
+.chat-flotante-header small { display: block; font-size: 11px; margin-top: 4px; color: #d9ebff; }
+
+.chat-flotante-header button {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chat-flotante-mensajes {
+  height: 260px;
+  overflow-y: auto;
+  padding: 14px;
+  background: #f7fbff;
+}
+
+.burbuja-chat {
+  padding: 11px 13px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.burbuja-chat.bot {
+  background: var(--celeste);
+  color: var(--texto);
+  margin-right: 25px;
+}
+
+.burbuja-chat.usuario {
+  background: var(--azul);
+  color: #fff;
+  margin-left: 25px;
+}
+
+.chat-flotante-preguntas {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid #e8f1fb;
+}
+
+.chat-flotante-preguntas button {
+  border: 1px solid #b9d7f4;
+  background: #f4f9ff;
+  color: var(--azul-profundo);
+  border-radius: 20px;
+  padding: 7px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.chat-flotante-preguntas button:hover {
+  background: #e3f1ff;
+}
+
+#formularioChatFlotante {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #e8f1fb;
+}
+
+#entradaChatFlotante {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #b9d7f4;
+  border-radius: 25px;
+  padding: 11px 14px;
+  outline: none;
+}
+
+#formularioChatFlotante button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-galeria {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 46, 92, 0.55);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-galeria[hidden] { display: none; }
+
+.modal-galeria-contenido {
+  width: min(1000px, 100%);
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-galeria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
+  color: #fff;
+}
+
+.modal-galeria-header h3 { margin: 0; font-size: 20px; }
+.modal-galeria-header p { margin: 4px 0 0; font-size: 13px; color: #d9ebff; }
+
+.modal-galeria-cerrar {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-galeria-body { padding: 16px; }
+
+.modal-galeria-body iframe {
+  width: 100%;
+  height: min(70vh, 620px);
+  border: 0;
+  border-radius: 12px;
+  background: #f5f9ff;
+}
+
+.modal-galeria-aviso {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #60758a;
+}
+
+@media (max-width: 600px) {
+  .barra-flotante { right: 10px; gap: 11px; }
+  .flotante-btn { width: 49px; height: 49px; font-size: 22px; }
+  .chat-flotante { right: 68px; width: 310px; max-width: calc(100vw - 85px); }
+}
 </style>
 </head>
 
@@ -1129,7 +1393,7 @@ footer p {
         alt="Imagen representativa de la donación de sangre"
         onerror="this.style.display='none'; this.parentElement.classList.add('sin-imagen')"
       >
-      <img class="logo-corazon" src="logo.png" alt="Logo Huanguelén Dona Vida">
+      <img class="logo" src="logo.png" alt="Logo Huanguelén Dona Vida">
     </div>
 
     <div class="tarjeta-flotante">
@@ -1325,60 +1589,20 @@ footer p {
   </div>
 </section>
 
-<section id="asistente">
-  <span class="subtitulo">Asistente</span>
-  <h2>Consultá con Medulín / Huesito</h2>
-  <p>Próximamente vas a poder hacer preguntas sobre donación de sangre y CPH a nuestro asistente. Puchi nos va a enviar las preguntas y respuestas para incorporarlo.</p>
+<section id="galeria" class="seccion-galeria">
+  <span class="subtitulo">Comunidad</span>
+  <h2>Galería de fotos</h2>
+  <p>Momentos, jornadas y personas que forman parte de Huanguelén Dona Vida.</p>
 
-  <div class="quiz">
-    <p><strong>Estado:</strong> en preparación.</p>
-    <p style="margin-top:10px; color:#60758a;">Cuando tengamos el contenido, acá se va a integrar el asistente con sus respuestas.</p>
-  </div>
-
-  <div class="tarjetas" style="margin-top:20px;">
-    <article class="tarjeta">
-      <h3>📅 Próximas actividades</h3>
-      <p><strong>Jornada de concientización:</strong> A confirmar · Huanguelén, Buenos Aires</p>
-      <p><strong>Colecta de sangre:</strong> A confirmar</p>
-      <p><strong>Charla informativa:</strong> A confirmar</p>
-    </article>
-    <article class="tarjeta">
-      <h3>📷 Fotos de donantes</h3>
-      <p>Conocé historias y momentos de quienes participan de la donación.</p>
-      <a href="#" class="boton" id="btnFotosDonantes" style="margin-top:12px; display:inline-block;">Abrir Google Fotos</a>
-      <p style="margin-top:10px; color:#60758a; font-size:14px;">* Conectá este botón con el enlace de Google Fotos cuando esté disponible.</p>
-    </article>
+  <div class="galeria-contenedor">
+    <div class="galeria-marco">
+      <iframe id="iframeGaleriaDirecta" src="https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid" title="Galería de fotos de Huanguelén Dona Vida" loading="lazy"></iframe>
+    </div>
+    <p class="galeria-nota">La galería está conectada para mostrar una carpeta de Google Drive. Reemplazá <code>REEMPLAZAR_ID_CARPETA</code> por el ID real de la carpeta cuando esté disponible.</p>
   </div>
 </section>
 
-<section class="faq">
-  <span class="subtitulo">Dudas frecuentes</span>
-  <h2>Preguntas frecuentes</h2>
 
-  <details>
-    <summary>¿Donar sangre y donar CPH es lo mismo?</summary>
-    <p>
-      No. Son procesos diferentes y tienen objetivos y
-      evaluaciones propias.
-    </p>
-  </details>
-
-  <details>
-    <summary>¿Todas las personas pueden donar?</summary>
-    <p>
-      La aptitud se determina mediante los requisitos y controles
-      que realiza el equipo de salud.
-    </p>
-  </details>
-
-  <details>
-    <summary>¿Inscribirse significa que ya voy a donar?</summary>
-    <p>
-      No. La donación se concreta si se encuentra una persona
-      compatible y se cumplen las evaluaciones necesarias.
-    </p>
-  </details>
-</section>
 
 <section id="memotest">
   <span class="subtitulo">Juego</span>
@@ -1435,6 +1659,62 @@ footer p {
   <b>HUANGUELÉN DONA VIDA ❤️</b>
   <p>Informarse también es una forma de ayudar.</p>
 </footer>
+
+<div class="barra-flotante" id="barraFlotante">
+  <a href="https://www.instagram.com/huanguelendonavida?igsh=MXZ3YmRwZGN2M2dncQ==" target="_blank" rel="noopener noreferrer" class="flotante-btn boton-instagram" title="Instagram Huanguelén Dona Vida">
+    <img src="logo.png" alt="Instagram Huanguelén Dona Vida">
+  </a>
+
+  <button type="button" class="flotante-btn boton-calendario" id="botonCalendarioFlotante" title="Calendario de actividades">📅</button>
+
+  <button type="button" class="flotante-btn boton-chat" id="botonChatFlotante" title="Abrir asistente">
+    🤖
+    <span class="chat-notificacion" aria-hidden="true"></span>
+  </button>
+</div>
+
+<div class="chat-flotante" id="chatFlotante" hidden>
+  <div class="chat-flotante-header">
+    <div class="chat-avatar">🤖</div>
+    <div>
+      <strong>Medulín</strong>
+      <small>● Asistente de Huanguelén Dona Vida</small>
+    </div>
+    <button type="button" id="cerrarChatFlotante" aria-label="Cerrar asistente">✕</button>
+  </div>
+
+  <div class="chat-flotante-mensajes" id="mensajesFlotantes">
+    <div class="burbuja-chat bot">¡Hola! Soy Medulín, el asistente de Huanguelén Dona Vida. Puedo orientarte sobre donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales. ¿En qué te ayudo?</div>
+  </div>
+
+  <div class="chat-flotante-preguntas">
+    <button type="button" data-pregunta="¿Qué es la donación de sangre?">🩸 Sangre</button>
+    <button type="button" data-pregunta="¿Qué es la donación de CPH?">🧬 CPH</button>
+    <button type="button" data-pregunta="¿Cuáles son los requisitos para donar?">📋 Requisitos</button>
+    <button type="button" data-pregunta="¿Dónde puedo informarme?">ℹ️ Informarme</button>
+  </div>
+
+  <form id="formularioChatFlotante">
+    <input id="entradaChatFlotante" placeholder="Escribí tu consulta..." autocomplete="off" required>
+    <button type="submit" aria-label="Enviar">➤</button>
+  </form>
+</div>
+
+<div class="modal-galeria" id="modalGaleria" hidden>
+  <div class="modal-galeria-contenido" role="dialog" aria-modal="true" aria-labelledby="tituloGaleria">
+    <div class="modal-galeria-header">
+      <div>
+        <h3 id="tituloGaleria">Galería de donantes</h3>
+        <p>Fotos y momentos de la campaña Huanguelén Dona Vida.</p>
+      </div>
+      <button type="button" class="modal-galeria-cerrar" id="cerrarGaleria" aria-label="Cerrar galería">×</button>
+    </div>
+    <div class="modal-galeria-body">
+      <iframe id="iframeGaleria" src="about:blank" title="Galería de fotos de donantes" loading="lazy"></iframe>
+      <p class="modal-galeria-aviso">* Esta galería está preparada para mostrar una carpeta de Google Drive. Reemplazá el enlace en el código cuando tengan la carpeta final.</p>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -2054,6 +2334,171 @@ document.getElementById("otraVez").addEventListener("click", () => {
 });
 
 mostrarPregunta();
+
+/* =========================
+   BARRA LATERAL / CHAT / GALERÍA
+========================= */
+
+(() => {
+  const botonChat = document.getElementById("botonChatFlotante");
+  const chat = document.getElementById("chatFlotante");
+  const cerrarChat = document.getElementById("cerrarChatFlotante");
+  const mensajes = document.getElementById("mensajesFlotantes");
+  const formulario = document.getElementById("formularioChatFlotante");
+  const entrada = document.getElementById("entradaChatFlotante");
+  const botonCalendario = document.getElementById("botonCalendarioFlotante");
+  const btnCalendarioGoogle = document.getElementById("btnCalendarioGoogle");
+  const btnFotosDonantes = document.getElementById("btnFotosDonantes");
+  const modalGaleria = document.getElementById("modalGaleria");
+  const cerrarGaleria = document.getElementById("cerrarGaleria");
+  const iframeGaleria = document.getElementById("iframeGaleria");
+
+  // Reemplazá este enlace por el de la carpeta de Drive (formato embed/preview).
+  const DRIVE_GALERIA_URL = "https://drive.google.com/embeddedfolderview?id=REEMPLAZAR_ID_CARPETA#grid";
+  // Reemplazá este enlace por el embed público de Google Calendar.
+  const GOOGLE_CALENDAR_URL = "https://calendar.google.com/calendar/embed?src=REEMPLAZAR_ID_CALENDARIO&ctz=America%2FArgentina%2FBuenos_Aires";
+
+  if (botonChat && chat && cerrarChat && mensajes && formulario && entrada) {
+    botonChat.addEventListener("click", () => {
+      chat.hidden = !chat.hidden;
+      if (!chat.hidden) entrada.focus();
+    });
+
+    cerrarChat.addEventListener("click", () => {
+      chat.hidden = true;
+    });
+  }
+
+  function abrirCalendario() {
+    const url = GOOGLE_CALENDAR_URL;
+    if (url.includes("REEMPLAZAR_ID_CALENDARIO")) {
+      window.open("https://calendar.google.com/", "_blank", "noopener,noreferrer");
+      return;
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  if (botonCalendario) botonCalendario.addEventListener("click", abrirCalendario);
+  if (btnCalendarioGoogle) btnCalendarioGoogle.addEventListener("click", abrirCalendario);
+
+  function abrirGaleria() {
+    if (!modalGaleria || !iframeGaleria) return;
+    iframeGaleria.src = DRIVE_GALERIA_URL;
+    modalGaleria.hidden = false;
+  }
+
+  function cerrarGaleriaModal() {
+    if (!modalGaleria || !iframeGaleria) return;
+    modalGaleria.hidden = true;
+    iframeGaleria.src = "about:blank";
+  }
+
+  if (btnFotosDonantes) btnFotosDonantes.addEventListener("click", abrirGaleria);
+  if (cerrarGaleria) cerrarGaleria.addEventListener("click", cerrarGaleriaModal);
+  if (modalGaleria) {
+    modalGaleria.addEventListener("click", (e) => {
+      if (e.target === modalGaleria) cerrarGaleriaModal();
+    });
+  }
+
+  function agregarMensaje(texto, tipo) {
+    if (!mensajes) return;
+    const div = document.createElement("div");
+    div.className = "burbuja-chat " + tipo;
+    div.textContent = texto;
+    mensajes.appendChild(div);
+    mensajes.scrollTop = mensajes.scrollHeight;
+  }
+
+  function responder(texto) {
+    const t = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    if (t.includes("hola") || t.includes("buenas") || t.includes("hello")) {
+      return "¡Hola! Soy el asistente de Huanguelén Dona Vida. Puedo ayudarte con información sobre donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales.";
+    }
+
+    if (t.includes("gracias")) {
+      return "¡De nada! Gracias por interesarte en la donación. Informarse también es una forma de ayudar.";
+    }
+
+    if ((t.includes("sangre") && t.includes("cph") && (t.includes("mismo") || t.includes("igual") || t.includes("difer"))) || t.includes("lo mismo")) {
+      return "No, donar sangre y donar CPH no es lo mismo. Son procesos diferentes, con objetivos, requisitos y evaluaciones propias.";
+    }
+
+    if (t.includes("todas las personas pueden donar") || (t.includes("todas") && t.includes("pueden") && t.includes("donar"))) {
+      return "No todas las personas pueden donar en todos los casos. La aptitud se determina mediante requisitos y controles que realiza el equipo de salud en el lugar de donación.";
+    }
+
+    if (t.includes("inscrib") && (t.includes("ya voy a donar") || t.includes("significa") || t.includes("inmediatamente"))) {
+      return "No. Inscribirse como donante de CPH no significa que ya vayas a donar. La donación se concreta solo si se encuentra una persona compatible y se cumplen las evaluaciones necesarias.";
+    }
+
+    if (t.includes("cph") || t.includes("medula") || t.includes("progenitoras") || t.includes("hematopoy")) {
+      return "Las CPH (células progenitoras hematopoyéticas) son células que pueden dar origen a los componentes de la sangre. Se encuentran principalmente en la médula ósea y también en sangre periférica. El registro permite buscar personas compatibles con pacientes que necesitan un trasplante. Inscribirse no significa donar de inmediato: la donación depende de la compatibilidad y de evaluaciones médicas.";
+    }
+
+    if (t.includes("requisit") || t.includes("edad") || t.includes("puedo donar") || t.includes("puede donar")) {
+      return "Los requisitos para donar dependen del tipo de donación y de la normativa vigente. En el caso de la sangre, los requisitos pueden variar según cada provincia. El equipo de salud evalúa en el lugar si una persona puede donar. Ante dudas, consultá en un centro de donación o hemoterapia.";
+    }
+
+    if (t.includes("provincia") || t.includes("buenos aires") || t.includes("varia")) {
+      return "Sí: los requisitos para donar sangre dependen de cada provincia y pueden ser distintos entre una y otra. Por eso es importante consultar con el centro de donación o el organismo de salud de tu provincia.";
+    }
+
+    if (t.includes("registro") || t.includes("inscrib") || t.includes("incucai")) {
+      return "El registro de donantes de CPH permite encontrar personas compatibles con pacientes que necesitan un trasplante. Inscribirse es un primer paso solidario, pero no implica donar inmediatamente. La donación se concreta solo si hay compatibilidad y se realizan las evaluaciones necesarias. Podés informarte en INCUCAI: https://www.argentina.gob.ar/salud/incucai";
+    }
+
+    if (t.includes("sangre") || t.includes("donar sangre") || t.includes("transfusion")) {
+      return "La donación de sangre es voluntaria, solidaria y segura. La sangre no se puede fabricar, por eso las donaciones son fundamentales para cirugías, tratamientos y urgencias. Para información oficial podés visitar: https://www.argentina.gob.ar/salud/donarsangre";
+    }
+
+    if (t.includes("donde") || t.includes("inform") || t.includes("fuente") || t.includes("link")) {
+      return "Podés informarte en fuentes oficiales: Donación de sangre (Nación) https://www.argentina.gob.ar/salud/donarsangre · Hemoterapia PBA https://www.ms.gba.gov.ar/sitios/hemoterapia/ · INCUCAI https://www.argentina.gob.ar/salud/incucai";
+    }
+
+    if (t.includes("calendario") || t.includes("actividad") || t.includes("jornada") || t.includes("colecta")) {
+      return "Podés consultar las actividades y jornadas en Google Calendar desde el botón de calendario del sitio. Cuando esté conectado el calendario oficial, vas a ver ahí las próximas fechas.";
+    }
+
+    if (t.includes("foto") || t.includes("galeria") || t.includes("drive")) {
+      return "La galería de fotos de donantes se puede abrir desde el botón de galería. Está preparada para mostrar una carpeta de Google Drive cuando tengan el enlace final.";
+    }
+
+    if (t.includes("contact") || t.includes("instagram") || t.includes("red")) {
+      return "Podés seguir a Huanguelén Dona Vida en Instagram desde el botón flotante de la página.";
+    }
+
+    return "Gracias por tu consulta. Puedo ayudarte con donación de sangre, CPH, requisitos, registro, actividades y fuentes oficiales. Si necesitás información específica, también te recomiendo consultar con un equipo de salud o en los enlaces oficiales del sitio.";
+  }
+
+  function enviarConsulta(texto) {
+    const valor = (texto || "").trim();
+    if (!valor) return;
+    agregarMensaje(valor, "usuario");
+    setTimeout(() => agregarMensaje(responder(valor), "bot"), 300);
+  }
+
+  if (formulario && entrada) {
+    formulario.addEventListener("submit", (e) => {
+      e.preventDefault();
+      enviarConsulta(entrada.value);
+      entrada.value = "";
+      entrada.focus();
+    });
+  }
+
+  document.querySelectorAll(".chat-flotante-preguntas button").forEach((btn) => {
+    btn.addEventListener("click", () => enviarConsulta(btn.dataset.pregunta || btn.textContent));
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (modalGaleria && !modalGaleria.hidden) cerrarGaleriaModal();
+      if (chat && !chat.hidden) chat.hidden = true;
+    }
+  });
+})();
 
 </script>
 
