@@ -2478,21 +2478,21 @@ dibujarFichas();
 
 (() => {
   const paresDefinidosMemo = [
-    ["assets/memotest/memotest-01.jpeg", "assets/memotest/memotest-0(1).jpeg"],
-    ["assets/memotest/memotest-02.jpeg", "assets/memotest/memotest-(2).jpeg"],
-    ["assets/memotest/memotest-03.jpeg", "assets/memotest/memotest-0(3).jpeg"],
-    ["assets/memotest/memotest-05.jpeg", "assets/memotest/memotest-(5).jpeg"],
-    ["assets/memotest/memotest-10.jpeg", "assets/memotest/memotest-(10).jpeg"],
-    ["assets/memotest/memotest-11.jpeg", "assets/memotest/memotest-(11).jpeg"],
-    ["assets/memotest/memotest-12.jpeg", "assets/memotest/memotest-(12).jpeg"]
+    { texto: "Par 1: completá la explicación", imagenes: ["assets/memotest/memotest-01.jpeg", "assets/memotest/memotest-0(1).jpeg"] },
+    { texto: "Par 2: completá la explicación", imagenes: ["assets/memotest/memotest-02.jpeg", "assets/memotest/memotest-(2).jpeg"] },
+    { texto: "Par 3: completá la explicación", imagenes: ["assets/memotest/memotest-03.jpeg", "assets/memotest/memotest-0(3).jpeg"] },
+    { texto: "Par 4: completá la explicación", imagenes: ["assets/memotest/memotest-05.jpeg", "assets/memotest/memotest-(5).jpeg"] },
+    { texto: "Par 5: completá la explicación", imagenes: ["assets/memotest/memotest-10.jpeg", "assets/memotest/memotest-(10).jpeg"] },
+    { texto: "Par 6: completá la explicación", imagenes: ["assets/memotest/memotest-11.jpeg", "assets/memotest/memotest-(11).jpeg"] },
+    { texto: "Par 7: completá la explicación", imagenes: ["assets/memotest/memotest-12.jpeg", "assets/memotest/memotest-(12).jpeg"] }
   ];
   const paresMemo = paresDefinidosMemo.flatMap((par, i) => {
     const id = `memo-${i + 1}`;
-    return par.map((img, j) => ({
+    return par.imagenes.map((img, j) => ({
       id,
-      texto: "Huanguelén Dona Vida",
+      texto: par.texto,
       img,
-      alt: `Foto del memotest ${i + 1}-${j + 1}`
+      alt: par.texto
     }));
   });
   const totalParesMemo = paresMemo.length / 2;
@@ -2529,7 +2529,7 @@ dibujarFichas();
     btn.dataset.id = carta.id;
     btn.dataset.index = String(index);
     const frente = carta.img
-      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:120px;object-fit:contain;background:#f4f9ff;border-radius:8px;display:block;">`
+      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:110px;object-fit:contain;background:#f4f9ff;border-radius:8px;display:block;margin-bottom:6px;"><span style="display:block;font-size:12px;line-height:1.3;color:#183650;">${carta.texto}</span>`
       : `<span>${carta.texto}</span>`;
     btn.innerHTML = `<span class="memo-back">❓</span><span class="memo-front">${frente}</span>`;
     btn.addEventListener("click", () => revelar(btn));
