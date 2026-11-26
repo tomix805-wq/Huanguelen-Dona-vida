@@ -2042,7 +2042,7 @@ footer p {
   <div class="juego">
     <div class="juego-cabecera">
       <strong>Memotest</strong>
-      <span class="estado" id="memoEstado">Movimientos: 0 | Pares: 0/6</span>
+      <span class="estado" id="memoEstado">Movimientos: 0 | Pares: 0/0</span>
     </div>
     <div class="memotest-grid" id="memotestGrid" aria-label="Memotest de fotos de Huanguelén Dona Vida"></div>
     <div class="juego-acciones">
@@ -2477,25 +2477,19 @@ dibujarFichas();
 ========================= */
 
 (() => {
-  const paresDefinidosMemo = [
-    { texto: "Foto 1: completá la explicación", imagen: "assets/memotest/memotest-01.jpeg" },
-    { texto: "Foto 2: completá la explicación", imagen: "assets/memotest/memotest-02.jpeg" },
-    { texto: "Foto 3: completá la explicación", imagen: "assets/memotest/memotest-03.jpeg" },
-    { texto: "Foto 4: completá la explicación", imagen: "assets/memotest/memotest-05.jpeg" },
-    { texto: "Foto 5: completá la explicación", imagen: "assets/memotest/memotest-10.jpeg" },
-    { texto: "Foto 6: completá la explicación", imagen: "assets/memotest/memotest-11.jpeg" },
-    { texto: "Foto 7: completá la explicación", imagen: "assets/memotest/memotest-12.jpeg" },
-    { texto: "Foto 8: completá la explicación", imagen: "assets/memotest/memotest-0(1).jpeg" },
-    { texto: "Foto 9: completá la explicación", imagen: "assets/memotest/memotest-(2).jpeg" },
-    { texto: "Foto 10: completá la explicación", imagen: "assets/memotest/memotest-0(3).jpeg" },
-    { texto: "Foto 11: completá la explicación", imagen: "assets/memotest/memotest-(5).jpeg" },
-    { texto: "Foto 12: completá la explicación", imagen: "assets/memotest/memotest-(10).jpeg" },
-    { texto: "Foto 13: completá la explicación", imagen: "assets/memotest/memotest-(11).jpeg" },
-    { texto: "Foto 14: completá la explicación", imagen: "assets/memotest/memotest-(12).jpeg" }
+  const imagenesMemo = [
+    "assets/memotest/memotest-(2).jpeg",
+    "assets/memotest/memotest-01.jpeg",
+    "assets/memotest/memotest-03.jpeg",
+    "assets/memotest/memotest-05.jpeg",
+    "assets/memotest/memotest-06.jpeg",
+    "assets/memotest/memotest-09.jpeg",
+    "assets/memotest/memotest-10.jpeg"
   ];
-  const paresMemo = paresDefinidosMemo.flatMap((par, i) => {
+
+  const paresMemo = imagenesMemo.flatMap((imagen, i) => {
     const id = `memo-${i + 1}`;
-    const carta = { id, texto: par.texto, img: par.imagen, alt: par.texto };
+    const carta = { id, img: imagen, alt: `Foto ${i + 1} de Huanguelén Dona Vida` };
     return [carta, { ...carta }];
   });
   const totalParesMemo = paresMemo.length / 2;
@@ -2531,10 +2525,12 @@ dibujarFichas();
     btn.className = "memo-card";
     btn.dataset.id = carta.id;
     btn.dataset.index = String(index);
-    const frente = carta.img
-      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:110px;object-fit:contain;background:#f4f9ff;border-radius:8px;display:block;margin-bottom:6px;"><span style="display:block;font-size:12px;line-height:1.3;color:#183650;">${carta.texto}</span>`
-      : `<span>${carta.texto}</span>`;
-    btn.innerHTML = `<span class="memo-back">❓</span><span class="memo-front">${frente}</span>`;
+    btn.setAttribute("aria-label", "Carta del memotest");
+    btn.innerHTML = `
+      <span class="memo-back">❓</span>
+      <span class="memo-front">
+        <img src="${carta.img}" alt="${carta.alt}" loading="lazy" style="width:100%;height:140px;object-fit:contain;background:#fff;border-radius:8px;display:block;">
+      </span>`;
     btn.addEventListener("click", () => revelar(btn));
     return btn;
   }
@@ -2542,6 +2538,7 @@ dibujarFichas();
   function revelar(btn) {
     if (bloqueado || btn.classList.contains("revelada") || btn.classList.contains("acertada")) return;
     btn.classList.add("revelada");
+    btn.setAttribute("aria-label", "Carta revelada");
     abiertas.push(btn);
     if (abiertas.length < 2) return;
 
@@ -2552,6 +2549,8 @@ dibujarFichas();
       b.classList.add("acertada");
       a.disabled = true;
       b.disabled = true;
+      a.setAttribute("aria-label", "Par encontrado");
+      b.setAttribute("aria-label", "Par encontrado");
       abiertas = [];
       pares++;
       actualizarEstadoMemo();
@@ -2563,6 +2562,8 @@ dibujarFichas();
     setTimeout(() => {
       a.classList.remove("revelada");
       b.classList.remove("revelada");
+      a.setAttribute("aria-label", "Carta del memotest");
+      b.setAttribute("aria-label", "Carta del memotest");
       abiertas = [];
       bloqueado = false;
     }, 800);
