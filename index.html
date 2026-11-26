@@ -2477,26 +2477,23 @@ dibujarFichas();
 ========================= */
 
 (() => {
-  const imagenesMemo = [
-    "assets/memotest/memotest-01.jpeg",
-    "assets/memotest/memotest-02.jpeg",
-    "assets/memotest/memotest-03.jpeg",
-    "assets/memotest/memotest-04.jpeg",
-    "assets/memotest/memotest-05.jpeg",
-    "assets/memotest/memotest-06.jpeg",
-    "assets/memotest/memotest-07.jpeg",
-    "assets/memotest/memotest-08.jpeg",
-    "assets/memotest/memotest-09.jpeg",
-    "assets/memotest/memotest-10.jpeg",
-    "assets/memotest/memotest-11.jpeg",
-    "assets/memotest/memotest-12.jpeg",
-    "assets/memotest/memotest-13.jpeg",
-    "assets/memotest/memotest-14.jpeg"
+  const paresDefinidosMemo = [
+    ["assets/memotest/memotest-01.jpeg", "assets/memotest/memotest-0(1).jpeg"],
+    ["assets/memotest/memotest-02.jpeg", "assets/memotest/memotest-(2).jpeg"],
+    ["assets/memotest/memotest-03.jpeg", "assets/memotest/memotest-0(3).jpeg"],
+    ["assets/memotest/memotest-05.jpeg", "assets/memotest/memotest-(5).jpeg"],
+    ["assets/memotest/memotest-10.jpeg", "assets/memotest/memotest-(10).jpeg"],
+    ["assets/memotest/memotest-11.jpeg", "assets/memotest/memotest-(11).jpeg"],
+    ["assets/memotest/memotest-12.jpeg", "assets/memotest/memotest-(12).jpeg"]
   ];
-  const paresMemo = imagenesMemo.flatMap((img, i) => {
+  const paresMemo = paresDefinidosMemo.flatMap((par, i) => {
     const id = `memo-${i + 1}`;
-    const carta = { id, texto: "Huanguelén Dona Vida", img, alt: `Foto del memotest ${i + 1}` };
-    return [carta, { ...carta }];
+    return par.map((img, j) => ({
+      id,
+      texto: "Huanguelén Dona Vida",
+      img,
+      alt: `Foto del memotest ${i + 1}-${j + 1}`
+    }));
   });
   const totalParesMemo = paresMemo.length / 2;
 
