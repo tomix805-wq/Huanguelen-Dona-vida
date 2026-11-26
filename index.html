@@ -2478,22 +2478,25 @@ dibujarFichas();
 
 (() => {
   const paresDefinidosMemo = [
-    { texto: "Par 1: completá la explicación", imagenes: ["assets/memotest/memotest-01.jpeg", "assets/memotest/memotest-0(1).jpeg"] },
-    { texto: "Par 2: completá la explicación", imagenes: ["assets/memotest/memotest-02.jpeg", "assets/memotest/memotest-(2).jpeg"] },
-    { texto: "Par 3: completá la explicación", imagenes: ["assets/memotest/memotest-03.jpeg", "assets/memotest/memotest-0(3).jpeg"] },
-    { texto: "Par 4: completá la explicación", imagenes: ["assets/memotest/memotest-05.jpeg", "assets/memotest/memotest-(5).jpeg"] },
-    { texto: "Par 5: completá la explicación", imagenes: ["assets/memotest/memotest-10.jpeg", "assets/memotest/memotest-(10).jpeg"] },
-    { texto: "Par 6: completá la explicación", imagenes: ["assets/memotest/memotest-11.jpeg", "assets/memotest/memotest-(11).jpeg"] },
-    { texto: "Par 7: completá la explicación", imagenes: ["assets/memotest/memotest-12.jpeg", "assets/memotest/memotest-(12).jpeg"] }
+    { texto: "Foto 1: completá la explicación", imagen: "assets/memotest/memotest-01.jpeg" },
+    { texto: "Foto 2: completá la explicación", imagen: "assets/memotest/memotest-02.jpeg" },
+    { texto: "Foto 3: completá la explicación", imagen: "assets/memotest/memotest-03.jpeg" },
+    { texto: "Foto 4: completá la explicación", imagen: "assets/memotest/memotest-05.jpeg" },
+    { texto: "Foto 5: completá la explicación", imagen: "assets/memotest/memotest-10.jpeg" },
+    { texto: "Foto 6: completá la explicación", imagen: "assets/memotest/memotest-11.jpeg" },
+    { texto: "Foto 7: completá la explicación", imagen: "assets/memotest/memotest-12.jpeg" },
+    { texto: "Foto 8: completá la explicación", imagen: "assets/memotest/memotest-0(1).jpeg" },
+    { texto: "Foto 9: completá la explicación", imagen: "assets/memotest/memotest-(2).jpeg" },
+    { texto: "Foto 10: completá la explicación", imagen: "assets/memotest/memotest-0(3).jpeg" },
+    { texto: "Foto 11: completá la explicación", imagen: "assets/memotest/memotest-(5).jpeg" },
+    { texto: "Foto 12: completá la explicación", imagen: "assets/memotest/memotest-(10).jpeg" },
+    { texto: "Foto 13: completá la explicación", imagen: "assets/memotest/memotest-(11).jpeg" },
+    { texto: "Foto 14: completá la explicación", imagen: "assets/memotest/memotest-(12).jpeg" }
   ];
   const paresMemo = paresDefinidosMemo.flatMap((par, i) => {
     const id = `memo-${i + 1}`;
-    return par.imagenes.map((img, j) => ({
-      id,
-      texto: par.texto,
-      img,
-      alt: par.texto
-    }));
+    const carta = { id, texto: par.texto, img: par.imagen, alt: par.texto };
+    return [carta, { ...carta }];
   });
   const totalParesMemo = paresMemo.length / 2;
 
