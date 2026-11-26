@@ -2037,14 +2037,14 @@ footer p {
 <section id="memotest">
   <span class="subtitulo">Juego</span>
   <h2>Memotest de la donación</h2>
-  <p>Encontrá los pares relacionados con la donación de sangre y CPH.</p>
+  <p>Encontrá los pares de fotos de las actividades de Huanguelén Dona Vida.</p>
 
   <div class="juego">
     <div class="juego-cabecera">
       <strong>Memotest</strong>
       <span class="estado" id="memoEstado">Movimientos: 0 | Pares: 0/6</span>
     </div>
-    <div class="memotest-grid" id="memotestGrid" aria-label="Memotest de la donación"></div>
+    <div class="memotest-grid" id="memotestGrid" aria-label="Memotest de fotos de Huanguelén Dona Vida"></div>
     <div class="juego-acciones">
       <button class="boton" id="reiniciarMemo" type="button">Reiniciar memotest</button>
     </div>
@@ -2477,20 +2477,28 @@ dibujarFichas();
 ========================= */
 
 (() => {
-  const paresMemo = [
-    { id: "sangre", texto: "🩸 Sangre" },
-    { id: "sangre", texto: "Salva vidas" },
-    { id: "cph", texto: "🧬 CPH" },
-    { id: "cph", texto: "Médula ósea" },
-    { id: "voluntaria", texto: "🤝 Voluntaria" },
-    { id: "voluntaria", texto: "Solidaridad" },
-    { id: "requisitos", texto: "📋 Requisitos" },
-    { id: "requisitos", texto: "Según provincia" },
-    { id: "registro", texto: "📝 Registro" },
-    { id: "registro", texto: "Donantes CPH" },
-    { id: "informacion", texto: "ℹ️ Informarse" },
-    { id: "informacion", texto: "Fuentes oficiales" }
+  const imagenesMemo = [
+    "assets/memotest/memotest-01.jpeg",
+    "assets/memotest/memotest-02.jpeg",
+    "assets/memotest/memotest-03.jpeg",
+    "assets/memotest/memotest-04.jpeg",
+    "assets/memotest/memotest-05.jpeg",
+    "assets/memotest/memotest-06.jpeg",
+    "assets/memotest/memotest-07.jpeg",
+    "assets/memotest/memotest-08.jpeg",
+    "assets/memotest/memotest-09.jpeg",
+    "assets/memotest/memotest-10.jpeg",
+    "assets/memotest/memotest-11.jpeg",
+    "assets/memotest/memotest-12.jpeg",
+    "assets/memotest/memotest-13.jpeg",
+    "assets/memotest/memotest-14.jpeg"
   ];
+  const paresMemo = imagenesMemo.flatMap((img, i) => {
+    const id = `memo-${i + 1}`;
+    const carta = { id, texto: "Huanguelén Dona Vida", img, alt: `Foto del memotest ${i + 1}` };
+    return [carta, { ...carta }];
+  });
+  const totalParesMemo = paresMemo.length / 2;
 
   const grid = document.getElementById("memotestGrid");
   const estado = document.getElementById("memoEstado");
@@ -2513,8 +2521,8 @@ dibujarFichas();
   }
 
   function actualizarEstadoMemo() {
-    estado.textContent = `Movimientos: ${movimientos} | Pares: ${pares}/6`;
-    if (pares === 6) estado.textContent = `¡Completaste el memotest! Movimientos: ${movimientos}`;
+    estado.textContent = `Movimientos: ${movimientos} | Pares: ${pares}/${totalParesMemo}`;
+    if (pares === totalParesMemo) estado.textContent = `¡Completaste el memotest! Movimientos: ${movimientos}`;
   }
 
   function crearCarta(carta, index) {
@@ -2524,7 +2532,7 @@ dibujarFichas();
     btn.dataset.id = carta.id;
     btn.dataset.index = String(index);
     const frente = carta.img
-      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:72px;object-fit:cover;border-radius:8px;display:block;margin-bottom:6px;"><span>${carta.texto}</span>`
+      ? `<img src="${carta.img}" alt="${carta.alt || carta.texto}" style="width:100%;height:96px;object-fit:cover;border-radius:8px;display:block;">`
       : `<span>${carta.texto}</span>`;
     btn.innerHTML = `<span class="memo-back">❓</span><span class="memo-front">${frente}</span>`;
     btn.addEventListener("click", () => revelar(btn));
