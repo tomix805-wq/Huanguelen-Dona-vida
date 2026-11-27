@@ -1,61 +1,226 @@
+
 from flask import Flask, jsonify, render_template, request
 import re
+import sqlite3
+from pathlib import Path
+from datetime import datetime, timezone
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 
+# ==========================================
+# CONFIGURACIÓN DE LA BASE DE DATOS
+# ==========================================
+
+CARPETA_PROYECTO = Path(__file__).resolve().parent
+BASE_DATOS = CARPETA_PROYECTO / "huanguelen.db"
+
+
+def conectar_db():
+    conexion = sqlite3.connect(BASE_DATOS)
+    conexion.row_factory = sqlite3.Row
+    return conexion
+
+
+def inicializar_db():
+    conexion = conectar_db()
+
+    conexion.execute("""
+        CREATE TABLE IF NOT EXISTS visitas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            pagina TEXT NOT NULL,
+            fecha TEXT NOT NULL
+        )
+    """)
+
+    conexion.commit()
+    conexion.close()
+
+
+def registrar_visita(pagina):
+    conexion = conectar_db()
+
+    fecha = datetime.now(timezone.utc).isoformat()
+
+    conexion.execute(
+        "INSERT INTO visitas (pagina, fecha) VALUES (?, ?)",
+        (pagina, fecha)
+    )
+
+    conexion.commit()
+    conexion.close()
+
+
+# Crear la base de datos automáticamente
+inicializar_db()
+
+
+# ==========================================
+# PÁGINA PRINCIPAL
+# ==========================================
+
 @app.get("/")
 def inicio():
+    registrar_visita("inicio")
     return render_template("index.html")
 
 
+# ==========================================
+# ASISTENTE INFORMATIVO LOCAL
+# SIN INTELIGENCIA ARTIFICIAL
+# ==========================================
+
 def responder_asistente(mensaje: str) -> str:
-    """Respuestas informativas básicas; no reemplaza la orientación sanitaria."""
+
     texto = re.sub(r"\s+", " ", mensaje.lower()).strip()
 
-    if any(p in texto for p in ("hola", "buenas", "buenos días", "buenas tardes")):
-        return ("¡Hola! Soy el asistente informativo de Huanguelén Dona Vida. "
-                "Puedo orientarte sobre donación de sangre, CPH y el registro de donantes.")
-    if any(p in texto for p in ("cph", "progenitor", "médula ósea", "medula osea")):
-        return ("Las células progenitoras hematopoyéticas (CPH) dan origen a los distintos "
-                "componentes de la sangre. Se encuentran principalmente en la médula ósea y "
-                "también pueden obtenerse de sangre periférica o de sangre de cordón umbilical.")
-    if any(p in texto for p in ("registro", "inscrib", "anotar", "donante de cph")):
-        return ("El Registro Nacional de Donantes de Células Progenitoras Hematopoyéticas "
-                "permite buscar personas compatibles con pacientes que necesitan un trasplante. "
-                "La inscripción y los pasos correspondientes se realizan por canales oficiales.")
-    if any(p in texto for p in ("requisito", "edad", "peso", "puedo donar", "aptitud")):
-        return ("Los requisitos para donar dependen de las normas vigentes y de la evaluación "
-                "del equipo de salud. Consultá con un centro de donación habilitado para conocer "
-                "si podés donar y recibir información actualizada.")
-    if any(p in texto for p in ("sangre", "donar", "donación", "donacion", "transfusión", "transfusion")):
-        return ("La donación voluntaria y habitual ayuda a mantener sangre disponible para "
-                "quienes la necesitan. La evaluación y la extracción se realizan en un centro "
-                "habilitado por personal capacitado.")
-    if any(p in texto for p in ("turno", "horario", "dónde", "donde", "lugar", "centro")):
-        return ("Para conocer lugares, horarios y turnos disponibles, consultá los canales "
-                "oficiales de salud de tu zona. Los datos pueden cambiar.")
-    return ("Puedo orientarte sobre donación de sangre, células progenitoras hematopoyéticas "
-            "(CPH) y el registro de donantes. Para consultas médicas personales, hablá con "
-            "un profesional de salud o con un centro habilitado.")
+    if any(p in texto for p in (
+        "hola", "buenas", "buenos días",
+        "buenas tardes"
+    )):
+        return (
+            "¡Hola! Soy el asistente informativo de "
+            "Huanguelén Dona Vida. Puedo orientarte sobre "
+            "donación de sangre, CPH y el registro de donantes."
+        )
 
+    if any(p in texto for p in (
+        "cph", "progenitor", "médula ósea", "medula osea"
+    )):
+        return (
+            "Las células progenitoras hematopoyéticas (CPH) "
+            "dan origen a los distintos componentes de la sangre. "
+            "Se encuentran principalmente en la médula ósea y "
+            "también pueden obtenerse de sangre periférica o "
+            "de sangre de cordón umbilical."
+        )
+
+    if any(p in texto for p in (
+        "registro", "inscrib", "anotar", "donante de cph"
+    )):
+        return (
+            "El Registro Nacional de Donantes de Células "
+            "Progenitoras Hematopoyéticas permite buscar personas "
+            "compatibles con pacientes que necesitan un trasplante. "
+            "La inscripción y los pasos correspondientes se "
+            "realizan por canales oficiales."
+        )
+
+    if any(p in texto for p in (
+        "requisito", "edad", "peso",
+        "puedo donar", "aptitud"
+    )):
+        return (
+            "Los requisitos para donar dependen de las normas "
+            "vigentes y de la evaluación del equipo de salud. "
+            "Consultá con un centro de donación habilitado para "
+            "conocer si podés donar y recibir información actualizada."
+        )
+
+    if any(p in texto for p in (
+        "sangre", "donar", "donación", "donacion",
+        "transfusión", "transfusion"
+    )):
+        return (
+            "La donación voluntaria y habitual ayuda a mantener "
+            "sangre disponible para quienes la necesitan. "
+            "La evaluación y la extracción se realizan en un "
+            "centro habilitado por personal capacitado."
+        )
+
+    if any(p in texto for p in (
+        "turno", "horario", "dónde",
+        "donde", "lugar", "centro"
+    )):
+        return (
+            "Para conocer lugares, horarios y turnos disponibles, "
+            "consultá los canales oficiales de salud de tu zona. "
+            "Los datos pueden cambiar."
+        )
+
+    return (
+        "Puedo orientarte sobre donación de sangre, células "
+        "progenitoras hematopoyéticas (CPH) y el registro de "
+        "donantes. Para consultas médicas personales, hablá con "
+        "un profesional de salud o con un centro habilitado."
+    )
+
+
+# ==========================================
+# API DEL ASISTENTE
+# ==========================================
 
 @app.post("/api/chat")
 def chat():
+
     datos = request.get_json(silent=True) or {}
     mensaje = datos.get("message", "")
-    if not isinstance(mensaje, str) or not mensaje.strip():
-        return jsonify(error="Escribí una consulta para continuar."), 400
-    if len(mensaje) > 1000:
-        return jsonify(error="La consulta es demasiado larga. Máximo: 1000 caracteres."), 400
-    return jsonify(reply=responder_asistente(mensaje))
 
+    if not isinstance(mensaje, str) or not mensaje.strip():
+        return jsonify(
+            error="Escribí una consulta para continuar."
+        ), 400
+
+    if len(mensaje) > 1000:
+        return jsonify(
+            error="La consulta es demasiado larga. Máximo: 1000 caracteres."
+        ), 400
+
+    return jsonify(
+        reply=responder_asistente(mensaje)
+    )
+
+
+# ==========================================
+# API DE ESTADÍSTICAS
+# ==========================================
+
+@app.get("/api/estadisticas")
+def estadisticas():
+
+    conexion = conectar_db()
+
+    total_visitas = conexion.execute("""
+        SELECT COUNT(*) AS total
+        FROM visitas
+    """).fetchone()["total"]
+
+    visitas_inicio = conexion.execute("""
+        SELECT COUNT(*) AS total
+        FROM visitas
+        WHERE pagina = ?
+    """, ("inicio",)).fetchone()["total"]
+
+    conexion.close()
+
+    return jsonify({
+        "total_visitas": total_visitas,
+        "visitas_inicio": visitas_inicio
+    })
+
+
+# ==========================================
+# ESTADO DEL SERVIDOR
+# ==========================================
 
 @app.get("/api/estado")
 def estado():
-    return jsonify(status="ok", aplicacion="Huanguelén Dona Vida")
 
+    return jsonify(
+        status="ok",
+        aplicacion="Huanguelén Dona Vida",
+        base_datos="conectada"
+    )
+
+
+# ==========================================
+# INICIO DE LA APLICACIÓN
+# ==========================================
 
 if __name__ == "__main__":
-    # Solo para desarrollo local. En producción, usar un servidor WSGI.
-    app.run(host="127.0.0.1", port=5000, debug=True)
+
+    app.run(
+        host="127.0.0.1",
+        port=5000,
+        debug=True
+    )
