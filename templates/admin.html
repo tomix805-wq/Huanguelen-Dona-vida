@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración | Huanguelén Dona Vida</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f6fc;
+      color: #18324d;
+    }
+    header {
+      background: #1769c2;
+      color: white;
+      padding: 22px;
+    }
+    header .contenedor, main {
+      max-width: 1100px;
+      margin: auto;
+    }
+    header h1 { margin: 0 0 6px; }
+    header p { margin: 0; }
+    main { padding: 25px 16px 50px; }
+    .barra-superior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    a, button {
+      cursor: pointer;
+    }
+    .salir {
+      background: white;
+      color: #1769c2;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .tarjetas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .tarjeta, .seccion {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 3px 14px #17395c12;
+    }
+    .tarjeta span {
+      color: #647b91;
+      font-size: 14px;
+    }
+    .tarjeta h2 {
+      color: #1769c2;
+      font-size: 32px;
+      margin: 10px 0 0;
+    }
+    .seccion { margin-bottom: 22px; }
+    .seccion h2 { margin-top: 0; }
+    .actividad-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+    .campo { display: flex; flex-direction: column; gap: 6px; }
+    .campo.completo { grid-column: 1 / -1; }
+    input, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd8e5;
+      border-radius: 8px;
+      font: inherit;
+    }
+    textarea { min-height: 85px; resize: vertical; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .principal { background: #1769c2; color: white; }
+    .editar { background: #e6f1ff; color: #1769c2; }
+    .eliminar { background: #ffeded; color: #b42318; }
+    .actividad {
+      border: 1px solid #e0e9f2;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 14px;
+    }
+    .actividad h3 { margin: 0 0 8px; }
+    .actividad p { color: #536b82; }
+    .actividad form { margin-top: 12px; }
+    .acciones {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .mensaje {
+      background: #e7f5eb;
+      color: #176b35;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .error {
+      background: #fff0f0;
+      color: #a11;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .grafico-fila {
+      display: grid;
+      grid-template-columns: 105px 1fr 35px;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+    .grafico-fondo {
+      height: 13px;
+      background: #e8eff7;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .barra {
+      height: 100%;
+      width: 0;
+      background: #2385dc;
+      border-radius: 20px;
+    }
+    @media (max-width: 600px) {
+      .actividad-form { grid-template-columns: 1fr; }
+      .campo.completo { grid-column: auto; }
+      .grafico-fila { grid-template-columns: 85px 1fr 25px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <h1>Huanguelén Dona Vida</h1>
+    <p>Panel de administración</p>
+  </div>
+</header>
+
+<main>
+  <div class="barra-superior">
+    <h2>Resumen general</h2>
+    <a class="salir" href="{{ url_for('admin_logout') }}">Cerrar sesión</a>
+  </div>
+
+  {% if request.args.get('mensaje') %}
+    <div class="mensaje">{{ request.args.get('mensaje') }}</div>
+  {% endif %}
+
+  {% if request.args.get('error') %}
+    <div class="error">{{ request.args.get('error') }}</div>
+  {% endif %}
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <span>Visitas registradas</span>
+      <h2>{{ total_visitas }}</h2>
+    </div>
+    <div class="tarjeta">
+      <span>Actividades cargadas</span>
+      <h2>{{ actividades|length }}</h2>
+    </div>
+    <div class="tarjeta">
+      <span>Estado de la plataforma</span>
+      <h2 style="font-size:22px;">En funcionamiento</h2>
+    </div>
+  </div>
+
+  <section class="seccion">
+    <h2>Actividad de visitas</h2>
+    {% if visitas_dia %}
+      {% for fila in visitas_dia %}
+        <div class="grafico-fila">
+          <span>{{ fila["dia"] }}</span>
+          <div class="grafico-fondo">
+            <div class="barra"
+                 data-porcentaje="{{ (fila['total'] / max_visitas * 100) if max_visitas else 0 }}"></div>
+          </div>
+          <strong>{{ fila["total"] }}</strong>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Todavía no hay visitas registradas.</p>
+    {% endif %}
+  </section>
+
+  <section class="seccion">
+    <h2>Agregar una actividad</h2>
+    <p>Las actividades que cargues aparecerán en el calendario público cuando esté integrado en la página principal.</p>
+
+    <form class="actividad-form" method="POST"
+          action="{{ url_for('crear_actividad') }}">
+      <div class="campo completo">
+        <label for="titulo">Título de la actividad</label>
+        <input id="titulo" name="titulo" maxlength="120"
+               placeholder="Ej. Jornada de donación" required>
+      </div>
+
+      <div class="campo completo">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion"
+                  maxlength="1000"
+                  placeholder="Contá brevemente de qué se trata"></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" name="fecha" type="date" required>
+      </div>
+
+      <div class="campo">
+        <label for="hora">Hora</label>
+        <input id="hora" name="hora" type="time" required>
+      </div>
+
+      <div class="campo completo">
+        <button class="principal" type="submit">Guardar actividad</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="seccion">
+    <h2>Administrar actividades</h2>
+
+    {% if actividades %}
+      {% for actividad in actividades %}
+        <article class="actividad">
+          <h3>{{ actividad["titulo"] }}</h3>
+          <p>{{ actividad["descripcion"] or "Sin descripción." }}</p>
+          <p><strong>Fecha:</strong> {{ actividad["fecha"] }}
+             · <strong>Hora:</strong> {{ actividad["hora"] }}</p>
+
+          <details>
+            <summary>Editar actividad</summary>
+
+            <form class="actividad-form" method="POST"
+                  action="{{ url_for('editar_actividad', actividad_id=actividad['id']) }}">
+              <div class="campo completo">
+                <label>Título</label>
+                <input name="titulo" maxlength="120"
+                       value="{{ actividad['titulo'] }}" required>
+              </div>
+
+              <div class="campo completo">
+                <label>Descripción</label>
+                <textarea name="descripcion" maxlength="1000">{{ actividad["descripcion"] }}</textarea>
+              </div>
+
+              <div class="campo">
+                <label>Fecha</label>
+                <input name="fecha" type="date"
+                       value="{{ actividad['fecha'] }}" required>
+              </div>
+
+              <div class="campo">
+                <label>Hora</label>
+                <input name="hora" type="time"
+                       value="{{ actividad['hora'] }}" required>
+              </div>
+
+              <div class="campo completo">
+                <button class="editar" type="submit">Guardar cambios</button>
+              </div>
+            </form>
+          </details>
+
+          <form method="POST"
+                action="{{ url_for('eliminar_actividad', actividad_id=actividad['id']) }}"
+                onsubmit="return confirm('¿Querés eliminar esta actividad?');">
+            <button class="eliminar" type="submit">Eliminar actividad</button>
+          </form>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>Todavía no cargaste actividades.</p>
+    {% endif %}
+  </section>
+</main>
+
+<script>
+  document.querySelectorAll(".barra").forEach(barra => {
+    const porcentaje = Number(barra.dataset.porcentaje) || 0;
+    barra.style.width = Math.min(100, Math.max(0, porcentaje)) + "%";
+  });
+</script>
+
+</body>
+</html>
