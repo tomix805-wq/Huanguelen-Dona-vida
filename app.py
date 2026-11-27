@@ -1,20 +1,37 @@
-
-from flask import Flask, jsonify, render_template, request
+from flask import (
+    Flask, jsonify, render_template, request,
+    session, redirect, url_for
+)
 import re
 import sqlite3
+import os
 from pathlib import Path
 from datetime import datetime, timezone
+
+# ==========================================
+# CONFIGURACIÓN GENERAL
+# ==========================================
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 
-# ==========================================
-# CONFIGURACIÓN DE LA BASE DE DATOS
-# ==========================================
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "clave-local-solo-desarrollo"
+)
+
+ADMIN_PASSWORD = os.environ.get(
+    "ADMIN_PASSWORD",
+    "CAMBIAR-ESTA-CLAVE"
+)
 
 CARPETA_PROYECTO = Path(__file__).resolve().parent
 BASE_DATOS = CARPETA_PROYECTO / "huanguelen.db"
 
+
+# ==========================================
+# BASE DE DATOS SQLITE
+# ==========================================
 
 def conectar_db():
     conexion = sqlite3.connect(BASE_DATOS)
@@ -43,7 +60,10 @@ def registrar_visita(pagina):
     fecha = datetime.now(timezone.utc).isoformat()
 
     conexion.execute(
-        "INSERT INTO visitas (pagina, fecha) VALUES (?, ?)",
+        """
+        INSERT INTO visitas (pagina, fecha)
+        VALUES (?, ?)
+        """,
         (pagina, fecha)
     )
 
@@ -51,7 +71,7 @@ def registrar_visita(pagina):
     conexion.close()
 
 
-# Crear la base de datos automáticamente
+# Inicializar base de datos
 inicializar_db()
 
 
@@ -214,7 +234,82 @@ def estado():
 
 
 # ==========================================
-# INICIO DE LA APLICACIÓN
+# ACCESO AL PANEL DE ADMINISTRACIÓN
+# ==========================================
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+
+    if request.method == "POST":
+
+        password = request.form.get("password", "")
+
+        if password == ADMIN_PASSWORD:
+            session["administrador"] = True
+            return redirect(url_for("admin_panel"))
+
+        return render_template(
+            "admin_login.html",
+            error="Contraseña incorrecta. Intentá nuevamente."
+        )
+
+    return render_template("admin_login.html")
+
+
+# ==========================================
+# PANEL DE ADMINISTRACIÓN
+# ==========================================
+
+@app.get("/admin")
+def admin_panel():
+
+    if not session.get("administrador"):
+        return redirect(url_for("admin_login"))
+
+    conexion = conectar_db()
+
+    total_visitas = conexion.execute("""
+        SELECT COUNT(*) AS total
+        FROM visitas
+    """).fetchone()["total"]
+
+    visitas_dia = conexion.execute("""
+        SELECT DATE(fecha) AS dia, COUNT(*) AS total
+        FROM visitas
+        WHERE DATE(fecha) >= DATE('now', '-6 days')
+        GROUP BY DATE(fecha)
+        ORDER BY dia ASC
+    """).fetchall()
+
+    conexion.close()
+
+    max_visitas = max(
+        [fila["total"] for fila in visitas_dia],
+        default=1
+    )
+
+    return render_template(
+        "admin.html",
+        total_visitas=total_visitas,
+        visitas_dia=visitas_dia,
+        max_visitas=max_visitas
+    )
+
+
+# ==========================================
+# CERRAR SESIÓN
+# ==========================================
+
+@app.get("/admin/logout")
+def admin_logout():
+
+    session.clear()
+
+    return redirect(url_for("admin_login"))
+
+
+# ==========================================
+# INICIAR APLICACIÓN
 # ==========================================
 
 if __name__ == "__main__":
